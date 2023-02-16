@@ -1,0 +1,30 @@
+{
+  "name": "jest-otel",
+  "description": "Run your tests using Jest & OpenTelemetry.",
+  "version": "0.0.1",
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/expect-dev/jest-opentelemetry.git",
+    "directory": "packages/jest-opentelemetry"
+  },
+  "homepage": "https://github.com/expect-dev/jest-opentelemetry/tree/main/packages/jest-opentelemetry#readme",
+  "bugs": {
+    "url": "https://github.com/expect-dev/jest-opentelemetry/issues"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "jest",
+    "opentelemetry",
+    "jest-opentelemetry"
+  ],
+  "dependencies": {
+    "expect-opentelemetry": "^0.0.1",
+    "jest-environment-otel": "^0.0.1"
+  }
+}
