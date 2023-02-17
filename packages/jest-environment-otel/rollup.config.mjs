@@ -16,7 +16,7 @@ const swcPlugin = swc(
 
 export default [
   bundle({
-    input: 'src/global.js',
+    input: 'src/global.ts',
     output: {
       file: 'lib/global.js',
       format: 'cjs',

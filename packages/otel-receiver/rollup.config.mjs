@@ -18,7 +18,7 @@ export default [
   bundle({
     input: 'src/index.ts',
     output: {
-      file: 'lib/index.js',
+      file: 'dist/index.js',
       format: 'cjs',
     },
     plugins: [swcPlugin, typescript({ tsconfig: '../../tsconfig.json' })],

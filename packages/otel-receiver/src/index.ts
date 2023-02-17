@@ -18,6 +18,6 @@ app.get('/v1/traces', (_: Request, res: Response) => {
   res.send(getAll());
 });
 
-const server = app.listen(port, () => {
-  console.log(`Example app listening at port ${port}`);
+app.listen(port, () => {
+  console.log(`otel-receiver listening at port ${port}`);
 });

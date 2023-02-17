@@ -5,7 +5,8 @@
     "build": "lerna run build",
     "format": "prettier --write .",
     "lint": "prettier --check . && eslint .",
-    "run-servers": "lerna run --scope @jest-opentelemetry/test-servers start",
+    "start-otel-receiver": "lerna run --scope @jest-opentelemetry/otel-receiver start",
+    "start-servers": "lerna run --scope @jest-opentelemetry/test-servers start",
     "test": "jest --runInBand"
   },
   "workspaces": [

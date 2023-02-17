@@ -1,15 +1,14 @@
-// eslint-disable-next-line
-import NodeEnvironment from "jest-environment-node";
-import { readConfig } from "./readConfig";
+import NodeEnvironment from 'jest-environment-node';
+import { readConfig } from './readConfig';
 
 const handleError = (error) => {
-  process.emit("uncaughtException", error);
+  process.emit('uncaughtException', error);
 };
 
 const KEYS = {
-  CONTROL_C: "\u0003",
-  CONTROL_D: "\u0004",
-  ENTER: "\r",
+  CONTROL_C: '\u0003',
+  CONTROL_D: '\u0004',
+  ENTER: '\r',
 };
 // JEST_WORKER_ID starts at 1
 const getWorkerIndex = () => process.env.JEST_WORKER_ID - 1;
@@ -24,7 +23,7 @@ class OpenTelemetryEnvironment extends NodeEnvironment {
       // eslint-disable-next-line no-underscore-dangle
       this.global.jasmine.DEFAULT_TIMEOUT_INTERVAL = timeout;
     } else {
-      this.global[Symbol.for("TEST_TIMEOUT_SYMBOL")] = timeout;
+      this.global[Symbol.for('TEST_TIMEOUT_SYMBOL')] = timeout;
     }
   }
 
