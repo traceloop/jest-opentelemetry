@@ -1,7 +1,9 @@
 /* eslint-disable no-use-before-define, no-restricted-syntax, no-await-in-loop */
-import { getInstanceType } from "./utils";
+import { getInstanceType } from './utils';
+import { toRecieveHttpRequest } from './matchers/toRecieveHttpRequest';
+import { toSendHttpRequest } from './matchers/toSendHttpRequest';
 
-export { setDefaultOptions, getDefaultOptions } from "./options";
+export { setDefaultOptions, getDefaultOptions } from './options';
 
 const spanMatchers = {};
 
@@ -12,7 +14,7 @@ const serviceMatchers = {
 
 function createMatcher(matcher, page) {
   return async function throwingMatcher(...args) {
-    if (typeof global.expect !== "undefined") {
+    if (typeof global.expect !== 'undefined') {
       global.expect.getState().assertionCalls += 1;
     }
 
@@ -31,7 +33,7 @@ function internalExpect(type, matchers) {
   };
 
   Object.keys(matchers).forEach((key) => {
-    if (key === "not") return;
+    if (key === 'not') return;
     expectation[key] = createMatcher(matchers[key], type);
   });
 
@@ -45,16 +47,16 @@ function internalExpect(type, matchers) {
 function expectOpenTelemetry(actual) {
   const type = getInstanceType(actual);
   switch (type) {
-    case "Span":
+    case 'Span':
       return internalExpect(actual, spanMatchers);
-    case "Service":
+    case 'Service':
       return internalExpect(actual, serviceMatchers);
     default:
       throw new Error(`${actual} is not supported`);
   }
 }
 
-if (typeof global.expect !== "undefined") {
+if (typeof global.expect !== 'undefined') {
   const originalExpect = global.expect;
   global.expect = (actual, ...args) => {
     const type = getInstanceType(actual);

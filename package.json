@@ -11,10 +11,8 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.52.0",
-    "@typescript-eslint/parser": "^5.52.0",
-    "eslint": "^8.34.0",
     "@tsconfig/recommended": "^1.0.2",
+    "@types/deep-equal": "^1.0.1",
     "@types/jest": "^29.4.0",
     "@typescript-eslint/eslint-plugin": "^5.52.0",
     "@typescript-eslint/parser": "^5.52.0",
@@ -28,6 +26,7 @@
     "@opentelemetry/semantic-conventions": "^1.9.1",
     "@opentelemetry/tracing": "^0.24.0",
     "@swc/jest": "^0.2.24",
+    "deep-equal": "^2.2.0",
     "eslint-config-prettier": "^8.6.0",
     "prettier": "^2.8.4"
   }
