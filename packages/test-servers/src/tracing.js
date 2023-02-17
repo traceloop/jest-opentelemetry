@@ -24,7 +24,7 @@ const { ConsoleSpanExporter } = require('@opentelemetry/sdk-trace-base');
 // OTEL HTTP exporter
 const traceExporter = new OTLPTraceExporter({
   url: 'http://localhost:4123/v1/traces',
-  timeoutMillis: 100,
+  timeoutMillis: 1,
 }); // uncomment to use OTEL HTTP exporter
 
 const sdk = new opentelemetry.NodeSDK({
