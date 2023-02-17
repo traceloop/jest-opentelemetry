@@ -1,5 +1,5 @@
 {
-  "name": "otel-receiver",
+  "name": "@jest-opentelemetry/otel-receiver",
   "description": "A node server to receive and cache incoming opentelemetry spans.",
   "version": "0.0.1",
   "type": "commonjs",
@@ -35,7 +35,7 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "rollup -c",
-    "start": "npx ts-node src/index.ts"
+    "start": "node ./dist/index.js"
   },
   "devDependencies": {
     "@types/express": "^4.17.17",

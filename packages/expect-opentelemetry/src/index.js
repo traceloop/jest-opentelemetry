@@ -1,10 +1,16 @@
 /* eslint-disable no-use-before-define, no-restricted-syntax, no-await-in-loop */
 import { getInstanceType } from './utils';
+import { toRecieveHttpRequest } from './matchers/toRecieveHttpRequest';
+import { toSendHttpRequest } from './matchers/toSendHttpRequest';
 
 export { setDefaultOptions, getDefaultOptions } from './options';
 
 const spanMatchers = {};
-const serviceMatchers = {};
+
+const serviceMatchers = {
+  toRecieveHttpRequest,
+  toSendHttpRequest,
+};
 
 function createMatcher(matcher, page) {
   return async function throwingMatcher(...args) {

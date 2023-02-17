@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 import NodeEnvironment from 'jest-environment-node';
 import { readConfig } from './readConfig';
 

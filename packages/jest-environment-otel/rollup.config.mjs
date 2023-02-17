@@ -1,4 +1,5 @@
 import { swc, defineRollupSwcOption } from 'rollup-plugin-swc3';
+import typescript from '@rollup/plugin-typescript';
 
 const bundle = (config) => ({
   external: (id) => {
@@ -15,13 +16,13 @@ const swcPlugin = swc(
 
 export default [
   bundle({
-    input: 'src/global.js',
+    input: 'src/global.ts',
     output: {
       file: 'lib/global.js',
       format: 'cjs',
       interop: 'compat',
     },
-    plugins: [swcPlugin],
+    plugins: [swcPlugin, typescript({ tsconfig: '../../tsconfig.json' })],
   }),
   bundle({
     input: 'src/env.js',
@@ -30,6 +31,6 @@ export default [
       format: 'cjs',
       interop: 'compat',
     },
-    plugins: [swcPlugin],
+    plugins: [swcPlugin, typescript({ tsconfig: '../../tsconfig.json' })],
   }),
 ];
