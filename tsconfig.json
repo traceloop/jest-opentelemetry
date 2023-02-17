@@ -1,7 +1,8 @@
 {
   "extends": "@tsconfig/recommended/tsconfig.json",
   "compilerOptions": {
-    "preserveConstEnums": true
+    "preserveConstEnums": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": ["packages/*/src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]

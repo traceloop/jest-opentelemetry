@@ -1,16 +1,16 @@
-/* eslint-disable no-console */
 import {
   setup as setupServer,
   teardown as teardownServer,
   ERROR_TIMEOUT,
   ERROR_NO_COMMAND,
-} from "jest-dev-server";
-import chalk from "chalk";
-import { readConfig } from "./readConfig";
+} from 'jest-dev-server';
+import chalk from 'chalk';
+import { readConfig } from './readConfig';
+import type { Config as JestConfig } from 'jest';
 
 let didAlreadyRunInWatchMode = false;
 
-export async function setup(jestConfig = {}) {
+export async function setup(jestConfig: JestConfig = {}) {
   const config = await readConfig();
 
   // If we are in watch mode, - only setupServer() once.
@@ -22,24 +22,24 @@ export async function setup(jestConfig = {}) {
   if (config.server) {
     try {
       await setupServer(config.server);
-    } catch (error) {
+    } catch (error: any) {
       if (error.code === ERROR_TIMEOUT) {
-        console.log("");
+        console.log('');
         console.error(chalk.red(error.message));
         console.error(
           chalk.blue(
-            `\n☝️ You can set "server.launchTimeout" in jest-opentelemetry.config.js`
-          )
+            `\n☝️ You can set "server.launchTimeout" in jest-opentelemetry.config.js`,
+          ),
         );
         process.exit(1);
       }
       if (error.code === ERROR_NO_COMMAND) {
-        console.log("");
+        console.log('');
         console.error(chalk.red(error.message));
         console.error(
           chalk.blue(
-            `\n☝️ You must set "server.command" in jest-opentelemetry.config.js`
-          )
+            `\n☝️ You must set "server.command" in jest-opentelemetry.config.js`,
+          ),
         );
         process.exit(1);
       }
@@ -48,9 +48,7 @@ export async function setup(jestConfig = {}) {
   }
 }
 
-export async function teardown(jestConfig = {}) {
-  const config = await readConfig();
-
+export async function teardown(jestConfig: JestConfig = {}) {
   if (!jestConfig.watch && !jestConfig.watchAll) {
     await teardownServer();
   }

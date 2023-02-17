@@ -16,20 +16,10 @@ const swcPlugin = swc(
 
 export default [
   bundle({
-    input: 'src/global.js',
+    input: 'src/index.ts',
     output: {
-      file: 'lib/global.js',
+      file: 'dist/index.js',
       format: 'cjs',
-      interop: 'compat',
-    },
-    plugins: [swcPlugin, typescript({ tsconfig: '../../tsconfig.json' })],
-  }),
-  bundle({
-    input: 'src/env.js',
-    output: {
-      file: 'lib/env.js',
-      format: 'cjs',
-      interop: 'compat',
     },
     plugins: [swcPlugin, typescript({ tsconfig: '../../tsconfig.json' })],
   }),
