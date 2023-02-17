@@ -1,9 +1,9 @@
 import { SpanKind } from '@opentelemetry/api';
 import { SemanticAttributes } from '@opentelemetry/semantic-conventions';
 import { HttpRequest } from '../../resources/http-request';
-import { Microservice } from '../../resources/microservice';
+import { Service } from '../../resources/service';
 
-export function toRecieveHttpCall(service: Microservice): HttpRequest {
+export function toSendHttpRequest(service: Service): HttpRequest {
   const { name: serviceName, spans } = service;
   const spanKind = SpanKind.CLIENT;
 

@@ -1,14 +1,14 @@
 /* eslint-disable no-use-before-define, no-restricted-syntax, no-await-in-loop */
 import { getInstanceType } from './utils';
-import { toRecieveHttpRequest } from './matchers/toRecieveHttpRequest';
-import { toSendHttpRequest } from './matchers/toSendHttpRequest';
+import { toReceiveHttpRequest } from './matchers/service/to-receive-http-request';
+import { toSendHttpRequest } from './matchers/service/to-send-http-request';
 
 export { setDefaultOptions, getDefaultOptions } from './options';
 
 const spanMatchers = {};
 
 const serviceMatchers = {
-  toRecieveHttpRequest,
+  toReceiveHttpRequest,
   toSendHttpRequest,
 };
 
