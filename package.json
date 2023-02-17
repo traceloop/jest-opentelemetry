@@ -5,12 +5,14 @@
     "build": "lerna run build",
     "format": "prettier --write .",
     "lint": "prettier --check . && eslint .",
+    "run-servers": "lerna run --scope @jest-opentelemetry/test-servers start",
     "test": "jest --runInBand"
   },
   "workspaces": [
     "packages/*"
   ],
   "devDependencies": {
+    "@rollup/plugin-typescript": "^11.0.0",
     "@tsconfig/recommended": "^1.0.2",
     "@types/jest": "^29.4.0",
     "@typescript-eslint/eslint-plugin": "^5.52.0",
@@ -22,6 +24,7 @@
   },
   "dependencies": {
     "@swc/jest": "^0.2.24",
+    "axios": "^1.3.3",
     "eslint-config-prettier": "^8.6.0",
     "prettier": "^2.8.4"
   }

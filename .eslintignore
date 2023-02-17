@@ -1,2 +1,3 @@
 jest.config.js
 tsconfig.json
+dist/
