@@ -34,7 +34,8 @@
   },
   "scripts": {
     "prebuild": "rm -rf dist",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "start": "npx ts-node src/index.ts"
   },
   "devDependencies": {
     "@types/express": "^4.17.17",

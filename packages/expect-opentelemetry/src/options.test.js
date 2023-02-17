@@ -2,10 +2,10 @@ import {
   getDefaultOptions,
   setDefaultOptions,
   defaultOptions,
-} from "./options";
+} from './options';
 
-describe("options", () => {
-  it("should get and set default options", () => {
+describe('options', () => {
+  it('should get and set default options', () => {
     expect(getDefaultOptions()).toEqual({ timeout: 500 });
     setDefaultOptions({ timeout: 200 });
     expect(getDefaultOptions()).toEqual({ timeout: 200 });

@@ -19,5 +19,5 @@ app.get('/v1/traces', (_: Request, res: Response) => {
 });
 
 const server = app.listen(port, () => {
-  console.log(`Example app listening at port ${port}`);
+  console.log(`Trace receiver server listening on port ${port}`);
 });
