@@ -19,7 +19,7 @@ export async function setup(jestConfig: JestConfig = {}) {
   }
 
   try {
-    await setupServer({ command: 'npm run start-otel-receiver' });
+    // await setupServer({ command: 'npm run start-otel-receiver' });
   } catch (error: any) {
     if (error.code === ERROR_TIMEOUT) {
       console.log('');

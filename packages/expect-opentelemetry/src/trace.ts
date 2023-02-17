@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { setTimeout } from 'timers/promises';
 import { Service } from './resources/service';
-import { ReadableSpan } from '@opentelemetry/tracing';
+import { ISpan } from '@opentelemetry/otlp-transformer';
+import { generateStubData } from './utils';
 
 export async function traces(fn: () => Promise<void>) {
   await setTimeout(1000);
@@ -13,14 +14,16 @@ export async function traces(fn: () => Promise<void>) {
 }
 
 export class Trace {
-  private spans: ReadableSpan[] = [];
+  private spans: ISpan[] = [];
 
   async init() {
-    const response = await (
-      await axios.get('http://localhost:4123/v1/traces')
-    ).data;
+    // const response = await (
+    //   await axios.get('http://localhost:4123/v1/traces')
+    // ).data;
 
-    response.forEach((trace: any) => this.spans.push(...trace.spans));
+    const response = generateStubData();
+
+    console.log('response', response);
   }
 
   service(name: string): Service {
