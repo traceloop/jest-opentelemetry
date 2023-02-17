@@ -37,6 +37,7 @@
     "build": "rollup -c"
   },
   "devDependencies": {
+    "@types/deep-equal": "^1.0.1",
     "rollup": "^3.13.0",
     "rollup-plugin-swc3": "^0.8.0"
   }
