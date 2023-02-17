@@ -1,13 +1,14 @@
 {
   "name": "jest-opentelemetry",
-  "version": "0.0.1",
+  "private": true,
   "scripts": {
     "build": "lerna run build",
     "format": "prettier --write .",
     "lint": "prettier --check . && eslint .",
-    "start-otel-receiver": "lerna run --scope @jest-opentelemetry/otel-receiver start",
-    "start-servers": "lerna run --scope @jest-opentelemetry/test-servers start",
-    "test": "jest --runInBand"
+    "start:otel-receiver": "lerna run --scope @jest-opentelemetry/otel-receiver start",
+    "start:servers": "lerna run --scope @jest-opentelemetry/test-servers start",
+    "test": "jest --runInBand",
+    "release": "npm run build && lerna publish --conventional-commits"
   },
   "workspaces": [
     "packages/*"
