@@ -4,7 +4,11 @@ import { getInstanceType } from "./utils";
 export { setDefaultOptions, getDefaultOptions } from "./options";
 
 const spanMatchers = {};
-const serviceMatchers = {};
+
+const serviceMatchers = {
+  toRecieveHttpRequest,
+  toSendHttpRequest,
+};
 
 function createMatcher(matcher, page) {
   return async function throwingMatcher(...args) {
