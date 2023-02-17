@@ -1,4 +1,5 @@
-import { swc, defineRollupSwcOption } from "rollup-plugin-swc3";
+import { swc, defineRollupSwcOption } from 'rollup-plugin-swc3';
+import typescript from '@rollup/plugin-typescript';
 
 const bundle = (config) => ({
   external: (id) => {
@@ -9,27 +10,27 @@ const bundle = (config) => ({
 
 const swcPlugin = swc(
   defineRollupSwcOption({
-    jsc: { target: "es2021" },
-  })
+    jsc: { target: 'es2021' },
+  }),
 );
 
 export default [
   bundle({
-    input: "src/global.js",
+    input: 'src/global.js',
     output: {
-      file: "lib/global.js",
-      format: "cjs",
-      interop: "compat",
+      file: 'lib/global.js',
+      format: 'cjs',
+      interop: 'compat',
     },
-    plugins: [swcPlugin],
+    plugins: [swcPlugin, typescript({ tsconfig: '../../tsconfig.json' })],
   }),
   bundle({
-    input: "src/env.js",
+    input: 'src/env.js',
     output: {
-      file: "lib/env.js",
-      format: "cjs",
-      interop: "compat",
+      file: 'lib/env.js',
+      format: 'cjs',
+      interop: 'compat',
     },
-    plugins: [swcPlugin],
+    plugins: [swcPlugin, typescript({ tsconfig: '../../tsconfig.json' })],
   }),
 ];
