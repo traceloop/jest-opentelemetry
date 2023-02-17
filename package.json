@@ -6,7 +6,8 @@
     "format": "prettier --write .",
     "lint": "prettier --check . && eslint .",
     "start:otel-receiver": "lerna run --scope @jest-opentelemetry/otel-receiver start",
-    "start:servers": "lerna run --scope @jest-opentelemetry/test-servers start",
+    "start:test-servers": "lerna run --scope @jest-opentelemetry/test-servers start",
+    "docker:test-servers": "docker build -f packages/test-servers/Dockerfile . -t test-servers",
     "test": "jest --runInBand",
     "release": "npm run build && lerna publish --conventional-commits"
   },

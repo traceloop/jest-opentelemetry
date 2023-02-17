@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orders-service
+  template:
+    metadata:
+      labels:
+        app: orders-service
+    spec:
+      containers:
+        - name: orders-service
+          image: test-servers
+          ports:
+            - containerPort: 3000
+          env:
+            - name: ORDERS_SERVICE
+              value: 'TRUE'
+            - name: EMAILS_SERVICE_URL
+              value: 'http://emails-service:3000'
+            - name: PORT
+              value: '3000'
+          imagePullPolicy: Never
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: emails-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: emails-service
+  template:
+    metadata:
+      labels:
+        app: emails-service
+    spec:
+      containers:
+        - name: emails-service
+          image: test-servers
+          ports:
+            - containerPort: 3000
+          env:
+            - name: EMAILS_SERVICE
+              value: 'TRUE'
+            - name: PORT
+              value: '3000'
+          imagePullPolicy: Never
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orders-service
+spec:
+  selector:
+    app: orders-service
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+  type: LoadBalancer
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: emails-service
+spec:
+  selector:
+    app: emails-service
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
