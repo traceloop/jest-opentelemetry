@@ -15,7 +15,7 @@ npm install jest-opentelemetry
 ```js
 // jest.config.js
 module.exports = {
-  preset: "jest-opentelemetry",
+  preset: 'jest-opentelemetry',
 };
 ```
 
