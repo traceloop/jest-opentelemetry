@@ -1,4 +1,3 @@
-import { ReadableSpan } from '@opentelemetry/tracing';
 import { SpanKind } from '@opentelemetry/api';
 import { SemanticAttributes } from '@opentelemetry/semantic-conventions';
 import { HttpRequest } from '../../resources/http-request';

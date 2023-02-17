@@ -1,12 +1,12 @@
 import { SpanKind } from '@opentelemetry/api';
 import { SemanticAttributes } from '@opentelemetry/semantic-conventions';
 import { ReadableSpan } from '@opentelemetry/tracing';
-import * as deepEqual from 'deep-equal';
+import deepEqual from 'deep-equal';
 
 export class HttpRequest {
   constructor(
     readonly spans: ReadableSpan[],
-    private readonly serviceName,
+    private readonly serviceName: string,
     private readonly spanKind: SpanKind,
   ) {}
 
