@@ -4,8 +4,9 @@ import { Service } from './resources/service';
 import { ReadableSpan } from '@opentelemetry/tracing';
 
 export async function traces(fn: () => Promise<void>) {
-  await setTimeout(4500);
+  await setTimeout(1000);
   await fn();
+  await setTimeout(10000);
   const t = new Trace();
   await t.init();
   return t;
@@ -15,19 +16,17 @@ export class Trace {
   private spans: ReadableSpan[] = [];
 
   async init() {
-    const spans = await (
+    const response = await (
       await axios.get('http://localhost:4123/v1/traces')
     ).data;
 
-    console.log('recieved spans', spans);
+    response.forEach((trace: any) => this.spans.push(...trace.spans));
   }
 
   service(name: string): Service {
-    console.log('this.spans', this.spans);
-
     return new Service(
       name,
-      this.spans.filter((span) => span.name === name),
+      this.spans, //.filter((span) => span.name === name),
     );
   }
 }
