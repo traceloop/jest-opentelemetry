@@ -4,19 +4,19 @@
 var $protobuf = require("protobufjs/minimal");
 
 // Common aliases
-var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
+const $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
 
 // Exported root namespace
-var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
+const $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
 
-$root.opentelemetry = (function() {
+export const opentelemetry = $root.opentelemetry = (() => {
 
     /**
      * Namespace opentelemetry.
      * @exports opentelemetry
      * @namespace
      */
-    var opentelemetry = {};
+    const opentelemetry = {};
 
     opentelemetry.proto = (function() {
 
@@ -25,7 +25,7 @@ $root.opentelemetry = (function() {
          * @memberof opentelemetry
          * @namespace
          */
-        var proto = {};
+        const proto = {};
 
         proto.trace = (function() {
 
@@ -34,7 +34,7 @@ $root.opentelemetry = (function() {
              * @memberof opentelemetry.proto
              * @namespace
              */
-            var trace = {};
+            const trace = {};
 
             trace.v1 = (function() {
 
@@ -43,7 +43,7 @@ $root.opentelemetry = (function() {
                  * @memberof opentelemetry.proto.trace
                  * @namespace
                  */
-                var v1 = {};
+                const v1 = {};
 
                 v1.TracesData = (function() {
 
@@ -65,7 +65,7 @@ $root.opentelemetry = (function() {
                     function TracesData(properties) {
                         this.resourceSpans = [];
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -103,7 +103,7 @@ $root.opentelemetry = (function() {
                         if (!writer)
                             writer = $Writer.create();
                         if (message.resourceSpans != null && message.resourceSpans.length)
-                            for (var i = 0; i < message.resourceSpans.length; ++i)
+                            for (let i = 0; i < message.resourceSpans.length; ++i)
                                 $root.opentelemetry.proto.trace.v1.ResourceSpans.encode(message.resourceSpans[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                         return writer;
                     };
@@ -135,9 +135,9 @@ $root.opentelemetry = (function() {
                     TracesData.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.opentelemetry.proto.trace.v1.TracesData();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.opentelemetry.proto.trace.v1.TracesData();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.resourceSpans && message.resourceSpans.length))
@@ -183,8 +183,8 @@ $root.opentelemetry = (function() {
                         if (message.resourceSpans != null && message.hasOwnProperty("resourceSpans")) {
                             if (!Array.isArray(message.resourceSpans))
                                 return "resourceSpans: array expected";
-                            for (var i = 0; i < message.resourceSpans.length; ++i) {
-                                var error = $root.opentelemetry.proto.trace.v1.ResourceSpans.verify(message.resourceSpans[i]);
+                            for (let i = 0; i < message.resourceSpans.length; ++i) {
+                                let error = $root.opentelemetry.proto.trace.v1.ResourceSpans.verify(message.resourceSpans[i]);
                                 if (error)
                                     return "resourceSpans." + error;
                             }
@@ -203,12 +203,12 @@ $root.opentelemetry = (function() {
                     TracesData.fromObject = function fromObject(object) {
                         if (object instanceof $root.opentelemetry.proto.trace.v1.TracesData)
                             return object;
-                        var message = new $root.opentelemetry.proto.trace.v1.TracesData();
+                        let message = new $root.opentelemetry.proto.trace.v1.TracesData();
                         if (object.resourceSpans) {
                             if (!Array.isArray(object.resourceSpans))
                                 throw TypeError(".opentelemetry.proto.trace.v1.TracesData.resourceSpans: array expected");
                             message.resourceSpans = [];
-                            for (var i = 0; i < object.resourceSpans.length; ++i) {
+                            for (let i = 0; i < object.resourceSpans.length; ++i) {
                                 if (typeof object.resourceSpans[i] !== "object")
                                     throw TypeError(".opentelemetry.proto.trace.v1.TracesData.resourceSpans: object expected");
                                 message.resourceSpans[i] = $root.opentelemetry.proto.trace.v1.ResourceSpans.fromObject(object.resourceSpans[i]);
@@ -229,12 +229,12 @@ $root.opentelemetry = (function() {
                     TracesData.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.arrays || options.defaults)
                             object.resourceSpans = [];
                         if (message.resourceSpans && message.resourceSpans.length) {
                             object.resourceSpans = [];
-                            for (var j = 0; j < message.resourceSpans.length; ++j)
+                            for (let j = 0; j < message.resourceSpans.length; ++j)
                                 object.resourceSpans[j] = $root.opentelemetry.proto.trace.v1.ResourceSpans.toObject(message.resourceSpans[j], options);
                         }
                         return object;
@@ -291,7 +291,7 @@ $root.opentelemetry = (function() {
                     function ResourceSpans(properties) {
                         this.scopeSpans = [];
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -347,7 +347,7 @@ $root.opentelemetry = (function() {
                         if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
                             $root.opentelemetry.proto.resource.v1.Resource.encode(message.resource, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                         if (message.scopeSpans != null && message.scopeSpans.length)
-                            for (var i = 0; i < message.scopeSpans.length; ++i)
+                            for (let i = 0; i < message.scopeSpans.length; ++i)
                                 $root.opentelemetry.proto.trace.v1.ScopeSpans.encode(message.scopeSpans[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.schemaUrl != null && Object.hasOwnProperty.call(message, "schemaUrl"))
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.schemaUrl);
@@ -381,9 +381,9 @@ $root.opentelemetry = (function() {
                     ResourceSpans.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.opentelemetry.proto.trace.v1.ResourceSpans();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.opentelemetry.proto.trace.v1.ResourceSpans();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1: {
                                     message.resource = $root.opentelemetry.proto.resource.v1.Resource.decode(reader, reader.uint32());
@@ -435,15 +435,15 @@ $root.opentelemetry = (function() {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
                         if (message.resource != null && message.hasOwnProperty("resource")) {
-                            var error = $root.opentelemetry.proto.resource.v1.Resource.verify(message.resource);
+                            let error = $root.opentelemetry.proto.resource.v1.Resource.verify(message.resource);
                             if (error)
                                 return "resource." + error;
                         }
                         if (message.scopeSpans != null && message.hasOwnProperty("scopeSpans")) {
                             if (!Array.isArray(message.scopeSpans))
                                 return "scopeSpans: array expected";
-                            for (var i = 0; i < message.scopeSpans.length; ++i) {
-                                var error = $root.opentelemetry.proto.trace.v1.ScopeSpans.verify(message.scopeSpans[i]);
+                            for (let i = 0; i < message.scopeSpans.length; ++i) {
+                                let error = $root.opentelemetry.proto.trace.v1.ScopeSpans.verify(message.scopeSpans[i]);
                                 if (error)
                                     return "scopeSpans." + error;
                             }
@@ -465,7 +465,7 @@ $root.opentelemetry = (function() {
                     ResourceSpans.fromObject = function fromObject(object) {
                         if (object instanceof $root.opentelemetry.proto.trace.v1.ResourceSpans)
                             return object;
-                        var message = new $root.opentelemetry.proto.trace.v1.ResourceSpans();
+                        let message = new $root.opentelemetry.proto.trace.v1.ResourceSpans();
                         if (object.resource != null) {
                             if (typeof object.resource !== "object")
                                 throw TypeError(".opentelemetry.proto.trace.v1.ResourceSpans.resource: object expected");
@@ -475,7 +475,7 @@ $root.opentelemetry = (function() {
                             if (!Array.isArray(object.scopeSpans))
                                 throw TypeError(".opentelemetry.proto.trace.v1.ResourceSpans.scopeSpans: array expected");
                             message.scopeSpans = [];
-                            for (var i = 0; i < object.scopeSpans.length; ++i) {
+                            for (let i = 0; i < object.scopeSpans.length; ++i) {
                                 if (typeof object.scopeSpans[i] !== "object")
                                     throw TypeError(".opentelemetry.proto.trace.v1.ResourceSpans.scopeSpans: object expected");
                                 message.scopeSpans[i] = $root.opentelemetry.proto.trace.v1.ScopeSpans.fromObject(object.scopeSpans[i]);
@@ -498,7 +498,7 @@ $root.opentelemetry = (function() {
                     ResourceSpans.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.arrays || options.defaults)
                             object.scopeSpans = [];
                         if (options.defaults) {
@@ -509,7 +509,7 @@ $root.opentelemetry = (function() {
                             object.resource = $root.opentelemetry.proto.resource.v1.Resource.toObject(message.resource, options);
                         if (message.scopeSpans && message.scopeSpans.length) {
                             object.scopeSpans = [];
-                            for (var j = 0; j < message.scopeSpans.length; ++j)
+                            for (let j = 0; j < message.scopeSpans.length; ++j)
                                 object.scopeSpans[j] = $root.opentelemetry.proto.trace.v1.ScopeSpans.toObject(message.scopeSpans[j], options);
                         }
                         if (message.schemaUrl != null && message.hasOwnProperty("schemaUrl"))
@@ -568,7 +568,7 @@ $root.opentelemetry = (function() {
                     function ScopeSpans(properties) {
                         this.spans = [];
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -624,7 +624,7 @@ $root.opentelemetry = (function() {
                         if (message.scope != null && Object.hasOwnProperty.call(message, "scope"))
                             $root.opentelemetry.proto.common.v1.InstrumentationScope.encode(message.scope, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                         if (message.spans != null && message.spans.length)
-                            for (var i = 0; i < message.spans.length; ++i)
+                            for (let i = 0; i < message.spans.length; ++i)
                                 $root.opentelemetry.proto.trace.v1.Span.encode(message.spans[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.schemaUrl != null && Object.hasOwnProperty.call(message, "schemaUrl"))
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.schemaUrl);
@@ -658,9 +658,9 @@ $root.opentelemetry = (function() {
                     ScopeSpans.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.opentelemetry.proto.trace.v1.ScopeSpans();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.opentelemetry.proto.trace.v1.ScopeSpans();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1: {
                                     message.scope = $root.opentelemetry.proto.common.v1.InstrumentationScope.decode(reader, reader.uint32());
@@ -712,15 +712,15 @@ $root.opentelemetry = (function() {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
                         if (message.scope != null && message.hasOwnProperty("scope")) {
-                            var error = $root.opentelemetry.proto.common.v1.InstrumentationScope.verify(message.scope);
+                            let error = $root.opentelemetry.proto.common.v1.InstrumentationScope.verify(message.scope);
                             if (error)
                                 return "scope." + error;
                         }
                         if (message.spans != null && message.hasOwnProperty("spans")) {
                             if (!Array.isArray(message.spans))
                                 return "spans: array expected";
-                            for (var i = 0; i < message.spans.length; ++i) {
-                                var error = $root.opentelemetry.proto.trace.v1.Span.verify(message.spans[i]);
+                            for (let i = 0; i < message.spans.length; ++i) {
+                                let error = $root.opentelemetry.proto.trace.v1.Span.verify(message.spans[i]);
                                 if (error)
                                     return "spans." + error;
                             }
@@ -742,7 +742,7 @@ $root.opentelemetry = (function() {
                     ScopeSpans.fromObject = function fromObject(object) {
                         if (object instanceof $root.opentelemetry.proto.trace.v1.ScopeSpans)
                             return object;
-                        var message = new $root.opentelemetry.proto.trace.v1.ScopeSpans();
+                        let message = new $root.opentelemetry.proto.trace.v1.ScopeSpans();
                         if (object.scope != null) {
                             if (typeof object.scope !== "object")
                                 throw TypeError(".opentelemetry.proto.trace.v1.ScopeSpans.scope: object expected");
@@ -752,7 +752,7 @@ $root.opentelemetry = (function() {
                             if (!Array.isArray(object.spans))
                                 throw TypeError(".opentelemetry.proto.trace.v1.ScopeSpans.spans: array expected");
                             message.spans = [];
-                            for (var i = 0; i < object.spans.length; ++i) {
+                            for (let i = 0; i < object.spans.length; ++i) {
                                 if (typeof object.spans[i] !== "object")
                                     throw TypeError(".opentelemetry.proto.trace.v1.ScopeSpans.spans: object expected");
                                 message.spans[i] = $root.opentelemetry.proto.trace.v1.Span.fromObject(object.spans[i]);
@@ -775,7 +775,7 @@ $root.opentelemetry = (function() {
                     ScopeSpans.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.arrays || options.defaults)
                             object.spans = [];
                         if (options.defaults) {
@@ -786,7 +786,7 @@ $root.opentelemetry = (function() {
                             object.scope = $root.opentelemetry.proto.common.v1.InstrumentationScope.toObject(message.scope, options);
                         if (message.spans && message.spans.length) {
                             object.spans = [];
-                            for (var j = 0; j < message.spans.length; ++j)
+                            for (let j = 0; j < message.spans.length; ++j)
                                 object.spans[j] = $root.opentelemetry.proto.trace.v1.Span.toObject(message.spans[j], options);
                         }
                         if (message.schemaUrl != null && message.hasOwnProperty("schemaUrl"))
@@ -859,7 +859,7 @@ $root.opentelemetry = (function() {
                         this.events = [];
                         this.links = [];
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -1025,17 +1025,17 @@ $root.opentelemetry = (function() {
                         if (message.endTimeUnixNano != null && Object.hasOwnProperty.call(message, "endTimeUnixNano"))
                             writer.uint32(/* id 8, wireType 1 =*/65).fixed64(message.endTimeUnixNano);
                         if (message.attributes != null && message.attributes.length)
-                            for (var i = 0; i < message.attributes.length; ++i)
+                            for (let i = 0; i < message.attributes.length; ++i)
                                 $root.opentelemetry.proto.common.v1.KeyValue.encode(message.attributes[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                         if (message.droppedAttributesCount != null && Object.hasOwnProperty.call(message, "droppedAttributesCount"))
                             writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.droppedAttributesCount);
                         if (message.events != null && message.events.length)
-                            for (var i = 0; i < message.events.length; ++i)
+                            for (let i = 0; i < message.events.length; ++i)
                                 $root.opentelemetry.proto.trace.v1.Span.Event.encode(message.events[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                         if (message.droppedEventsCount != null && Object.hasOwnProperty.call(message, "droppedEventsCount"))
                             writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.droppedEventsCount);
                         if (message.links != null && message.links.length)
-                            for (var i = 0; i < message.links.length; ++i)
+                            for (let i = 0; i < message.links.length; ++i)
                                 $root.opentelemetry.proto.trace.v1.Span.Link.encode(message.links[i], writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                         if (message.droppedLinksCount != null && Object.hasOwnProperty.call(message, "droppedLinksCount"))
                             writer.uint32(/* id 14, wireType 0 =*/112).uint32(message.droppedLinksCount);
@@ -1071,9 +1071,9 @@ $root.opentelemetry = (function() {
                     Span.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.opentelemetry.proto.trace.v1.Span();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.opentelemetry.proto.trace.v1.Span();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1: {
                                     message.traceId = reader.bytes();
@@ -1212,8 +1212,8 @@ $root.opentelemetry = (function() {
                         if (message.attributes != null && message.hasOwnProperty("attributes")) {
                             if (!Array.isArray(message.attributes))
                                 return "attributes: array expected";
-                            for (var i = 0; i < message.attributes.length; ++i) {
-                                var error = $root.opentelemetry.proto.common.v1.KeyValue.verify(message.attributes[i]);
+                            for (let i = 0; i < message.attributes.length; ++i) {
+                                let error = $root.opentelemetry.proto.common.v1.KeyValue.verify(message.attributes[i]);
                                 if (error)
                                     return "attributes." + error;
                             }
@@ -1224,8 +1224,8 @@ $root.opentelemetry = (function() {
                         if (message.events != null && message.hasOwnProperty("events")) {
                             if (!Array.isArray(message.events))
                                 return "events: array expected";
-                            for (var i = 0; i < message.events.length; ++i) {
-                                var error = $root.opentelemetry.proto.trace.v1.Span.Event.verify(message.events[i]);
+                            for (let i = 0; i < message.events.length; ++i) {
+                                let error = $root.opentelemetry.proto.trace.v1.Span.Event.verify(message.events[i]);
                                 if (error)
                                     return "events." + error;
                             }
@@ -1236,8 +1236,8 @@ $root.opentelemetry = (function() {
                         if (message.links != null && message.hasOwnProperty("links")) {
                             if (!Array.isArray(message.links))
                                 return "links: array expected";
-                            for (var i = 0; i < message.links.length; ++i) {
-                                var error = $root.opentelemetry.proto.trace.v1.Span.Link.verify(message.links[i]);
+                            for (let i = 0; i < message.links.length; ++i) {
+                                let error = $root.opentelemetry.proto.trace.v1.Span.Link.verify(message.links[i]);
                                 if (error)
                                     return "links." + error;
                             }
@@ -1246,7 +1246,7 @@ $root.opentelemetry = (function() {
                             if (!$util.isInteger(message.droppedLinksCount))
                                 return "droppedLinksCount: integer expected";
                         if (message.status != null && message.hasOwnProperty("status")) {
-                            var error = $root.opentelemetry.proto.trace.v1.Status.verify(message.status);
+                            let error = $root.opentelemetry.proto.trace.v1.Status.verify(message.status);
                             if (error)
                                 return "status." + error;
                         }
@@ -1264,7 +1264,7 @@ $root.opentelemetry = (function() {
                     Span.fromObject = function fromObject(object) {
                         if (object instanceof $root.opentelemetry.proto.trace.v1.Span)
                             return object;
-                        var message = new $root.opentelemetry.proto.trace.v1.Span();
+                        let message = new $root.opentelemetry.proto.trace.v1.Span();
                         if (object.traceId != null)
                             if (typeof object.traceId === "string")
                                 $util.base64.decode(object.traceId, message.traceId = $util.newBuffer($util.base64.length(object.traceId)), 0);
@@ -1338,7 +1338,7 @@ $root.opentelemetry = (function() {
                             if (!Array.isArray(object.attributes))
                                 throw TypeError(".opentelemetry.proto.trace.v1.Span.attributes: array expected");
                             message.attributes = [];
-                            for (var i = 0; i < object.attributes.length; ++i) {
+                            for (let i = 0; i < object.attributes.length; ++i) {
                                 if (typeof object.attributes[i] !== "object")
                                     throw TypeError(".opentelemetry.proto.trace.v1.Span.attributes: object expected");
                                 message.attributes[i] = $root.opentelemetry.proto.common.v1.KeyValue.fromObject(object.attributes[i]);
@@ -1350,7 +1350,7 @@ $root.opentelemetry = (function() {
                             if (!Array.isArray(object.events))
                                 throw TypeError(".opentelemetry.proto.trace.v1.Span.events: array expected");
                             message.events = [];
-                            for (var i = 0; i < object.events.length; ++i) {
+                            for (let i = 0; i < object.events.length; ++i) {
                                 if (typeof object.events[i] !== "object")
                                     throw TypeError(".opentelemetry.proto.trace.v1.Span.events: object expected");
                                 message.events[i] = $root.opentelemetry.proto.trace.v1.Span.Event.fromObject(object.events[i]);
@@ -1362,7 +1362,7 @@ $root.opentelemetry = (function() {
                             if (!Array.isArray(object.links))
                                 throw TypeError(".opentelemetry.proto.trace.v1.Span.links: array expected");
                             message.links = [];
-                            for (var i = 0; i < object.links.length; ++i) {
+                            for (let i = 0; i < object.links.length; ++i) {
                                 if (typeof object.links[i] !== "object")
                                     throw TypeError(".opentelemetry.proto.trace.v1.Span.links: object expected");
                                 message.links[i] = $root.opentelemetry.proto.trace.v1.Span.Link.fromObject(object.links[i]);
@@ -1390,7 +1390,7 @@ $root.opentelemetry = (function() {
                     Span.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.arrays || options.defaults) {
                             object.attributes = [];
                             object.events = [];
@@ -1422,12 +1422,12 @@ $root.opentelemetry = (function() {
                             object.name = "";
                             object.kind = options.enums === String ? "SPAN_KIND_UNSPECIFIED" : 0;
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, false);
+                                let long = new $util.Long(0, 0, false);
                                 object.startTimeUnixNano = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.startTimeUnixNano = options.longs === String ? "0" : 0;
                             if ($util.Long) {
-                                var long = new $util.Long(0, 0, false);
+                                let long = new $util.Long(0, 0, false);
                                 object.endTimeUnixNano = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.endTimeUnixNano = options.longs === String ? "0" : 0;
@@ -1460,21 +1460,21 @@ $root.opentelemetry = (function() {
                                 object.endTimeUnixNano = options.longs === String ? $util.Long.prototype.toString.call(message.endTimeUnixNano) : options.longs === Number ? new $util.LongBits(message.endTimeUnixNano.low >>> 0, message.endTimeUnixNano.high >>> 0).toNumber() : message.endTimeUnixNano;
                         if (message.attributes && message.attributes.length) {
                             object.attributes = [];
-                            for (var j = 0; j < message.attributes.length; ++j)
+                            for (let j = 0; j < message.attributes.length; ++j)
                                 object.attributes[j] = $root.opentelemetry.proto.common.v1.KeyValue.toObject(message.attributes[j], options);
                         }
                         if (message.droppedAttributesCount != null && message.hasOwnProperty("droppedAttributesCount"))
                             object.droppedAttributesCount = message.droppedAttributesCount;
                         if (message.events && message.events.length) {
                             object.events = [];
-                            for (var j = 0; j < message.events.length; ++j)
+                            for (let j = 0; j < message.events.length; ++j)
                                 object.events[j] = $root.opentelemetry.proto.trace.v1.Span.Event.toObject(message.events[j], options);
                         }
                         if (message.droppedEventsCount != null && message.hasOwnProperty("droppedEventsCount"))
                             object.droppedEventsCount = message.droppedEventsCount;
                         if (message.links && message.links.length) {
                             object.links = [];
-                            for (var j = 0; j < message.links.length; ++j)
+                            for (let j = 0; j < message.links.length; ++j)
                                 object.links[j] = $root.opentelemetry.proto.trace.v1.Span.Link.toObject(message.links[j], options);
                         }
                         if (message.droppedLinksCount != null && message.hasOwnProperty("droppedLinksCount"))
@@ -1522,7 +1522,7 @@ $root.opentelemetry = (function() {
                      * @property {number} SPAN_KIND_CONSUMER=5 SPAN_KIND_CONSUMER value
                      */
                     Span.SpanKind = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
+                        const valuesById = {}, values = Object.create(valuesById);
                         values[valuesById[0] = "SPAN_KIND_UNSPECIFIED"] = 0;
                         values[valuesById[1] = "SPAN_KIND_INTERNAL"] = 1;
                         values[valuesById[2] = "SPAN_KIND_SERVER"] = 2;
@@ -1555,7 +1555,7 @@ $root.opentelemetry = (function() {
                         function Event(properties) {
                             this.attributes = [];
                             if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
@@ -1621,7 +1621,7 @@ $root.opentelemetry = (function() {
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
                             if (message.attributes != null && message.attributes.length)
-                                for (var i = 0; i < message.attributes.length; ++i)
+                                for (let i = 0; i < message.attributes.length; ++i)
                                     $root.opentelemetry.proto.common.v1.KeyValue.encode(message.attributes[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.droppedAttributesCount != null && Object.hasOwnProperty.call(message, "droppedAttributesCount"))
                                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.droppedAttributesCount);
@@ -1655,9 +1655,9 @@ $root.opentelemetry = (function() {
                         Event.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.opentelemetry.proto.trace.v1.Span.Event();
+                            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.opentelemetry.proto.trace.v1.Span.Event();
                             while (reader.pos < end) {
-                                var tag = reader.uint32();
+                                let tag = reader.uint32();
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.timeUnixNano = reader.fixed64();
@@ -1721,8 +1721,8 @@ $root.opentelemetry = (function() {
                             if (message.attributes != null && message.hasOwnProperty("attributes")) {
                                 if (!Array.isArray(message.attributes))
                                     return "attributes: array expected";
-                                for (var i = 0; i < message.attributes.length; ++i) {
-                                    var error = $root.opentelemetry.proto.common.v1.KeyValue.verify(message.attributes[i]);
+                                for (let i = 0; i < message.attributes.length; ++i) {
+                                    let error = $root.opentelemetry.proto.common.v1.KeyValue.verify(message.attributes[i]);
                                     if (error)
                                         return "attributes." + error;
                                 }
@@ -1744,7 +1744,7 @@ $root.opentelemetry = (function() {
                         Event.fromObject = function fromObject(object) {
                             if (object instanceof $root.opentelemetry.proto.trace.v1.Span.Event)
                                 return object;
-                            var message = new $root.opentelemetry.proto.trace.v1.Span.Event();
+                            let message = new $root.opentelemetry.proto.trace.v1.Span.Event();
                             if (object.timeUnixNano != null)
                                 if ($util.Long)
                                     (message.timeUnixNano = $util.Long.fromValue(object.timeUnixNano)).unsigned = false;
@@ -1760,7 +1760,7 @@ $root.opentelemetry = (function() {
                                 if (!Array.isArray(object.attributes))
                                     throw TypeError(".opentelemetry.proto.trace.v1.Span.Event.attributes: array expected");
                                 message.attributes = [];
-                                for (var i = 0; i < object.attributes.length; ++i) {
+                                for (let i = 0; i < object.attributes.length; ++i) {
                                     if (typeof object.attributes[i] !== "object")
                                         throw TypeError(".opentelemetry.proto.trace.v1.Span.Event.attributes: object expected");
                                     message.attributes[i] = $root.opentelemetry.proto.common.v1.KeyValue.fromObject(object.attributes[i]);
@@ -1783,12 +1783,12 @@ $root.opentelemetry = (function() {
                         Event.toObject = function toObject(message, options) {
                             if (!options)
                                 options = {};
-                            var object = {};
+                            let object = {};
                             if (options.arrays || options.defaults)
                                 object.attributes = [];
                             if (options.defaults) {
                                 if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
+                                    let long = new $util.Long(0, 0, false);
                                     object.timeUnixNano = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                                 } else
                                     object.timeUnixNano = options.longs === String ? "0" : 0;
@@ -1804,7 +1804,7 @@ $root.opentelemetry = (function() {
                                 object.name = message.name;
                             if (message.attributes && message.attributes.length) {
                                 object.attributes = [];
-                                for (var j = 0; j < message.attributes.length; ++j)
+                                for (let j = 0; j < message.attributes.length; ++j)
                                     object.attributes[j] = $root.opentelemetry.proto.common.v1.KeyValue.toObject(message.attributes[j], options);
                             }
                             if (message.droppedAttributesCount != null && message.hasOwnProperty("droppedAttributesCount"))
@@ -1865,7 +1865,7 @@ $root.opentelemetry = (function() {
                         function Link(properties) {
                             this.attributes = [];
                             if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
@@ -1941,7 +1941,7 @@ $root.opentelemetry = (function() {
                             if (message.traceState != null && Object.hasOwnProperty.call(message, "traceState"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.traceState);
                             if (message.attributes != null && message.attributes.length)
-                                for (var i = 0; i < message.attributes.length; ++i)
+                                for (let i = 0; i < message.attributes.length; ++i)
                                     $root.opentelemetry.proto.common.v1.KeyValue.encode(message.attributes[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.droppedAttributesCount != null && Object.hasOwnProperty.call(message, "droppedAttributesCount"))
                                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.droppedAttributesCount);
@@ -1975,9 +1975,9 @@ $root.opentelemetry = (function() {
                         Link.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.opentelemetry.proto.trace.v1.Span.Link();
+                            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.opentelemetry.proto.trace.v1.Span.Link();
                             while (reader.pos < end) {
-                                var tag = reader.uint32();
+                                let tag = reader.uint32();
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.traceId = reader.bytes();
@@ -2048,8 +2048,8 @@ $root.opentelemetry = (function() {
                             if (message.attributes != null && message.hasOwnProperty("attributes")) {
                                 if (!Array.isArray(message.attributes))
                                     return "attributes: array expected";
-                                for (var i = 0; i < message.attributes.length; ++i) {
-                                    var error = $root.opentelemetry.proto.common.v1.KeyValue.verify(message.attributes[i]);
+                                for (let i = 0; i < message.attributes.length; ++i) {
+                                    let error = $root.opentelemetry.proto.common.v1.KeyValue.verify(message.attributes[i]);
                                     if (error)
                                         return "attributes." + error;
                                 }
@@ -2071,7 +2071,7 @@ $root.opentelemetry = (function() {
                         Link.fromObject = function fromObject(object) {
                             if (object instanceof $root.opentelemetry.proto.trace.v1.Span.Link)
                                 return object;
-                            var message = new $root.opentelemetry.proto.trace.v1.Span.Link();
+                            let message = new $root.opentelemetry.proto.trace.v1.Span.Link();
                             if (object.traceId != null)
                                 if (typeof object.traceId === "string")
                                     $util.base64.decode(object.traceId, message.traceId = $util.newBuffer($util.base64.length(object.traceId)), 0);
@@ -2088,7 +2088,7 @@ $root.opentelemetry = (function() {
                                 if (!Array.isArray(object.attributes))
                                     throw TypeError(".opentelemetry.proto.trace.v1.Span.Link.attributes: array expected");
                                 message.attributes = [];
-                                for (var i = 0; i < object.attributes.length; ++i) {
+                                for (let i = 0; i < object.attributes.length; ++i) {
                                     if (typeof object.attributes[i] !== "object")
                                         throw TypeError(".opentelemetry.proto.trace.v1.Span.Link.attributes: object expected");
                                     message.attributes[i] = $root.opentelemetry.proto.common.v1.KeyValue.fromObject(object.attributes[i]);
@@ -2111,7 +2111,7 @@ $root.opentelemetry = (function() {
                         Link.toObject = function toObject(message, options) {
                             if (!options)
                                 options = {};
-                            var object = {};
+                            let object = {};
                             if (options.arrays || options.defaults)
                                 object.attributes = [];
                             if (options.defaults) {
@@ -2140,7 +2140,7 @@ $root.opentelemetry = (function() {
                                 object.traceState = message.traceState;
                             if (message.attributes && message.attributes.length) {
                                 object.attributes = [];
-                                for (var j = 0; j < message.attributes.length; ++j)
+                                for (let j = 0; j < message.attributes.length; ++j)
                                     object.attributes[j] = $root.opentelemetry.proto.common.v1.KeyValue.toObject(message.attributes[j], options);
                             }
                             if (message.droppedAttributesCount != null && message.hasOwnProperty("droppedAttributesCount"))
@@ -2200,7 +2200,7 @@ $root.opentelemetry = (function() {
                      */
                     function Status(properties) {
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -2279,9 +2279,9 @@ $root.opentelemetry = (function() {
                     Status.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.opentelemetry.proto.trace.v1.Status();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.opentelemetry.proto.trace.v1.Status();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 2: {
                                     message.message = reader.string();
@@ -2352,7 +2352,7 @@ $root.opentelemetry = (function() {
                     Status.fromObject = function fromObject(object) {
                         if (object instanceof $root.opentelemetry.proto.trace.v1.Status)
                             return object;
-                        var message = new $root.opentelemetry.proto.trace.v1.Status();
+                        let message = new $root.opentelemetry.proto.trace.v1.Status();
                         if (object.message != null)
                             message.message = String(object.message);
                         switch (object.code) {
@@ -2390,7 +2390,7 @@ $root.opentelemetry = (function() {
                     Status.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.defaults) {
                             object.message = "";
                             object.code = options.enums === String ? "STATUS_CODE_UNSET" : 0;
@@ -2437,7 +2437,7 @@ $root.opentelemetry = (function() {
                      * @property {number} STATUS_CODE_ERROR=2 STATUS_CODE_ERROR value
                      */
                     Status.StatusCode = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
+                        const valuesById = {}, values = Object.create(valuesById);
                         values[valuesById[0] = "STATUS_CODE_UNSET"] = 0;
                         values[valuesById[1] = "STATUS_CODE_OK"] = 1;
                         values[valuesById[2] = "STATUS_CODE_ERROR"] = 2;
@@ -2460,7 +2460,7 @@ $root.opentelemetry = (function() {
              * @memberof opentelemetry.proto
              * @namespace
              */
-            var resource = {};
+            const resource = {};
 
             resource.v1 = (function() {
 
@@ -2469,7 +2469,7 @@ $root.opentelemetry = (function() {
                  * @memberof opentelemetry.proto.resource
                  * @namespace
                  */
-                var v1 = {};
+                const v1 = {};
 
                 v1.Resource = (function() {
 
@@ -2492,7 +2492,7 @@ $root.opentelemetry = (function() {
                     function Resource(properties) {
                         this.attributes = [];
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -2538,7 +2538,7 @@ $root.opentelemetry = (function() {
                         if (!writer)
                             writer = $Writer.create();
                         if (message.attributes != null && message.attributes.length)
-                            for (var i = 0; i < message.attributes.length; ++i)
+                            for (let i = 0; i < message.attributes.length; ++i)
                                 $root.opentelemetry.proto.common.v1.KeyValue.encode(message.attributes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                         if (message.droppedAttributesCount != null && Object.hasOwnProperty.call(message, "droppedAttributesCount"))
                             writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.droppedAttributesCount);
@@ -2572,9 +2572,9 @@ $root.opentelemetry = (function() {
                     Resource.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.opentelemetry.proto.resource.v1.Resource();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.opentelemetry.proto.resource.v1.Resource();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.attributes && message.attributes.length))
@@ -2624,8 +2624,8 @@ $root.opentelemetry = (function() {
                         if (message.attributes != null && message.hasOwnProperty("attributes")) {
                             if (!Array.isArray(message.attributes))
                                 return "attributes: array expected";
-                            for (var i = 0; i < message.attributes.length; ++i) {
-                                var error = $root.opentelemetry.proto.common.v1.KeyValue.verify(message.attributes[i]);
+                            for (let i = 0; i < message.attributes.length; ++i) {
+                                let error = $root.opentelemetry.proto.common.v1.KeyValue.verify(message.attributes[i]);
                                 if (error)
                                     return "attributes." + error;
                             }
@@ -2647,12 +2647,12 @@ $root.opentelemetry = (function() {
                     Resource.fromObject = function fromObject(object) {
                         if (object instanceof $root.opentelemetry.proto.resource.v1.Resource)
                             return object;
-                        var message = new $root.opentelemetry.proto.resource.v1.Resource();
+                        let message = new $root.opentelemetry.proto.resource.v1.Resource();
                         if (object.attributes) {
                             if (!Array.isArray(object.attributes))
                                 throw TypeError(".opentelemetry.proto.resource.v1.Resource.attributes: array expected");
                             message.attributes = [];
-                            for (var i = 0; i < object.attributes.length; ++i) {
+                            for (let i = 0; i < object.attributes.length; ++i) {
                                 if (typeof object.attributes[i] !== "object")
                                     throw TypeError(".opentelemetry.proto.resource.v1.Resource.attributes: object expected");
                                 message.attributes[i] = $root.opentelemetry.proto.common.v1.KeyValue.fromObject(object.attributes[i]);
@@ -2675,14 +2675,14 @@ $root.opentelemetry = (function() {
                     Resource.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.arrays || options.defaults)
                             object.attributes = [];
                         if (options.defaults)
                             object.droppedAttributesCount = 0;
                         if (message.attributes && message.attributes.length) {
                             object.attributes = [];
-                            for (var j = 0; j < message.attributes.length; ++j)
+                            for (let j = 0; j < message.attributes.length; ++j)
                                 object.attributes[j] = $root.opentelemetry.proto.common.v1.KeyValue.toObject(message.attributes[j], options);
                         }
                         if (message.droppedAttributesCount != null && message.hasOwnProperty("droppedAttributesCount"))
@@ -2732,7 +2732,7 @@ $root.opentelemetry = (function() {
              * @memberof opentelemetry.proto
              * @namespace
              */
-            var common = {};
+            const common = {};
 
             common.v1 = (function() {
 
@@ -2741,7 +2741,7 @@ $root.opentelemetry = (function() {
                  * @memberof opentelemetry.proto.common
                  * @namespace
                  */
-                var v1 = {};
+                const v1 = {};
 
                 v1.AnyValue = (function() {
 
@@ -2768,7 +2768,7 @@ $root.opentelemetry = (function() {
                      */
                     function AnyValue(properties) {
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -2830,7 +2830,7 @@ $root.opentelemetry = (function() {
                     AnyValue.prototype.bytesValue = null;
 
                     // OneOf field names bound to virtual getters and setters
-                    var $oneOfFields;
+                    let $oneOfFields;
 
                     /**
                      * AnyValue value.
@@ -2911,9 +2911,9 @@ $root.opentelemetry = (function() {
                     AnyValue.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.opentelemetry.proto.common.v1.AnyValue();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.opentelemetry.proto.common.v1.AnyValue();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1: {
                                     message.stringValue = reader.string();
@@ -2978,7 +2978,7 @@ $root.opentelemetry = (function() {
                     AnyValue.verify = function verify(message) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
-                        var properties = {};
+                        let properties = {};
                         if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
                             properties.value = 1;
                             if (!$util.isString(message.stringValue))
@@ -3010,7 +3010,7 @@ $root.opentelemetry = (function() {
                                 return "value: multiple values";
                             properties.value = 1;
                             {
-                                var error = $root.opentelemetry.proto.common.v1.ArrayValue.verify(message.arrayValue);
+                                let error = $root.opentelemetry.proto.common.v1.ArrayValue.verify(message.arrayValue);
                                 if (error)
                                     return "arrayValue." + error;
                             }
@@ -3020,7 +3020,7 @@ $root.opentelemetry = (function() {
                                 return "value: multiple values";
                             properties.value = 1;
                             {
-                                var error = $root.opentelemetry.proto.common.v1.KeyValueList.verify(message.kvlistValue);
+                                let error = $root.opentelemetry.proto.common.v1.KeyValueList.verify(message.kvlistValue);
                                 if (error)
                                     return "kvlistValue." + error;
                             }
@@ -3046,7 +3046,7 @@ $root.opentelemetry = (function() {
                     AnyValue.fromObject = function fromObject(object) {
                         if (object instanceof $root.opentelemetry.proto.common.v1.AnyValue)
                             return object;
-                        var message = new $root.opentelemetry.proto.common.v1.AnyValue();
+                        let message = new $root.opentelemetry.proto.common.v1.AnyValue();
                         if (object.stringValue != null)
                             message.stringValue = String(object.stringValue);
                         if (object.boolValue != null)
@@ -3092,7 +3092,7 @@ $root.opentelemetry = (function() {
                     AnyValue.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
                             object.stringValue = message.stringValue;
                             if (options.oneofs)
@@ -3183,7 +3183,7 @@ $root.opentelemetry = (function() {
                     function ArrayValue(properties) {
                         this.values = [];
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -3221,7 +3221,7 @@ $root.opentelemetry = (function() {
                         if (!writer)
                             writer = $Writer.create();
                         if (message.values != null && message.values.length)
-                            for (var i = 0; i < message.values.length; ++i)
+                            for (let i = 0; i < message.values.length; ++i)
                                 $root.opentelemetry.proto.common.v1.AnyValue.encode(message.values[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                         return writer;
                     };
@@ -3253,9 +3253,9 @@ $root.opentelemetry = (function() {
                     ArrayValue.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.opentelemetry.proto.common.v1.ArrayValue();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.opentelemetry.proto.common.v1.ArrayValue();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.values && message.values.length))
@@ -3301,8 +3301,8 @@ $root.opentelemetry = (function() {
                         if (message.values != null && message.hasOwnProperty("values")) {
                             if (!Array.isArray(message.values))
                                 return "values: array expected";
-                            for (var i = 0; i < message.values.length; ++i) {
-                                var error = $root.opentelemetry.proto.common.v1.AnyValue.verify(message.values[i]);
+                            for (let i = 0; i < message.values.length; ++i) {
+                                let error = $root.opentelemetry.proto.common.v1.AnyValue.verify(message.values[i]);
                                 if (error)
                                     return "values." + error;
                             }
@@ -3321,12 +3321,12 @@ $root.opentelemetry = (function() {
                     ArrayValue.fromObject = function fromObject(object) {
                         if (object instanceof $root.opentelemetry.proto.common.v1.ArrayValue)
                             return object;
-                        var message = new $root.opentelemetry.proto.common.v1.ArrayValue();
+                        let message = new $root.opentelemetry.proto.common.v1.ArrayValue();
                         if (object.values) {
                             if (!Array.isArray(object.values))
                                 throw TypeError(".opentelemetry.proto.common.v1.ArrayValue.values: array expected");
                             message.values = [];
-                            for (var i = 0; i < object.values.length; ++i) {
+                            for (let i = 0; i < object.values.length; ++i) {
                                 if (typeof object.values[i] !== "object")
                                     throw TypeError(".opentelemetry.proto.common.v1.ArrayValue.values: object expected");
                                 message.values[i] = $root.opentelemetry.proto.common.v1.AnyValue.fromObject(object.values[i]);
@@ -3347,12 +3347,12 @@ $root.opentelemetry = (function() {
                     ArrayValue.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.arrays || options.defaults)
                             object.values = [];
                         if (message.values && message.values.length) {
                             object.values = [];
-                            for (var j = 0; j < message.values.length; ++j)
+                            for (let j = 0; j < message.values.length; ++j)
                                 object.values[j] = $root.opentelemetry.proto.common.v1.AnyValue.toObject(message.values[j], options);
                         }
                         return object;
@@ -3407,7 +3407,7 @@ $root.opentelemetry = (function() {
                     function KeyValueList(properties) {
                         this.values = [];
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -3445,7 +3445,7 @@ $root.opentelemetry = (function() {
                         if (!writer)
                             writer = $Writer.create();
                         if (message.values != null && message.values.length)
-                            for (var i = 0; i < message.values.length; ++i)
+                            for (let i = 0; i < message.values.length; ++i)
                                 $root.opentelemetry.proto.common.v1.KeyValue.encode(message.values[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                         return writer;
                     };
@@ -3477,9 +3477,9 @@ $root.opentelemetry = (function() {
                     KeyValueList.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.opentelemetry.proto.common.v1.KeyValueList();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.opentelemetry.proto.common.v1.KeyValueList();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.values && message.values.length))
@@ -3525,8 +3525,8 @@ $root.opentelemetry = (function() {
                         if (message.values != null && message.hasOwnProperty("values")) {
                             if (!Array.isArray(message.values))
                                 return "values: array expected";
-                            for (var i = 0; i < message.values.length; ++i) {
-                                var error = $root.opentelemetry.proto.common.v1.KeyValue.verify(message.values[i]);
+                            for (let i = 0; i < message.values.length; ++i) {
+                                let error = $root.opentelemetry.proto.common.v1.KeyValue.verify(message.values[i]);
                                 if (error)
                                     return "values." + error;
                             }
@@ -3545,12 +3545,12 @@ $root.opentelemetry = (function() {
                     KeyValueList.fromObject = function fromObject(object) {
                         if (object instanceof $root.opentelemetry.proto.common.v1.KeyValueList)
                             return object;
-                        var message = new $root.opentelemetry.proto.common.v1.KeyValueList();
+                        let message = new $root.opentelemetry.proto.common.v1.KeyValueList();
                         if (object.values) {
                             if (!Array.isArray(object.values))
                                 throw TypeError(".opentelemetry.proto.common.v1.KeyValueList.values: array expected");
                             message.values = [];
-                            for (var i = 0; i < object.values.length; ++i) {
+                            for (let i = 0; i < object.values.length; ++i) {
                                 if (typeof object.values[i] !== "object")
                                     throw TypeError(".opentelemetry.proto.common.v1.KeyValueList.values: object expected");
                                 message.values[i] = $root.opentelemetry.proto.common.v1.KeyValue.fromObject(object.values[i]);
@@ -3571,12 +3571,12 @@ $root.opentelemetry = (function() {
                     KeyValueList.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.arrays || options.defaults)
                             object.values = [];
                         if (message.values && message.values.length) {
                             object.values = [];
-                            for (var j = 0; j < message.values.length; ++j)
+                            for (let j = 0; j < message.values.length; ++j)
                                 object.values[j] = $root.opentelemetry.proto.common.v1.KeyValue.toObject(message.values[j], options);
                         }
                         return object;
@@ -3631,7 +3631,7 @@ $root.opentelemetry = (function() {
                      */
                     function KeyValue(properties) {
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -3710,9 +3710,9 @@ $root.opentelemetry = (function() {
                     KeyValue.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.opentelemetry.proto.common.v1.KeyValue();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.opentelemetry.proto.common.v1.KeyValue();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1: {
                                     message.key = reader.string();
@@ -3761,7 +3761,7 @@ $root.opentelemetry = (function() {
                             if (!$util.isString(message.key))
                                 return "key: string expected";
                         if (message.value != null && message.hasOwnProperty("value")) {
-                            var error = $root.opentelemetry.proto.common.v1.AnyValue.verify(message.value);
+                            let error = $root.opentelemetry.proto.common.v1.AnyValue.verify(message.value);
                             if (error)
                                 return "value." + error;
                         }
@@ -3779,7 +3779,7 @@ $root.opentelemetry = (function() {
                     KeyValue.fromObject = function fromObject(object) {
                         if (object instanceof $root.opentelemetry.proto.common.v1.KeyValue)
                             return object;
-                        var message = new $root.opentelemetry.proto.common.v1.KeyValue();
+                        let message = new $root.opentelemetry.proto.common.v1.KeyValue();
                         if (object.key != null)
                             message.key = String(object.key);
                         if (object.value != null) {
@@ -3802,7 +3802,7 @@ $root.opentelemetry = (function() {
                     KeyValue.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.defaults) {
                             object.key = "";
                             object.value = null;
@@ -3866,7 +3866,7 @@ $root.opentelemetry = (function() {
                     function InstrumentationScope(properties) {
                         this.attributes = [];
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
                                     this[keys[i]] = properties[keys[i]];
                     }
@@ -3932,7 +3932,7 @@ $root.opentelemetry = (function() {
                         if (message.version != null && Object.hasOwnProperty.call(message, "version"))
                             writer.uint32(/* id 2, wireType 2 =*/18).string(message.version);
                         if (message.attributes != null && message.attributes.length)
-                            for (var i = 0; i < message.attributes.length; ++i)
+                            for (let i = 0; i < message.attributes.length; ++i)
                                 $root.opentelemetry.proto.common.v1.KeyValue.encode(message.attributes[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                         if (message.droppedAttributesCount != null && Object.hasOwnProperty.call(message, "droppedAttributesCount"))
                             writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.droppedAttributesCount);
@@ -3966,9 +3966,9 @@ $root.opentelemetry = (function() {
                     InstrumentationScope.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.opentelemetry.proto.common.v1.InstrumentationScope();
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.opentelemetry.proto.common.v1.InstrumentationScope();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
+                            let tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -4032,8 +4032,8 @@ $root.opentelemetry = (function() {
                         if (message.attributes != null && message.hasOwnProperty("attributes")) {
                             if (!Array.isArray(message.attributes))
                                 return "attributes: array expected";
-                            for (var i = 0; i < message.attributes.length; ++i) {
-                                var error = $root.opentelemetry.proto.common.v1.KeyValue.verify(message.attributes[i]);
+                            for (let i = 0; i < message.attributes.length; ++i) {
+                                let error = $root.opentelemetry.proto.common.v1.KeyValue.verify(message.attributes[i]);
                                 if (error)
                                     return "attributes." + error;
                             }
@@ -4055,7 +4055,7 @@ $root.opentelemetry = (function() {
                     InstrumentationScope.fromObject = function fromObject(object) {
                         if (object instanceof $root.opentelemetry.proto.common.v1.InstrumentationScope)
                             return object;
-                        var message = new $root.opentelemetry.proto.common.v1.InstrumentationScope();
+                        let message = new $root.opentelemetry.proto.common.v1.InstrumentationScope();
                         if (object.name != null)
                             message.name = String(object.name);
                         if (object.version != null)
@@ -4064,7 +4064,7 @@ $root.opentelemetry = (function() {
                             if (!Array.isArray(object.attributes))
                                 throw TypeError(".opentelemetry.proto.common.v1.InstrumentationScope.attributes: array expected");
                             message.attributes = [];
-                            for (var i = 0; i < object.attributes.length; ++i) {
+                            for (let i = 0; i < object.attributes.length; ++i) {
                                 if (typeof object.attributes[i] !== "object")
                                     throw TypeError(".opentelemetry.proto.common.v1.InstrumentationScope.attributes: object expected");
                                 message.attributes[i] = $root.opentelemetry.proto.common.v1.KeyValue.fromObject(object.attributes[i]);
@@ -4087,7 +4087,7 @@ $root.opentelemetry = (function() {
                     InstrumentationScope.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
-                        var object = {};
+                        let object = {};
                         if (options.arrays || options.defaults)
                             object.attributes = [];
                         if (options.defaults) {
@@ -4101,7 +4101,7 @@ $root.opentelemetry = (function() {
                             object.version = message.version;
                         if (message.attributes && message.attributes.length) {
                             object.attributes = [];
-                            for (var j = 0; j < message.attributes.length; ++j)
+                            for (let j = 0; j < message.attributes.length; ++j)
                                 object.attributes[j] = $root.opentelemetry.proto.common.v1.KeyValue.toObject(message.attributes[j], options);
                         }
                         if (message.droppedAttributesCount != null && message.hasOwnProperty("droppedAttributesCount"))
