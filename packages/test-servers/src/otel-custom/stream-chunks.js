@@ -1,9 +1,9 @@
 // for body with at most this length, full body will be captured.
 // for large body with more than this amount of bytes, we will
 // collect at least this amount of bytes, but might truncate after it
-const MIN_COLLECTED_BODY_LENGTH = 524288;
+export const MIN_COLLECTED_BODY_LENGTH = 524288;
 
-class StreamChunks {
+export class StreamChunks {
   chunks;
   length;
 
@@ -26,8 +26,3 @@ class StreamChunks {
     return this.chunks.join('');
   }
 }
-
-module.exports = {
-  StreamChunks,
-  MIN_COLLECTED_BODY_LENGTH,
-};

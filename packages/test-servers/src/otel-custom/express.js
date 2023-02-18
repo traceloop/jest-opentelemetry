@@ -1,6 +1,6 @@
-const { HttpExtendedAttribute } = require('./constants');
-const { shouldCaptureBodyByMimeType } = require('./mime-type');
-const { StreamChunks } = require('./stream-chunks');
+import { HttpExtendedAttribute } from './constants';
+import { shouldCaptureBodyByMimeType } from './mime-type';
+import { StreamChunks } from './stream-chunks';
 
 const requestHook = (span, req, res) => {
   span.setAttributes({
@@ -50,10 +50,6 @@ const requestHook = (span, req, res) => {
   };
 };
 
-const expressInstrumentationConfig = {
+export const expressInstrumentationConfig = {
   requestHook,
-};
-
-module.exports = {
-  expressInstrumentationConfig,
 };

@@ -1,7 +1,7 @@
-const { IncomingMessage, ClientRequest } = require('http');
-const { HttpExtendedAttribute } = require('./constants');
-const { shouldCaptureBodyByMimeType } = require('./mime-type');
-const { StreamChunks } = require('./stream-chunks');
+import { IncomingMessage, ClientRequest } from 'http';
+import { HttpExtendedAttribute } from './constants';
+import { shouldCaptureBodyByMimeType } from './mime-type';
+import { StreamChunks } from './stream-chunks';
 
 const streamChunksKey = Symbol(
   'opentelemetry.instrumentation.http.StreamChunks',
@@ -84,12 +84,8 @@ const httpCustomAttributesOnResponse = (span, response) => {
   }
 };
 
-const httpInstrumentationConfig = {
+export const httpInstrumentationConfig = {
   applyCustomAttributesOnSpan: httpCustomAttributes,
   requestHook: httpCustomAttributesOnRequest,
   responseHook: httpCustomAttributesOnResponse,
-};
-
-module.exports = {
-  httpInstrumentationConfig,
 };
