@@ -22,5 +22,7 @@ export const parseServerResponse = (data: any) => {
 };
 
 export const generateStubData = () => {
-  return TracesData.create({});
+  return {
+    traces: Buffer.from(TracesData.create({})).toString('base64'),
+  };
 };
