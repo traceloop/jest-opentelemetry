@@ -3,7 +3,6 @@ import { setTimeout } from 'timers/promises';
 import { Service } from './resources/service';
 import { generateStubData, parseServerResponse } from './utils';
 import { opentelemetry } from './proto';
-import { SemanticAttributes } from '@opentelemetry/semantic-conventions';
 
 export async function traces(fn: () => Promise<void>) {
   await setTimeout(1000);
