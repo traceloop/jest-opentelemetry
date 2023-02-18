@@ -2,7 +2,8 @@
   "extends": "@tsconfig/recommended/tsconfig.json",
   "compilerOptions": {
     "preserveConstEnums": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true
   },
   "include": ["packages/*/src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]

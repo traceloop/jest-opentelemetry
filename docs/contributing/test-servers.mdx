@@ -1,0 +1,39 @@
+---
+title: 'Running Test Servers'
+---
+
+## Installing on a local Kubernetes cluster
+
+1. Make sure you have a K8s cluster running locally.
+   If you don't, you can use either [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
+   or [Docker Desktop](https://www.docker.com/products/docker-desktop) to run a local cluster.
+
+1. Build the docker image.
+
+   ```bash
+   npm run docker:test-servers
+   ```
+
+1. Install cert-manager (needed by OpenTelemetry operator)
+
+   ```bash
+   kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.11.0/cert-manager.yaml
+   ```
+
+1. Install the OpenTelemetry operator so that metrics will be generated and collected automatically.
+
+   ```bash
+       kubectl apply -f https://github.com/open-telemetry/opentelemetry-operator/releases/latest/download/opentelemetry-operator.yaml
+   ```
+
+1. Apply the K8s spec.
+
+   ```bash
+   kubectl apply -f packages/test-servers/deployment.yaml
+   ```
+
+   <Info>
+     If you ever re-built the docker image, you need to delete the old
+     deployment first. ```bash kubectl delete -f
+     packages/test-servers/deployment.yaml ```
+   </Info>

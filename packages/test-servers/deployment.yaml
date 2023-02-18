@@ -1,3 +1,15 @@
+apiVersion: opentelemetry.io/v1alpha1
+kind: Instrumentation
+metadata:
+  name: otel-instrumentation
+spec:
+  exporter:
+    endpoint: http://otel-collector:4317
+  propagators:
+    - tracecontext
+    - baggage
+    - b3
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -11,6 +23,8 @@ spec:
     metadata:
       labels:
         app: orders-service
+      annotations:
+        instrumentation.opentelemetry.io/inject-nodejs: 'true'
     spec:
       containers:
         - name: orders-service
@@ -40,6 +54,8 @@ spec:
     metadata:
       labels:
         app: emails-service
+      annotations:
+        instrumentation.opentelemetry.io/inject-nodejs: 'true'
     spec:
       containers:
         - name: emails-service
@@ -79,3 +95,32 @@ spec:
     - protocol: TCP
       port: 3000
       targetPort: 3000
+
+---
+apiVersion: opentelemetry.io/v1alpha1
+kind: OpenTelemetryCollector
+metadata:
+  name: otel
+spec:
+  config: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+          http:
+    processors:
+      batch:
+        timeout: 100ms
+
+    exporters:
+      logging:
+        verbosity: detailed
+      otlphttp:
+        endpoint: http://host.docker.internal:4123
+
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp]
+          processors: [batch]
+          exporters: [logging, otlphttp]
