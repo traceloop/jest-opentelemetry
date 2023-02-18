@@ -1,4 +1,4 @@
-import { TracesData } from './proto';
+import { opentelemetry } from './proto';
 
 export const getInstanceType = (instance: any) => {
   if (
@@ -16,13 +16,63 @@ export const enhanceError = (error: any, message: string) => {
   return error;
 };
 
-export const parseServerResponse = (data: any) => {
+export function parseServerResponse(
+  data: any,
+): opentelemetry.proto.trace.v1.TracesData {
   const tracesBinary = Buffer.from(data.traces, 'base64');
-  const traces = TracesData.decode(tracesBinary);
-};
+
+  return opentelemetry.proto.trace.v1.TracesData.decode(tracesBinary);
+}
 
 export const generateStubData = () => {
+  const tracesData = opentelemetry.proto.trace.v1.TracesData.create();
+
+  tracesData.resourceSpans.push(
+    opentelemetry.proto.trace.v1.ResourceSpans.create({
+      resource: opentelemetry.proto.resource.v1.Resource.create({
+        attributes: [
+          opentelemetry.proto.common.v1.KeyValue.create({
+            key: 'service.name',
+            value: opentelemetry.proto.common.v1.AnyValue.create({
+              stringValue: 'orders-service',
+            }),
+          }),
+        ],
+      }),
+      scopeSpans: [
+        opentelemetry.proto.trace.v1.ScopeSpans.create({
+          spans: [
+            opentelemetry.proto.trace.v1.Span.create({
+              traceId: Uint8Array.from(Buffer.from('AAAAAAAAAAAAAAAA', 'hex')),
+              spanId: Uint8Array.from(Buffer.from('BBBBBBBBBBBBBBBB', 'hex')),
+              name: 'orders-service',
+              kind: opentelemetry.proto.trace.v1.Span.SpanKind.SPAN_KIND_CLIENT,
+              startTimeUnixNano: 1630000000000000000,
+              endTimeUnixNano: 1630000000000000000,
+              attributes: [
+                opentelemetry.proto.common.v1.KeyValue.create({
+                  key: 'http.method',
+                  value: opentelemetry.proto.common.v1.AnyValue.create({
+                    stringValue: 'GET',
+                  }),
+                }),
+                opentelemetry.proto.common.v1.KeyValue.create({
+                  key: 'http.url',
+                  value: opentelemetry.proto.common.v1.AnyValue.create({
+                    stringValue: 'http://localhost:3000/orders',
+                  }),
+                }),
+              ],
+            }),
+          ],
+        }),
+      ],
+    }),
+  );
+
   return {
-    traces: Buffer.from(TracesData.create({})).toString('base64'),
+    traces: Buffer.from(
+      opentelemetry.proto.trace.v1.TracesData.encode(tracesData).finish(),
+    ).toString('base64'),
   };
 };

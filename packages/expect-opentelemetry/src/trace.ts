@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { setTimeout } from 'timers/promises';
 import { Service } from './resources/service';
-import { ISpan } from '@opentelemetry/otlp-transformer';
-import { generateStubData } from './utils';
+import { generateStubData, parseServerResponse } from './utils';
+import { opentelemetry } from './proto';
+import { SemanticAttributes } from '@opentelemetry/semantic-conventions';
 
 export async function traces(fn: () => Promise<void>) {
   await setTimeout(1000);
@@ -14,7 +15,7 @@ export async function traces(fn: () => Promise<void>) {
 }
 
 export class Trace {
-  private spans: ISpan[] = [];
+  private tracesData: opentelemetry.proto.trace.v1.ITracesData | undefined;
 
   async init() {
     // const response = await (
@@ -23,13 +24,19 @@ export class Trace {
 
     const response = generateStubData();
 
-    console.log('response', response);
+    this.tracesData = parseServerResponse(response);
   }
 
   service(name: string): Service {
-    return new Service(
-      name,
-      this.spans, //.filter((span) => span.name === name),
+    const serviceResourceSpans = this.tracesData?.resourceSpans?.find((rs) =>
+      rs.resource?.attributes?.find(
+        (a) => a.key === 'service.name' && a.value?.stringValue === name,
+      ),
     );
+
+    const serviceSpans =
+      serviceResourceSpans?.scopeSpans?.flatMap((ss) => ss.spans || []) || [];
+
+    return new Service(name, serviceSpans);
   }
 }

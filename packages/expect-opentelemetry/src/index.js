@@ -55,7 +55,6 @@ function expectOpenTelemetry(actual) {
     case 'Span':
       return internalExpect(actual, spanMatchers);
     case 'Service':
-      console.log('Using Service matchers', actual);
       return internalExpect(actual, serviceMatchers);
     default:
       throw new Error(`${actual} is not supported`);

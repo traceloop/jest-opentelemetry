@@ -9,6 +9,6 @@ describe('trace', () => {
       await axios.post('http://localhost:3000/orders/create');
     });
 
-    expect(sequence.service('orders')).toSendHttpRequest();
+    expect(sequence.service('orders-service')).toSendHttpRequest();
   });
 });

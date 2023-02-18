@@ -1,29 +1,18 @@
-import { SpanKind } from '@opentelemetry/api';
 import { SemanticAttributes } from '@opentelemetry/semantic-conventions';
 import { HttpRequest } from '../../resources/http-request';
 import { Service } from '../../resources/service';
+import { opentelemetry } from '../../proto';
 
 export function toSendHttpRequest(service: Service): HttpRequest {
   const { name: serviceName, spans } = service;
-  const spanKind = SpanKind.CLIENT;
-
-  console.log('toSendHttpRequest');
+  const spanKind = opentelemetry.proto.trace.v1.Span.SpanKind.SPAN_KIND_CLIENT;
 
   const filteredSpans = spans.filter((span) => {
-    // console.log('span.kind', span.kind);
-    // console.log(
-    //   'span.attributes[SemanticAttributes.HTTP_METHOD]',
-    //   span.attributes[SemanticAttributes.HTTP_METHOD],
-    // );
-
-    // console.log('span.attributes');
-
-    // Object.keys(span.attributes).forEach((key) => {
-    //   console.log(key, span.attributes[key]);
-    // });
-
     return (
-      span.kind === spanKind && span.attributes[SemanticAttributes.HTTP_METHOD]
+      span.kind === spanKind &&
+      span.attributes?.find((attribute) => {
+        return attribute.key === SemanticAttributes.HTTP_METHOD;
+      })
     );
   });
 
