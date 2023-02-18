@@ -1,23 +1,32 @@
-import express, { Express, Request, Response } from 'express';
+import express, { Request, Response } from 'express';
 import { addToStore, getAll } from './store';
+import { opentelemetry } from './proto';
 
-const port = Number(process.env.TRACE_SERVER_PORT) || 4123;
+const app = express();
+const port = 4123;
 
-const app: Express = express();
-app.use(express.json({ limit: '200mb' }));
+const run = async () => {
+  app.post(
+    '/v1/traces',
+    express.raw({ type: '*/*' }),
+    (req: Request, res: Response) => {
+      const tracesData = opentelemetry.proto.trace.v1.TracesData.decode(
+        req.body,
+      );
 
-app.post('/v1/traces', (req: Request, res: Response) => {
-  req.body.resourceSpans.forEach((resourceSpan: any) => {
-    addToStore(resourceSpan);
+      addToStore(tracesData.resourceSpans);
+
+      res.send();
+    },
+  );
+
+  app.get('/v1/traces', (_: Request, res: Response) => {
+    res.send(getAll());
   });
 
-  res.send();
-});
+  app.listen(port, () => {
+    console.log(`otel-receiver listening at port ${port}`);
+  });
+};
 
-app.get('/v1/traces', (_: Request, res: Response) => {
-  res.send(getAll());
-});
-
-app.listen(port, () => {
-  console.log(`otel-receiver listening at port ${port}`);
-});
+run();
