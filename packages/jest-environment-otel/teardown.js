@@ -1,1 +1,3 @@
-module.exports = require('./lib/global').teardown;
+import { teardown } from './lib/global';
+
+module.exports = teardown;

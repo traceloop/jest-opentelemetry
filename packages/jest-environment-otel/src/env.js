@@ -34,6 +34,7 @@ class OpenTelemetryEnvironment extends NodeEnvironment {
     this.global.jestOpenTelemetry = {};
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   async teardown() {}
 }
 

@@ -1,3 +1,6 @@
-module.exports = require('./lib/env').OpenTelemetryEnvironment;
-module.exports.setup = require('./lib/global').setup;
-module.exports.teardown = require('./lib/global').teardown;
+import { teardown, setup } from './lib/global';
+import { OpenTelemetryEnvironment } from './lib/env';
+
+module.exports = OpenTelemetryEnvironment;
+module.exports.setup = setup;
+module.exports.teardown = teardown;

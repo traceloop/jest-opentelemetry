@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import { addToStore, getAll } from './store';
-import { opentelemetry } from './proto';
+import { opentelemetry } from './../../../proto';
 
 const app = express();
 const port = 4123;

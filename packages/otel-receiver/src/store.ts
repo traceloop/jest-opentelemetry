@@ -1,4 +1,4 @@
-import { opentelemetry } from './proto';
+import { opentelemetry } from './../../../proto';
 
 const _resourceSpans: opentelemetry.proto.trace.v1.IResourceSpans[] = [];
 
