@@ -1,7 +1,7 @@
-import axios from 'axios';
 import { setTimeout } from 'timers/promises';
 import { Service } from './resources/service';
 import { opentelemetry } from '../../../proto';
+import { promiseHttpGet } from './utils';
 
 export async function traces(fn: () => Promise<void>) {
   await setTimeout(5000);
@@ -16,7 +16,7 @@ export class Trace {
   private tracesData: opentelemetry.proto.trace.v1.ITracesData | undefined;
 
   async init() {
-    const response = (await axios.get('http://localhost:4123/v1/traces')).data;
+    const response = await promiseHttpGet('http://localhost:4123/v1/traces');
 
     this.tracesData = opentelemetry.proto.trace.v1.TracesData.decode(response);
   }
