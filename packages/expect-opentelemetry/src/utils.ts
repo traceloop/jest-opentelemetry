@@ -1,3 +1,4 @@
+import http from 'http';
 import { opentelemetry } from './../../../proto';
 
 export const getInstanceType = (instance: any) => {
@@ -72,3 +73,31 @@ export const generateStubData = () => {
 
   return opentelemetry.proto.trace.v1.TracesData.encode(tracesData).finish();
 };
+
+/**
+* Promise wrapper for http.get
+* @see https://github.com/protobufjs/protobuf.js/wiki/How-to-read-binary-data-in-the-browser-or-under-node.js%3F
+* 
+* @param url - url to make get request to (server that responds with Buffer)
+* @returns Buffer result
+*/
+export function promiseHttpGet(url: string): Promise<Buffer> {
+ return new Promise((resolve, reject) => {
+   http.get(url, (res) => {
+     const { statusCode } = res;
+     
+     if (!statusCode || statusCode < 200 || statusCode >= 300) {
+       return reject(new Error('statusCode=' + res.statusCode));
+     }
+
+     var data = []; 
+     res.on("data", function(chunk) {
+       data.push(chunk as never); 
+     });
+     res.on("end", function() {
+       const result = Buffer.concat(data); 
+       resolve(result);
+     });
+   });
+ });
+}
