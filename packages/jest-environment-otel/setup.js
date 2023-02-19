@@ -1,3 +1,3 @@
 import { setup } from './lib/global';
 
-module.exports = setup;
+export default setup;
