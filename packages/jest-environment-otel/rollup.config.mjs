@@ -18,7 +18,7 @@ export default [
   bundle({
     input: 'src/global.ts',
     output: {
-      file: 'lib/global.js',
+      file: 'dist/global.js',
       format: 'cjs',
       interop: 'compat',
     },
@@ -27,7 +27,7 @@ export default [
   bundle({
     input: 'src/env.js',
     output: {
-      file: 'lib/env.js',
+      file: 'dist/env.js',
       format: 'cjs',
       interop: 'compat',
     },

@@ -1,4 +1,3 @@
-/* eslint-disable no-use-before-define, no-restricted-syntax, no-await-in-loop */
 import { getInstanceType } from './utils';
 import { toReceiveHttpRequest } from './matchers/service/to-receive-http-request';
 import { toSendHttpRequest } from './matchers/service/to-send-http-request';
