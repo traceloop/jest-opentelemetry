@@ -1,0 +1,57 @@
+{
+  "name": "Traceloop",
+  "colors": {
+    "primary": "#6644EC",
+    "light": "#B8BDFE",
+    "dark": "#3E21B2",
+    "anchors": {
+      "from": "#3E21B2",
+      "to": "#6644EC"
+    },
+    "background": {
+      "dark": "#121212"
+    }
+  },
+  "topbarLinks": [
+    {
+      "name": "Website",
+      "url": "https://www.traceloop.dev"
+    }
+  ],
+  "topbarCtaButton": {
+    "type": "github",
+    "url": "https://github.com/traceloop/jest-opentelemetry"
+  },
+  "anchors": [
+    {
+      "name": "Github",
+      "icon": "github",
+      "url": "https://github.com/traceloop/jest-opentelemetry"
+    },
+    {
+      "name": "Contributing",
+      "icon": "code",
+      "url": "contributing"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Quick Start",
+      "pages": ["introduction"]
+    },
+    {
+      "group": "Contributing",
+      "pages": ["contributing/test-servers"]
+    }
+  ],
+  "footerSocials": {
+    "github": "https://github.com/traceloop",
+    "twitter": "https://twitter.com/traceloop"
+  },
+  "backgroundImage": "/background.png",
+  "analytics": {
+    "posthog": {
+      "apiKey": "phc_fRRadE3AhoZjnVh3VZt9mCk5sOc27ZkqhN6o5E4Av2D"
+    }
+  }
+}
