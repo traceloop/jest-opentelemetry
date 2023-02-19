@@ -1,19 +1,20 @@
-import { SpanKind } from '@opentelemetry/api';
 import { SemanticAttributes } from '@opentelemetry/semantic-conventions';
-import { ReadableSpan } from '@opentelemetry/tracing';
 import deepEqual from 'deep-equal';
+import { opentelemetry } from '../../../../proto';
 
 export class HttpRequest {
   constructor(
-    readonly spans: ReadableSpan[],
+    readonly spans: opentelemetry.proto.trace.v1.ISpan[],
     private readonly serviceName: string,
-    private readonly spanKind: SpanKind,
+    private readonly spanKind: opentelemetry.proto.trace.v1.Span.SpanKind,
   ) {}
 
   withBody(body: object) {
     const filteredSpans = this.spans.filter((span) => {
       const jsonBody = JSON.parse(
-        span.attributes['http.request.body'] as string,
+        span.attributes?.find(
+          (attribute) => attribute.key === 'http.request.body',
+        )?.value?.stringValue || '',
       );
 
       return deepEqual(jsonBody, body);
@@ -30,7 +31,11 @@ export class HttpRequest {
 
   withHeader(key: string, value: string) {
     const filteredSpans = this.spans.filter((span) => {
-      return span.attributes[`http.request.header.${key}`] === value;
+      return span.attributes?.find(
+        (attribute) =>
+          attribute.key === `http.request.header.${key}` &&
+          attribute.value?.stringValue === value,
+      );
     });
 
     if (filteredSpans.length === 0) {
@@ -44,7 +49,11 @@ export class HttpRequest {
 
   ofMethod(method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH') {
     const filteredSpans = this.spans.filter((span) => {
-      return span.attributes[SemanticAttributes.HTTP_METHOD] === method;
+      return span.attributes?.find(
+        (attribute) =>
+          attribute.key === SemanticAttributes.HTTP_METHOD &&
+          attribute.value?.stringValue === method,
+      );
     });
 
     if (filteredSpans.length === 0) {
@@ -58,7 +67,11 @@ export class HttpRequest {
 
   withStatusCode(code: number) {
     const filteredSpans = this.spans.filter((span) => {
-      return span.attributes[SemanticAttributes.HTTP_STATUS_CODE] === code;
+      return span.attributes?.find(
+        (attribute) =>
+          attribute.key === SemanticAttributes.HTTP_STATUS_CODE &&
+          attribute.value?.intValue === code,
+      );
     });
 
     if (filteredSpans.length === 0) {
@@ -72,9 +85,9 @@ export class HttpRequest {
 
   private serviceErrorBySpanKind() {
     switch (this.spanKind) {
-      case SpanKind.CLIENT:
+      case opentelemetry.proto.trace.v1.Span.SpanKind.SPAN_KIND_CLIENT:
         return `was sent by ${this.serviceName}`;
-      case SpanKind.SERVER:
+      case opentelemetry.proto.trace.v1.Span.SpanKind.SPAN_KIND_SERVER:
         return `was received by ${this.serviceName}`;
       default:
         return `was found for ${this.serviceName}`;

@@ -1,14 +1,14 @@
 import axios from 'axios';
-import { trace } from './trace';
+import { traces } from './trace';
+
+jest.setTimeout(30000);
 
 describe('trace', () => {
   it('should see orders-service calling emails-service', async () => {
-    const sequence = await trace(async () =>
-      axios.post('http://localhost:3000/orders/create'),
-    );
-    expect(1).toBe(1);
-    // expect(sequence.service('orders-service'))
-    //   .toCall('emails-service')
-    //   .withHttpBody({});
+    const sequence = await traces(async () => {
+      await axios.post('http://localhost:3000/orders/create');
+    });
+
+    expect(sequence.service('orders-service')).toSendHttpRequest();
   });
 });

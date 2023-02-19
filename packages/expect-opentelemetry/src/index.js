@@ -1,15 +1,18 @@
 /* eslint-disable no-use-before-define, no-restricted-syntax, no-await-in-loop */
 import { getInstanceType } from './utils';
-import { toRecieveHttpRequest } from './matchers/toRecieveHttpRequest';
-import { toSendHttpRequest } from './matchers/toSendHttpRequest';
+import { toReceiveHttpRequest } from './matchers/service/to-receive-http-request';
+import { toSendHttpRequest } from './matchers/service/to-send-http-request';
 
 export { setDefaultOptions, getDefaultOptions } from './options';
 
-const spanMatchers = {};
+const spanMatchers = {
+  not: {},
+};
 
 const serviceMatchers = {
-  toRecieveHttpRequest,
+  toReceiveHttpRequest,
   toSendHttpRequest,
+  not: {},
 };
 
 function createMatcher(matcher, page) {
@@ -32,14 +35,16 @@ function internalExpect(type, matchers) {
     not: {},
   };
 
-  Object.keys(matchers).forEach((key) => {
-    if (key === 'not') return;
-    expectation[key] = createMatcher(matchers[key], type);
-  });
+  matchers &&
+    Object.keys(matchers).forEach((key) => {
+      if (key === 'not') return;
+      expectation[key] = createMatcher(matchers[key], type);
+    });
 
-  Object.keys(matchers.not).forEach((key) => {
-    expectation.not[key] = createMatcher(matchers.not[key], type);
-  });
+  matchers?.not &&
+    Object.keys(matchers.not).forEach((key) => {
+      expectation.not[key] = createMatcher(matchers.not[key], type);
+    });
 
   return expectation;
 }
@@ -60,6 +65,7 @@ if (typeof global.expect !== 'undefined') {
   const originalExpect = global.expect;
   global.expect = (actual, ...args) => {
     const type = getInstanceType(actual);
+
     if (type) {
       const matchers = expectOpenTelemetry(actual);
       const jestMatchers = originalExpect(actual, ...args);

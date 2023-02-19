@@ -4,7 +4,7 @@ import { Resource } from '@opentelemetry/resources';
 import { SemanticResourceAttributes } from '@opentelemetry/semantic-conventions';
 import { httpInstrumentationConfig } from './otel-custom/http';
 import { expressInstrumentationConfig } from './otel-custom/express';
-import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-http';
+import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-proto';
 
 const traceExporter = new OTLPTraceExporter({
   url: 'http://localhost:4123/v1/traces',
