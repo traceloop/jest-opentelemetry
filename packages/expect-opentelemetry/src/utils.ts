@@ -90,7 +90,7 @@ export function promiseHttpGet(url: string): Promise<Buffer> {
         return reject(new Error('statusCode=' + res.statusCode));
       }
 
-      var data = [];
+      const data = [];
       res.on('data', function (chunk) {
         data.push(chunk as never);
       });
