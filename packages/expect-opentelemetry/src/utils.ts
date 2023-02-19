@@ -1,4 +1,4 @@
-import { opentelemetry } from './proto';
+import { opentelemetry } from './../../../proto';
 
 export const getInstanceType = (instance: any) => {
   if (
@@ -70,9 +70,5 @@ export const generateStubData = () => {
     }),
   );
 
-  return {
-    traces: Buffer.from(
-      opentelemetry.proto.trace.v1.TracesData.encode(tracesData).finish(),
-    ).toString('base64'),
-  };
+  return opentelemetry.proto.trace.v1.TracesData.encode(tracesData).finish();
 };

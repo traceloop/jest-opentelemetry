@@ -1,7 +1,7 @@
 import { SemanticAttributes } from '@opentelemetry/semantic-conventions';
 import { HttpRequest } from '../../resources/http-request';
 import { Service } from '../../resources/service';
-import { opentelemetry } from '../../proto';
+import { opentelemetry } from '../../../../../proto';
 
 export function toReceiveHttpRequest(service: Service): HttpRequest {
   const { name: serviceName, spans } = service;

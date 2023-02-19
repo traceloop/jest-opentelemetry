@@ -1,4 +1,4 @@
-import { opentelemetry } from '../proto';
+import { opentelemetry } from '../../../../proto';
 
 export class Service {
   constructor(

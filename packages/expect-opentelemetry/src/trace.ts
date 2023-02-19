@@ -1,13 +1,13 @@
 import axios from 'axios';
 import { setTimeout } from 'timers/promises';
 import { Service } from './resources/service';
-import { generateStubData, parseServerResponse } from './utils';
-import { opentelemetry } from './proto';
+import { generateStubData } from './utils';
+import { opentelemetry } from '../../../proto';
 
 export async function traces(fn: () => Promise<void>) {
-  await setTimeout(1000);
+  await setTimeout(5000);
   await fn();
-  await setTimeout(10000);
+  await setTimeout(20000);
   const t = new Trace();
   await t.init();
   return t;
@@ -17,13 +17,11 @@ export class Trace {
   private tracesData: opentelemetry.proto.trace.v1.ITracesData | undefined;
 
   async init() {
-    // const response = await (
-    //   await axios.get('http://localhost:4123/v1/traces')
-    // ).data;
+    // const response = (await axios.get('http://localhost:4123/v1/traces')).data;
 
     const response = generateStubData();
 
-    this.tracesData = parseServerResponse(response);
+    this.tracesData = opentelemetry.proto.trace.v1.TracesData.decode(response);
   }
 
   service(name: string): Service {

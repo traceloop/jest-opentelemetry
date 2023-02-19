@@ -1,6 +1,6 @@
 import { SemanticAttributes } from '@opentelemetry/semantic-conventions';
 import deepEqual from 'deep-equal';
-import { opentelemetry } from '../proto';
+import { opentelemetry } from '../../../../proto';
 
 export class HttpRequest {
   constructor(
@@ -93,6 +93,4 @@ export class HttpRequest {
         return `was found for ${this.serviceName}`;
     }
   }
-
-  
 }
