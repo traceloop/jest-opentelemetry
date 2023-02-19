@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.17",
-    "rollup": "^3.13.0",
+    "rollup": "^3.17.1",
     "rollup-plugin-swc3": "^0.8.0"
   },
   "dependencies": {
