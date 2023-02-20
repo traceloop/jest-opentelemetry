@@ -35,7 +35,7 @@ const startServer = async () => {
 };
 
 const gracefulShutdownHandler = function gracefulShutdownHandler(signal) {
-  console.log(`otel receiver caught ${signal}, gracefully shutting down`);
+  console.log(`otel-receiver caught ${signal}, gracefully shutting down`);
 
   setTimeout(() => {
     _server.close(function () {
@@ -44,11 +44,7 @@ const gracefulShutdownHandler = function gracefulShutdownHandler(signal) {
   }, 0);
 };
 
-process.on('SIGINT', () => {
-  gracefulShutdownHandler('SIGINT');
-});
-process.on('SIGTERM', () => {
-  gracefulShutdownHandler('SIGTERM');
-});
+process.on('SIGINT', gracefulShutdownHandler);
+process.on('SIGTERM', gracefulShutdownHandler);
 
 startServer();
