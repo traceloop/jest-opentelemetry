@@ -16,7 +16,7 @@
   ],
   "devDependencies": {
     "@commitlint/cli": "^17.4.3",
-    "@commitlint/config-conventional": "^17.4.3",
+    "@commitlint/config-conventional": "^17.4.4",
     "@opentelemetry/instrumentation-http": "^0.35.1",
     "@rollup/plugin-typescript": "^11.0.0",
     "@tsconfig/recommended": "^1.0.2",
