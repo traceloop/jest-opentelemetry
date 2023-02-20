@@ -4,9 +4,8 @@ import { opentelemetry } from '../../../proto';
 import { promiseHttpGet } from './utils';
 
 export async function traces(fn: () => Promise<void>) {
-  await setTimeout(5000);
   await fn();
-  await setTimeout(20000);
+  await setTimeout(5000);
   const t = new Trace();
   await t.init();
   return t;
