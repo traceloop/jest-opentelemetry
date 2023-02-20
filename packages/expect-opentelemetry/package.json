@@ -3,9 +3,9 @@
   "description": "Assertion toolkit for OpenTelemetry tests.",
   "version": "0.0.1",
   "type": "commonjs",
-  "main": "./lib/index.js",
+  "main": "./dist/index.js",
   "exports": {
-    ".": "./lib/index.js",
+    ".": "./dist/index.js",
     "./package.json": "./package.json"
   },
   "repository": {

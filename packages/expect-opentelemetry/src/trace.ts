@@ -28,6 +28,8 @@ export class Trace {
       ),
     );
 
+    console.log(serviceResourceSpans);
+
     const serviceSpans =
       serviceResourceSpans?.scopeSpans?.flatMap((ss) => ss.spans || []) || [];
 
