@@ -1,5 +1,5 @@
-import { teardown, setup } from './lib/global';
-import { OpenTelemetryEnvironment } from './lib/env';
+import { teardown, setup } from './dist/global';
+import { OpenTelemetryEnvironment } from './dist/env';
 
 export default OpenTelemetryEnvironment;
 export { setup, teardown };

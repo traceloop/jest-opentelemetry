@@ -1,3 +1,3 @@
-import { setup } from './lib/global';
+import { setup } from './dist/global';
 
 export default setup;
