@@ -1,3 +1,3 @@
-import { teardown } from './lib/global';
+import { teardown } from './dist/global';
 
 export default teardown;
