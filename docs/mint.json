@@ -1,5 +1,6 @@
 {
-  "name": "Traceloop",
+  "name": "traceloop",
+  "favicon": "/favicon.ico",
   "colors": {
     "primary": "#6644EC",
     "light": "#B8BDFE",
