@@ -25,7 +25,7 @@ export default [
     plugins: [swcPlugin, typescript({ tsconfig: '../../tsconfig.json' })],
   }),
   bundle({
-    input: 'src/env.js',
+    input: 'src/env.ts',
     output: {
       file: 'dist/env.js',
       format: 'cjs',

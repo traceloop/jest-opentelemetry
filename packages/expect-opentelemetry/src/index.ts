@@ -14,22 +14,22 @@ const serviceMatchers = {
   not: {},
 };
 
-function createMatcher(matcher, page) {
-  return async function throwingMatcher(...args) {
+function createMatcher(matcher: any, type: any) {
+  return async function throwingMatcher(...args: any[]) {
     if (typeof global.expect !== 'undefined') {
       global.expect.getState().assertionCalls += 1;
     }
 
     try {
-      return await matcher(page, ...args);
-    } catch (error) {
+      return await matcher(type, ...args);
+    } catch (error: any) {
       Error.captureStackTrace(error, throwingMatcher);
       throw error;
     }
   };
 }
 
-function internalExpect(type, matchers) {
+function internalExpect(type: any, matchers: any[]) {
   const expectation = {
     not: {},
   };
@@ -48,7 +48,7 @@ function internalExpect(type, matchers) {
   return expectation;
 }
 
-function expectOpenTelemetry(actual) {
+function expectOpenTelemetry(actual: any) {
   const type = getInstanceType(actual);
   switch (type) {
     case 'Span':
@@ -62,7 +62,7 @@ function expectOpenTelemetry(actual) {
 
 if (typeof global.expect !== 'undefined') {
   const originalExpect = global.expect;
-  global.expect = (actual, ...args) => {
+  global.expect = (actual: any, ...args: any[]) => {
     const type = getInstanceType(actual);
 
     if (type) {

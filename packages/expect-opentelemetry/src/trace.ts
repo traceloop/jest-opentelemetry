@@ -28,7 +28,21 @@ export class Trace {
       ),
     );
 
-    console.log(serviceResourceSpans);
+    console.log('resource attrs');
+    serviceResourceSpans?.resource?.attributes?.forEach((a) => {
+      console.log(a.key, a.value?.stringValue);
+    });
+
+    serviceResourceSpans?.scopeSpans?.forEach((ss) => {
+      console.log('scope spans');
+      ss.spans?.forEach((s) => {
+        console.log(s.name);
+
+        s.attributes?.forEach((a) => {
+          console.log(a.key, a.value?.stringValue);
+        });
+      });
+    });
 
     const serviceSpans =
       serviceResourceSpans?.scopeSpans?.flatMap((ss) => ss.spans || []) || [];
