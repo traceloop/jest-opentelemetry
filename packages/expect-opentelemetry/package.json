@@ -2,6 +2,7 @@
   "name": "@traceloop/expect-opentelemetry",
   "description": "Assertion toolkit for OpenTelemetry tests.",
   "version": "0.1.0",
+  "license": "Apache-2.0",
   "type": "commonjs",
   "main": "./dist/index.js",
   "exports": {
