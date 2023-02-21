@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/traceloop/jest-opentelemetry/compare/v0.2.7...v0.3.0) (2023-02-21)
+
+### Bug Fixes
+
+- import paths of proto package ([466e8b1](https://github.com/traceloop/jest-opentelemetry/commit/466e8b13521f77d4d1893b86b438f488a8ade0e7))
+
+### Features
+
+- compare types ([ff0bb90](https://github.com/traceloop/jest-opentelemetry/commit/ff0bb906128d130cc92fdc434c8b31c352b5451e))
+- matcher utils ([599d113](https://github.com/traceloop/jest-opentelemetry/commit/599d113634882b1b4fcc44cd3c5268d7cba41655))
+
 ## [0.2.7](https://github.com/traceloop/jest-opentelemetry/compare/v0.2.6...v0.2.7) (2023-02-21)
 
 ### Bug Fixes

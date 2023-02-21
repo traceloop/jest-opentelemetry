@@ -1,7 +1,7 @@
 {
   "name": "@traceloop/jest-opentelemetry",
   "description": "Run your tests using Jest & OpenTelemetry.",
-  "version": "0.2.7",
+  "version": "0.3.0",
   "license": "Apache-2.0",
   "type": "commonjs",
   "repository": {
@@ -25,7 +25,7 @@
     "jest-opentelemetry"
   ],
   "dependencies": {
-    "@traceloop/expect-opentelemetry": "^0.2.7",
-    "@traceloop/jest-environment-otel": "^0.2.7"
+    "@traceloop/expect-opentelemetry": "^0.3.0",
+    "@traceloop/jest-environment-otel": "^0.3.0"
   }
 }
