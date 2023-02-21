@@ -1,0 +1,116 @@
+---
+title: 'Getting Started'
+---
+
+Jest OpenTelemetry requires that you have OpenTelemetry installed and configured in your microservices.
+For most languages, this can be done by merely installing the OpenTelemetry SDK or configuring a Kubernetes init container that does that.
+
+[Odigo](https://docs.odigos.io/intro) is a new open source project that can do this for you without a single line of code.
+
+You can find more information on how to do this in the [OpenTelemetry documentation](https://opentelemetry.io/docs/js/getting-started/).
+
+Feel free to contact us at dev@traceloop.dev if you need any help.
+
+## Installing Jest OpenTelemetry
+
+1.  In your repo, run:
+
+    ```bash
+    npm install --save-dev @traceloop/jest-opentelemetry jest
+    ```
+
+2.  Update or create your jest configuration (`jest.config.js` or `jest.config.ts`):
+
+    ```js
+    module.exports = {
+      preset: '@traceloop/jest-opentelemetry',
+    };
+    ```
+
+3.  Update or create your OpenTelemetry collector configuration:
+
+    <CodeGroup>
+
+    ```yaml docker-compose (otel-collector-config.yaml)
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+          http:
+    processors:
+      batch:
+        timeout: 100ms
+
+    exporters:
+      otlphttp:
+        endpoint: http://host.docker.internal:4123
+
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp]
+          processors: [batch]
+          exporters: [otlphttp]
+    ```
+
+    ```yaml Kubernetes (otel-collector.yaml)
+    apiVersion: opentelemetry.io/v1alpha1
+    kind: OpenTelemetryCollector
+    metadata:
+    name: otel
+    spec:
+    config: |
+      receivers:
+        otlp:
+            protocols:
+              grpc:
+              http:
+      processors:
+        batch:
+            timeout: 100ms
+
+      exporters:
+        otlphttp:
+            endpoint: http://host.docker.internal:4123
+
+      service:
+        pipelines:
+            traces:
+                receivers: [otlp]
+                processors: [batch]
+                exporters: [otlphttp]
+    ```
+
+    </CodeGroup>
+
+4.  If you don't have an OpenTelemetry collector set up, you can set it up in 5 minutes by following the instructions below.
+
+    <CodeGroup>
+
+    ```yaml docker-compose.yaml
+    services:
+        ...
+        otel-collector:
+            image: otel/opentelemetry-collector-contrib:0.71.0
+            ports:
+                - 4317:4317
+            volumes:
+                - ./otel-collector-config.yaml:/etc/otel-collector-config.yaml
+            command:
+                - --config=/etc/otel-collector-config.yaml
+    ```
+
+    ```bash Kubernetes
+    kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.11.0/cert-manager.yaml
+    kubectl apply -f https://github.com/open-telemetry/opentelemetry-operator/releases/latest/download/opentelemetry-operator.yaml
+    kubectl apply -f otel-collector.yaml
+    ```
+
+    </CodeGroup>
+
+5.  Start writing tests following our [syntax](syntax/introduction).
+
+## Typescript configuration
+
+Make sure you use `@jest/globals` for your types and not `@types/jest` which is out of date.
+See more info [here](https://jestjs.io/docs/getting-started#type-definitions).

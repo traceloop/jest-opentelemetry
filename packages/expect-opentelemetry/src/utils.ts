@@ -81,7 +81,7 @@ export const generateStubData = () => {
  * @param url - url to make get request to (server that responds with Buffer)
  * @returns Buffer result
  */
-export function promiseHttpGet(url: string): Promise<Buffer> {
+export function httpGetBinary(url: string): Promise<Buffer> {
   return new Promise((resolve, reject) => {
     http.get(url, (res) => {
       const { statusCode } = res;
@@ -90,7 +90,7 @@ export function promiseHttpGet(url: string): Promise<Buffer> {
         return reject(new Error('statusCode=' + res.statusCode));
       }
 
-      const data = [];
+      const data: Uint8Array[] = [];
       res.on('data', function (chunk) {
         data.push(chunk as never);
       });

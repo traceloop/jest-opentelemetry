@@ -4,8 +4,9 @@ import { opentelemetry } from './../../../proto';
 
 const app = express();
 const port = 4123;
+let _server;
 
-const run = async () => {
+const startServer = async () => {
   app.post(
     '/v1/traces',
     express.raw({ type: '*/*' }),
@@ -24,9 +25,26 @@ const run = async () => {
     res.send(getAll());
   });
 
-  app.listen(port, () => {
+  app.get('/ping', (_: Request, res: Response) => {
+    res.send('pong');
+  });
+
+  _server = app.listen(port, () => {
     console.log(`otel-receiver listening at port ${port}`);
   });
 };
 
-run();
+const gracefulShutdownHandler = function gracefulShutdownHandler(signal) {
+  console.log(`otel-receiver caught ${signal}, gracefully shutting down`);
+
+  setTimeout(() => {
+    _server.close(function () {
+      process.exit();
+    });
+  }, 0);
+};
+
+process.on('SIGINT', gracefulShutdownHandler);
+process.on('SIGTERM', gracefulShutdownHandler);
+
+startServer();

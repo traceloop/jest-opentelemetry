@@ -1,21 +1,19 @@
 {
-  "name": "expect-opentelemetry",
+  "name": "@traceloop/expect-opentelemetry",
   "description": "Assertion toolkit for OpenTelemetry tests.",
-  "version": "0.0.1",
+  "version": "0.2.1",
+  "license": "Apache-2.0",
   "type": "commonjs",
-  "main": "./lib/index.js",
-  "exports": {
-    ".": "./lib/index.js",
-    "./package.json": "./package.json"
-  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/expect-dev/jest-opentelemetry.git",
+    "url": "https://github.com/traceloop/jest-opentelemetry.git",
     "directory": "packages/expect-opentelemetry"
   },
-  "homepage": "https://github.com/expect-dev/jest-opentelemetry/tree/main/packages/expect-opentelemetry#readme",
+  "homepage": "https://github.com/traceloop/jest-opentelemetry/tree/main/packages/expect-opentelemetry#readme",
   "bugs": {
-    "url": "https://github.com/expect-dev/jest-opentelemetry/issues"
+    "url": "https://github.com/traceloop/jest-opentelemetry/issues"
   },
   "engines": {
     "node": ">=14.0.0"
@@ -38,7 +36,7 @@
   },
   "devDependencies": {
     "@types/deep-equal": "^1.0.1",
-    "rollup": "^3.13.0",
+    "rollup": "^3.17.2",
     "rollup-plugin-swc3": "^0.8.0"
   }
 }

@@ -1,0 +1,58 @@
+---
+title: 'Introduction'
+---
+
+Jest OpenTelemetry is an engine for writing end to end tests for distributed systems with 10 lines of code.
+
+```js
+const sequence = await traces(async () => {
+  await axios.post('http://orders-service/orders/create', {
+    productId: 5,
+    quantity: 2,
+  });
+});
+
+expect(sequence.service('emails-service')).toReceiveHttpRequest({
+  order: { productId: 5, quantity: 2 },
+});
+```
+
+Everything is running locally on your system and can connect to services running locally on your machine,
+or any kubernetes cluster (locally or remotely).
+
+<Tip>
+  We're working on a cloud runner that will enable you to run tests on large
+  clusters with significant load. [Sign up for our private beta
+  here](https://c9nshtdss2i.typeform.com/to/mLMW70eV).
+</Tip>
+
+## Getting Started
+
+Select from the following guides to learn more about how to use Jest OpenTelemetry:
+
+<CardGroup>
+  <Card
+    title="Getting Started"
+    icon="bars-staggered"
+    href="/jest-otel/getting-started"
+  >
+    Set up Jest OpenTelemetry in your project
+  </Card>
+  <Card title="Syntax" icon="code" href="/jest-otel/syntax/introduction">
+    How to write tests with Jest OpenTelemetry
+  </Card>
+  <Card
+    title="Architecture"
+    icon="diagram-project"
+    href="/jest-otel/architecture"
+  >
+    Understand how Jest OpenTelemetry works
+  </Card>
+  <Card
+    title="Open Source"
+    icon="github"
+    href="https://github.com/traceloop/jest-opentelemetry"
+  >
+    See our GitHub repo
+  </Card>
+</CardGroup>

@@ -88,4 +88,14 @@ export const httpInstrumentationConfig = {
   applyCustomAttributesOnSpan: httpCustomAttributes,
   requestHook: httpCustomAttributesOnRequest,
   responseHook: httpCustomAttributesOnResponse,
+  headersToSpanAttributes: {
+    client: {
+      requestHeaders: ['trace-loop-id'],
+      responseHeaders: ['trace-loop-id'],
+    },
+    server: {
+      requestHeaders: ['trace-loop-id'],
+      responseHeaders: ['trace-loop-id'],
+    },
+  },
 };

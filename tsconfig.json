@@ -3,8 +3,10 @@
   "compilerOptions": {
     "preserveConstEnums": true,
     "allowSyntheticDefaultImports": true,
-    "allowJs": true
+    "allowJs": true,
+    "declaration": true,
+    "outDir": "dist"
   },
   "include": ["packages/*/src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "exclude": ["node_modules", "dist"]
 }
