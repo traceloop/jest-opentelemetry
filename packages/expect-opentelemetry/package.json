@@ -4,11 +4,6 @@
   "version": "0.1.4",
   "license": "Apache-2.0",
   "type": "commonjs",
-  "main": "./dist/index.js",
-  "exports": {
-    ".": "./dist/index.js",
-    "./package.json": "./package.json"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/traceloop/jest-opentelemetry.git",
