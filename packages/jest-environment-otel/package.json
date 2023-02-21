@@ -47,6 +47,7 @@
     "cwd": "^0.10.0",
     "jest-dev-server": "^7.0.1",
     "jest-environment-node": "^29.4.1",
-    "merge-deep": "^3.0.3"
+    "merge-deep": "^3.0.3",
+    "@traceloop/otel-receiver": "^0.2.0"
   }
 }

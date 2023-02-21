@@ -1,27 +1,27 @@
-import { getInstanceType } from './utils';
 import { toReceiveHttpRequest } from './matchers/service/to-receive-http-request';
 import { toSendHttpRequest } from './matchers/service/to-send-http-request';
-
+import { expect } from '@jest/globals';
+import { HttpRequest, Service } from './resources';
 export { setDefaultOptions, getDefaultOptions } from './options';
 
 export * from './matchers';
 export * from './resources';
 export * from './trace-loop';
 
-const spanMatchers = {
-  not: {},
-};
-
 const serviceMatchers = {
   toReceiveHttpRequest,
   toSendHttpRequest,
-  not: {},
 };
+
+interface TraceMatchers {
+  toReceiveHttpRequest(): HttpRequest;
+  toSendHttpRequest(): HttpRequest;
+}
 
 function createMatcher(matcher, type) {
   return function throwingMatcher(...args) {
-    if (typeof global.expect !== 'undefined') {
-      global.expect.getState().assertionCalls += 1;
+    if (typeof expect !== 'undefined') {
+      expect.getState().assertionCalls += 1;
     }
 
     try {
@@ -33,57 +33,12 @@ function createMatcher(matcher, type) {
   };
 }
 
-function internalExpect(type, matchers) {
-  const expectation = {
-    not: {},
-  };
-
-  matchers &&
-    Object.keys(matchers).forEach((key) => {
-      if (key === 'not') return;
-      expectation[key] = createMatcher(matchers[key], type);
-    });
-
-  matchers?.not &&
-    Object.keys(matchers.not).forEach((key) => {
-      expectation.not[key] = createMatcher(matchers.not[key], type);
-    });
-
-  return expectation;
-}
-
-function expectOpenTelemetry(actual) {
-  const type = getInstanceType(actual);
-  switch (type) {
-    case 'Span':
-      return internalExpect(actual, spanMatchers);
-    case 'Service':
-      return internalExpect(actual, serviceMatchers);
-    default:
-      throw new Error(`${actual} is not supported`);
-  }
-}
-
-if (typeof global.expect !== 'undefined') {
-  const originalExpect = global.expect;
-  global.expect = (actual, ...args) => {
-    const type = getInstanceType(actual);
-
-    if (type) {
-      const matchers = expectOpenTelemetry(actual);
-      const jestMatchers = originalExpect(actual, ...args);
-      return {
-        ...jestMatchers,
-        ...matchers,
-        not: {
-          ...jestMatchers.not,
-          ...matchers.not,
-        },
-      };
-    }
-    return originalExpect(actual, ...args);
-  };
-  Object.keys(originalExpect).forEach((prop) => {
-    global.expect[prop] = originalExpect[prop];
+export function expectTrace(actual: Service): TraceMatchers {
+  const expectation: Partial<TraceMatchers> = {};
+  Object.keys(serviceMatchers).forEach((key) => {
+    if (key === 'not') return;
+    expectation[key] = createMatcher(serviceMatchers[key], actual);
   });
+
+  return expectation as TraceMatchers;
 }

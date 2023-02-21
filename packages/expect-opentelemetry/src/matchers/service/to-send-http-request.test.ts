@@ -1,4 +1,5 @@
-import { jest, expect, describe, it } from '@jest/globals';
+import { jest, describe, it } from '@jest/globals';
+import { expectTrace } from '../..';
 import { TraceLoop } from '../../trace-loop';
 
 jest.setTimeout(30000);
@@ -11,7 +12,7 @@ describe('send-http-request', () => {
     await axios.post('http://localhost:3000/orders/create'); // or use t.traceLoopId to set the header manually
     await traceloop.fetchTraces();
 
-    expect(traceloop.service('orders-service'))
+    expectTrace(traceloop.service('orders-service'))
       .toSendHttpRequest()
       .ofMethod('POST');
   });

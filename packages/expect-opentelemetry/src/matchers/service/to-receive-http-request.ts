@@ -22,10 +22,3 @@ export function toReceiveHttpRequest(service: Service): HttpRequest {
 
   return new HttpRequest(filteredSpans, serviceName, spanKind);
 }
-
-declare module 'expect' {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  interface Matchers<R> {
-    toReceiveHttpRequest(): HttpRequest;
-  }
-}
