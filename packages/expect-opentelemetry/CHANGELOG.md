@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.1](https://github.com/expect-dev/jest-opentelemetry/compare/v0.1.0...v0.1.1) (2023-02-21)
+
+**Note:** Version bump only for package @traceloop/expect-opentelemetry
+
 # 0.1.0 (2023-02-21)
 
 ### Bug Fixes
