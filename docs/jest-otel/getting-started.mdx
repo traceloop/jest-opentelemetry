@@ -39,11 +39,11 @@ Feel free to contact us at dev@traceloop.dev if you need any help.
           http:
     processors:
       batch:
-      timeout: 100ms
+        timeout: 100ms
 
     exporters:
       otlphttp:
-      endpoint: http://host.docker.internal:4123
+        endpoint: http://host.docker.internal:4123
 
     service:
       pipelines:
@@ -61,10 +61,10 @@ Feel free to contact us at dev@traceloop.dev if you need any help.
     spec:
     config: |
       receivers:
-      otlp:
-          protocols:
-            grpc:
-            http:
+        otlp:
+            protocols:
+              grpc:
+              http:
       processors:
         batch:
             timeout: 100ms
