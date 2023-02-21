@@ -6,7 +6,7 @@ export { setDefaultOptions, getDefaultOptions } from './options';
 
 export * from './matchers';
 export * from './resources';
-export * from './trace';
+export * from './trace-loop';
 
 const spanMatchers = {
   not: {},

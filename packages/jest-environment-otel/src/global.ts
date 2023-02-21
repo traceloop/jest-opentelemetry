@@ -26,6 +26,7 @@ export async function setup(jestConfig: JestConfig = {}) {
       port: 4123,
       protocol: 'http',
       path: 'ping',
+      usedPortAction: 'kill', // todo: improve this
     });
   } catch (error: any) {
     if (error.code === ERROR_TIMEOUT) {
