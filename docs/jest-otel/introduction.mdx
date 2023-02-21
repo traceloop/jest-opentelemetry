@@ -2,25 +2,42 @@
 title: 'Introduction'
 ---
 
-Jest OpenTelemetry allows you to easily write end-to-end or integration tests for your microservice architecture.
-It provides an easy-to-use syntax, built on top of OpenTelemetry traces to assert that your services are working as expected.
+Jest OpenTelemetry is an engine for writing end to end tests for distributed systems with 10 lines of code.
 
-Don't worry if you're not familiar with OpenTelemetry. Even if you don't have it currently in your system, you can easily set it up.
-And we can help you too!
+```js
+const sequence = await traces(async () => {
+  await axios.post('http://orders-service/orders/create', {
+    productId: 5,
+    quantity: 2,
+  });
+});
+
+expect(sequence.service('emails-service')).toReceiveHttpRequest({
+  order: { productId: 5, quantity: 2 },
+});
+```
 
 ## Getting Started
 
 Select from the following guides to learn more about how to use Jest OpenTelemetry:
 
 <CardGroup>
-  <Card title="OpenTelemetry" icon="bars-staggered" href="/opentelemetry">
-    Learn more about OpenTelemetry and hpw to set it up
+  <Card
+    title="Getting Started"
+    icon="bars-staggered"
+    href="/jest-otel/getting-started"
+  >
+    Set up Jest OpenTelemetry in your project
   </Card>
-  <Card title="Syntax" icon="code" href="/syntax">
+  <Card title="Syntax" icon="code" href="/jest-otel/syntax/introduction">
     How to write tests with Jest OpenTelemetry
   </Card>
-  <Card title="Architecture" icon="diagram-project" href="/architecture">
-    Familiarize yourself with the basics
+  <Card
+    title="Architecture"
+    icon="diagram-project"
+    href="/jest-otel/architecture"
+  >
+    Understand how Jest OpenTelemetry works
   </Card>
   <Card
     title="Open Source"

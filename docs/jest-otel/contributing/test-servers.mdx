@@ -2,7 +2,20 @@
 title: 'Running Test Servers'
 ---
 
-## Installing on a local Kubernetes cluster
+Currently, we have two test servers which are ran and tested together as part of Jest OpenTelemetry internal test suite:
+
+- **orders-service** - a simple service that creates orders and send emails to users when an order is created.
+- **emails-service** - a simple service that sends emails to users.
+
+## Running locally
+
+Running our test servers locally is as simple as running the following command:
+
+```bash
+   npm run start:test-servers
+```
+
+## Running on a local Kubernetes cluster
 
 1. Make sure you have a K8s cluster running locally.
    If you don't, you can use either [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
@@ -32,8 +45,8 @@ title: 'Running Test Servers'
    kubectl apply -f packages/test-servers/deployment.yaml
    ```
 
-   <Info>
-     If you ever re-built the docker image, you need to delete the old
-     deployment first. ```bash kubectl delete -f
+   <Warning>
+     If you ever re-built the docker image, make sure to delete the old
+     deployment first. Run ```kubectl delete -f
      packages/test-servers/deployment.yaml ```
-   </Info>
+   </Warning>

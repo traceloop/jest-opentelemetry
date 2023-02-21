@@ -29,29 +29,50 @@
   },
   "anchors": [
     {
-      "name": "Github",
-      "icon": "github",
-      "url": "https://github.com/traceloop/jest-opentelemetry"
+      "name": "Jest OpenTelemetry",
+      "icon": "node",
+      "url": "jest-otel"
     },
     {
-      "name": "Contributing",
-      "icon": "code",
-      "url": "contributing"
+      "name": "Community",
+      "icon": "slack",
+      "url": "https://join.slack.com/t/traceloopcommunity/shared_invite/zt-1plpfpm6r-zOHKI028VkpcWdobX65C~g"
+    },
+    {
+      "name": "GitHub",
+      "icon": "github",
+      "url": "https://github.com/traceloop"
     }
   ],
   "navigation": [
     {
-      "group": "Quick Start",
+      "group": "Learn",
       "pages": ["introduction"]
     },
     {
+      "group": "Quick Start",
+      "pages": [
+        "jest-otel/introduction",
+        "jest-otel/getting-started",
+        "jest-otel/architecture"
+      ]
+    },
+    {
+      "group": "Syntax",
+      "pages": ["jest-otel/syntax/introduction"]
+    },
+    {
       "group": "Contributing",
-      "pages": ["contributing/test-servers"]
+      "pages": [
+        "jest-otel/contributing/overview",
+        "jest-otel/contributing/local-env",
+        "jest-otel/contributing/test-servers"
+      ]
     }
   ],
   "footerSocials": {
     "github": "https://github.com/traceloop",
-    "twitter": "https://twitter.com/traceloop"
+    "twitter": "https://twitter.com/traceloopdev"
   },
   "analytics": {
     "posthog": {

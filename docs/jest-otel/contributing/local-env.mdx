@@ -1,0 +1,43 @@
+---
+title: 'Setting up a local developement environment'
+---
+
+Jest OpenTelemetry is using a monorepo (powered by [Lerna](https://lerna.js.org/)).
+
+Follow these instructions to set up a local developement environment.
+
+1. Fork out repository and clone it locally.
+
+   ```bash
+   git clone <your fork path>
+   cd jest-opentelemetry
+   nvm install
+   npm install
+   ```
+
+2. Build the packages:
+
+   ```bash
+   npm run build
+   ```
+
+3. Do any changes you want to do. Make sure to add proper tests, especially if you add new assertions.
+
+4. Re-build the project (this is needed because the assertion package is using itself in the tests):
+
+   ```bash
+   npm run build
+   ```
+
+5. Run the [test servers](test-servers). You can either run them locally in a separate terminal or on a local Kubernetes cluster.
+   These are the servers that we use to test the different assertions we have in Jest OpenTelemetry.
+
+6. Run the tests to make sure everything still works:
+
+   ```bash
+   npm run test
+   ```
+
+7. Commit, push and open a pull request.
+
+If you have any questions, hit us up over at [Slack](https://join.slack.com/t/traceloopcommunity/shared_invite/zt-1plpfpm6r-zOHKI028VkpcWdobX65C~g)!
