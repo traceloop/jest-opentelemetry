@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.8](https://github.com/traceloop/jest-opentelemetry/compare/v0.1.7...v0.1.8) (2023-02-21)
+
+### Bug Fixes
+
+- **expect:** remove async matcher creation ([#18](https://github.com/traceloop/jest-opentelemetry/issues/18)) ([e54fd9d](https://github.com/traceloop/jest-opentelemetry/commit/e54fd9dd5a2330fbd5eac6c04c4be9830c9390fa))
+
 ## [0.1.7](https://github.com/traceloop/jest-opentelemetry/compare/v0.1.6...v0.1.7) (2023-02-21)
 
 ### Bug Fixes
