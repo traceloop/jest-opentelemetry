@@ -13,12 +13,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/expect-dev/jest-opentelemetry.git",
+    "url": "https://github.com/traceloop/jest-opentelemetry.git",
     "directory": "packages/jest-environment-otel"
   },
-  "homepage": "https://github.com/expect-dev/jest-opentelemetry/tree/main/packages/jest-environment-otel#readme",
+  "homepage": "https://github.com/traceloop/jest-opentelemetry/tree/main/packages/jest-environment-otel#readme",
   "bugs": {
-    "url": "https://github.com/expect-dev/jest-opentelemetry/issues"
+    "url": "https://github.com/traceloop/jest-opentelemetry/issues"
   },
   "engines": {
     "node": ">=14.0.0"
