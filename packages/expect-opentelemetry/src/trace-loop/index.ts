@@ -1,6 +1,6 @@
 import { randomUUID } from 'crypto';
 import axios from 'axios';
-import { opentelemetry } from '../../../../proto';
+import { opentelemetry } from '../../../otel-proto/src';
 import { httpGetBinary } from '../utils';
 import { setTimeout } from 'timers/promises';
 import {

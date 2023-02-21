@@ -20,7 +20,7 @@ export async function setup(jestConfig: JestConfig = {}) {
 
   try {
     await setupServer({
-      command: 'npm run start:otel-receiver',
+      command: 'node ./node_modules/@traceloop/otel-receiver/dist/index.js',
       // debug: true,
       host: 'localhost',
       port: 4123,

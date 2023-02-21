@@ -1,4 +1,4 @@
-import { opentelemetry } from '../../../../proto';
+import { opentelemetry } from '@traceloop/otel-proto';
 import { setTimeout } from 'timers/promises';
 import { httpGetBinary } from '../utils';
 

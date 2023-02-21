@@ -1,17 +1,24 @@
 {
-  "name": "@traceloop/expect-opentelemetry",
-  "description": "Assertion toolkit for OpenTelemetry tests.",
-  "version": "0.2.4",
+  "name": "@traceloop/otel-proto",
+  "description": "A set of functions for parsing OpenTelemetry protos.",
+  "version": "0.2.5",
   "license": "Apache-2.0",
   "type": "commonjs",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/traceloop/jest-opentelemetry.git",
-    "directory": "packages/expect-opentelemetry"
+    "directory": "packages/otel-receiver"
   },
-  "homepage": "https://github.com/traceloop/jest-opentelemetry/tree/main/packages/expect-opentelemetry#readme",
+  "homepage": "https://github.com/traceloop/jest-opentelemetry/tree/main/packages/otel-proto#readme",
   "bugs": {
     "url": "https://github.com/traceloop/jest-opentelemetry/issues"
   },
@@ -35,11 +42,9 @@
     "build": "rollup -c"
   },
   "dependencies": {
-    "@traceloop/otel-proto": "^0.2.5"
+    "express": "^4.18.2"
   },
   "devDependencies": {
-    "@types/deep-equal": "^1.0.1",
-    "rollup": "^3.17.2",
-    "rollup-plugin-swc3": "^0.8.0"
+    "rollup-plugin-copy": "^3.4.0"
   }
 }

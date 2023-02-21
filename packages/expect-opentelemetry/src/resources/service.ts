@@ -1,4 +1,4 @@
-import { opentelemetry } from '../../../../proto';
+import { opentelemetry } from '../../../otel-proto/src';
 
 export class Service {
   constructor(
