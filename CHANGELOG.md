@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.5](https://github.com/traceloop/jest-opentelemetry/compare/v0.2.4...v0.2.5) (2023-02-21)
+
+### Bug Fixes
+
+- otel-receiver can be executed ([4360cdb](https://github.com/traceloop/jest-opentelemetry/commit/4360cdb3970835142c35f3eb28d7355f909a165b))
+
 ## [0.2.4](https://github.com/traceloop/jest-opentelemetry/compare/v0.2.3...v0.2.4) (2023-02-21)
 
 ### Bug Fixes
