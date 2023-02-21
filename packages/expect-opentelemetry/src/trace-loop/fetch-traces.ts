@@ -55,13 +55,15 @@ export const pollForTraceLoopIdMatch = async (
   config: FetchTracesConfig,
   traceLoopId: string,
 ) => {
-  while (true) {
+  let foundMatch = false;
+  while (!foundMatch) {
     await setTimeout(config.pollInterval);
     const response = await httpGetBinary(config.url);
     const traces = opentelemetry.proto.trace.v1.TracesData.decode(response);
 
     const traceId = findTraceLoopIdMatch(traces, traceLoopId);
     if (traceId) {
+      foundMatch = true;
       return traceId;
     }
   }
