@@ -38,7 +38,7 @@
 ## 🚀 Getting Started
 
 ```js
-npm install jest-opentelemetry
+npm i --save-dev @testloop/jest-opentelemetry 
 ```
 
 Then, you can start testing your microservices:
