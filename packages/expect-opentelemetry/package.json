@@ -1,7 +1,7 @@
 {
-  "name": "expect-opentelemetry",
+  "name": "@traceloop/expect-opentelemetry",
   "description": "Assertion toolkit for OpenTelemetry tests.",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "type": "commonjs",
   "main": "./dist/index.js",
   "exports": {

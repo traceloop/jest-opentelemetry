@@ -1,7 +1,7 @@
 {
-  "name": "@jest-opentelemetry/otel-receiver",
+  "name": "@traceloop/otel-receiver",
   "description": "A node server to receive and cache incoming opentelemetry spans.",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "type": "commonjs",
   "main": "./dist/index.js",
   "exports": {

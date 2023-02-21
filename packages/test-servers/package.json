@@ -1,5 +1,5 @@
 {
-  "name": "@jest-opentelemetry/test-servers",
+  "name": "@traceloop/test-servers",
   "private": true,
   "main": "./dist/index.js",
   "engines": {
