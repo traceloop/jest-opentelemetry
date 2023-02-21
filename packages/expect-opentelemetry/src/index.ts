@@ -17,15 +17,15 @@ const serviceMatchers = {
   not: {},
 };
 
-function createMatcher(matcher, page) {
-  return async function throwingMatcher(...args) {
+function createMatcher(matcher, type) {
+  return function throwingMatcher(...args) {
     if (typeof global.expect !== 'undefined') {
       global.expect.getState().assertionCalls += 1;
     }
 
     try {
-      return await matcher(page, ...args);
-    } catch (error) {
+      return matcher(type, ...args);
+    } catch (error: any) {
       Error.captureStackTrace(error, throwingMatcher);
       throw error;
     }
