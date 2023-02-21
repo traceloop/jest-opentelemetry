@@ -1,7 +1,7 @@
 {
   "name": "@traceloop/expect-opentelemetry",
   "description": "Assertion toolkit for OpenTelemetry tests.",
-  "version": "0.2.4",
+  "version": "0.2.6",
   "license": "Apache-2.0",
   "type": "commonjs",
   "main": "./dist/index.js",
@@ -35,7 +35,7 @@
     "build": "rollup -c"
   },
   "dependencies": {
-    "@traceloop/otel-proto": "^0.2.5"
+    "@traceloop/otel-proto": "^0.2.6"
   },
   "devDependencies": {
     "@types/deep-equal": "^1.0.1",
