@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.7](https://github.com/traceloop/jest-opentelemetry/compare/v0.2.6...v0.2.7) (2023-02-21)
+
+### Bug Fixes
+
+- moved dependncies to packages that need them ([60dc5ae](https://github.com/traceloop/jest-opentelemetry/commit/60dc5ae524920f9efea717034ae64152a180c69b))
+
 ## [0.2.6](https://github.com/traceloop/jest-opentelemetry/compare/v0.2.5...v0.2.6) (2023-02-21)
 
 ### Bug Fixes
