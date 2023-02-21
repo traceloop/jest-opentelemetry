@@ -1,8 +1,9 @@
-import { TraceLoop } from './trace-loop';
+import { jest, expect, describe, it } from '@jest/globals';
+import { TraceLoop } from '../../trace-loop';
 
 jest.setTimeout(30000);
 
-describe('trace', () => {
+describe('send-http-request', () => {
   it('should see orders-service calling emails-service', async () => {
     const traceloop = new TraceLoop();
 

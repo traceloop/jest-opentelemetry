@@ -25,8 +25,7 @@ export default [
       swcPlugin,
       typescript({
         tsconfig: '../../tsconfig.json',
-        declaration: true,
-        outDir: 'dist/',
+        exclude: ['**/*.test.ts'],
       }),
     ],
   }),
