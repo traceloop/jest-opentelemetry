@@ -1,9 +1,11 @@
 {
   "name": "@traceloop/expect-opentelemetry",
   "description": "Assertion toolkit for OpenTelemetry tests.",
-  "version": "0.1.5",
+  "version": "0.1.4",
   "license": "Apache-2.0",
   "type": "commonjs",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/traceloop/jest-opentelemetry.git",
