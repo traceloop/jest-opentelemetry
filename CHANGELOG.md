@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.3](https://github.com/traceloop/jest-opentelemetry/compare/v0.2.2...v0.2.3) (2023-02-21)
+
+### Bug Fixes
+
+- wrong export for setup/teardown of jest ([3979c3f](https://github.com/traceloop/jest-opentelemetry/commit/3979c3f01a0286175c2f1a52bd117b1fee9b6d76))
+
 ## [0.2.2](https://github.com/traceloop/jest-opentelemetry/compare/v0.2.1...v0.2.2) (2023-02-21)
 
 ### Bug Fixes
