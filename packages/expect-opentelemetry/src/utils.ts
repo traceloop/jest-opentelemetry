@@ -1,5 +1,5 @@
 import http from 'http';
-import { opentelemetry } from '../../otel-proto/src';
+import { opentelemetry } from '@traceloop/otel-proto';
 
 export const getInstanceType = (instance: any) => {
   if (

@@ -1,6 +1,6 @@
 import { SemanticAttributes } from '@opentelemetry/semantic-conventions';
 import deepEqual from 'deep-equal';
-import { opentelemetry } from '../../../otel-proto/src';
+import { opentelemetry } from '@traceloop/otel-proto';
 
 export class HttpRequest {
   constructor(
