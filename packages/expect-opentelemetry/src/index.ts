@@ -4,6 +4,9 @@ import { toSendHttpRequest } from './matchers/service/to-send-http-request';
 
 export { setDefaultOptions, getDefaultOptions } from './options';
 
+export * from './matchers';
+export * from './resources';
+
 const spanMatchers = {
   not: {},
 };
