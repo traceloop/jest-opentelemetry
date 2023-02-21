@@ -38,7 +38,7 @@
 ## 🚀 Getting Started
 
 ```js
-npm i --save-dev @testloop/jest-opentelemetry 
+npm i --save-dev @traceloop/jest-opentelemetry
 ```
 
 Then, you can start testing your microservices:
