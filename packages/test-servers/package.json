@@ -20,5 +20,6 @@
   "dependencies": {
     "@opentelemetry/auto-instrumentations-node": "^0.36.3",
     "express": "^4.18.2"
-  }
+  },
+  "version": "0.1.0"
 }
