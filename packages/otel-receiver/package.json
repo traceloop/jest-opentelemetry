@@ -5,6 +5,7 @@
   "license": "Apache-2.0",
   "type": "commonjs",
   "main": "./dist/index.js",
+  "bin": "./dist/index.js",
   "exports": {
     ".": "./dist/index.js",
     "./package.json": "./package.json"
