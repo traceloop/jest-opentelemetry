@@ -1,9 +1,9 @@
 import { SemanticAttributes } from '@opentelemetry/semantic-conventions';
 import { Service } from '../../resources/service';
 import { opentelemetry } from '@traceloop/otel-proto';
-import { PostgresQLQuery } from '../../resources/postgresql-query';
+import { PostgreSQLQuery } from '../../resources/postgresql-query';
 
-export function toQueryPostgresQL(service: Service): PostgresQLQuery {
+export function toQueryPostgreSQL(service: Service): PostgreSQLQuery {
   const { name: serviceName, spans } = service;
 
   const filteredSpans = spans.filter((span) => {
@@ -23,5 +23,5 @@ export function toQueryPostgresQL(service: Service): PostgresQLQuery {
     throw new Error(`No query by ${serviceName} to postgresql was found`);
   }
 
-  return new PostgresQLQuery(filteredSpans, serviceName);
+  return new PostgreSQLQuery(filteredSpans, serviceName);
 }

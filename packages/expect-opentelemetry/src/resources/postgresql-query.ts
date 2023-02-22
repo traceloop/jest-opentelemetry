@@ -1,7 +1,7 @@
 import { SemanticAttributes } from '@opentelemetry/semantic-conventions';
 import { opentelemetry } from '@traceloop/otel-proto';
 
-export class PostgresQLQuery {
+export class PostgreSQLQuery {
   constructor(
     readonly spans: opentelemetry.proto.trace.v1.ISpan[],
     private readonly serviceName: string,
@@ -22,6 +22,6 @@ export class PostgresQLQuery {
       );
     }
 
-    return new PostgresQLQuery(filteredSpans, this.serviceName);
+    return new PostgreSQLQuery(filteredSpans, this.serviceName);
   }
 }

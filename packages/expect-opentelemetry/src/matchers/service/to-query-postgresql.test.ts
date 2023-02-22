@@ -6,7 +6,7 @@ import { setTimeout } from 'timers/promises';
 jest.setTimeout(30000);
 
 describe('send-http-request', () => {
-  it('should see orders-service calling emails-service', async () => {
+  it('should see orders-service querying postgresql named postgres', async () => {
     const traceloop = new TraceLoop();
     const axios = traceloop.axiosInstance; // contains trace-loop-id header set to t.traceLoopId (uuid)
 
@@ -15,7 +15,7 @@ describe('send-http-request', () => {
     await traceloop.fetchTraces();
 
     expectTrace(traceloop.serviceByName('orders-service'))
-      .toQueryPostgresQL()
+      .toQueryPostgreSQL()
       .withDatabaseName('postgres');
   });
 });
