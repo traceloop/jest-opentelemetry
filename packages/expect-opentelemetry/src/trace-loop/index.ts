@@ -68,21 +68,21 @@ export class TraceLoop {
     this._fetchedTrace = true;
   }
 
-  serviceByName(name: string, options?: CompareOptions) {
+  public serviceByName(name: string, options?: CompareOptions) {
     return new Service(
       name,
       byServiceName(name, this._traceData, this._traceId, options),
     );
   }
 
-  serviceByK8sPodName(name: string, options?: CompareOptions) {
+  public serviceByK8sPodName(name: string, options?: CompareOptions) {
     return new Service(
       name,
       byK8sPodName(name, this._traceData, this._traceId, options),
     );
   }
 
-  serviceByCustomAttribute(
+  public serviceByCustomAttribute(
     key: string,
     value: string | RegExp,
     options?: CompareOptions,

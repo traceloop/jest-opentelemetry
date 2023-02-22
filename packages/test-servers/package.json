@@ -8,8 +8,8 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "rollup -c",
-    "start:orders": "ORDERS_SERVICE=TRUE PORT=3000 node -r @traceloop/instrument-opentelemetry dist/index.js",
-    "start:emails": "EMAILS_SERVICE=TRUE PORT=3001 node -r @traceloop/instrument-opentelemetry dist/index.js",
+    "start:orders": "ORDERS_SERVICE=TRUE SERVICE_NAME=orders-service PORT=3000 node -r @traceloop/instrument-opentelemetry dist/index.js",
+    "start:emails": "EMAILS_SERVICE=TRUE SERVICE_NAME=emails-service PORT=3001 node -r @traceloop/instrument-opentelemetry dist/index.js",
     "start": "concurrently \"npm:start:orders\" \"npm:start:emails\""
   },
   "devDependencies": {

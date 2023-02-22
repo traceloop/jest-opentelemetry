@@ -3,6 +3,8 @@ kind: Instrumentation
 metadata:
   name: otel-instrumentation
 spec:
+  nodejs:
+    image: traceloop/instrument-opentelemetry:node-0.3.0
   exporter:
     endpoint: http://otel-collector:4317
   propagators:
@@ -32,6 +34,8 @@ spec:
           ports:
             - containerPort: 3000
           env:
+            - name: SERVICE_NAME
+              value: 'orders-service'
             - name: ORDERS_SERVICE
               value: 'TRUE'
             - name: EMAILS_SERVICE_URL
@@ -63,6 +67,8 @@ spec:
           ports:
             - containerPort: 3000
           env:
+            - name: SERVICE_NAME
+              value: 'emails-service'
             - name: EMAILS_SERVICE
               value: 'TRUE'
             - name: PORT
