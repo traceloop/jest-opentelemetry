@@ -4,25 +4,28 @@ import { Resource } from '@opentelemetry/resources';
 import { SemanticResourceAttributes } from '@opentelemetry/semantic-conventions';
 import { httpInstrumentationConfig } from './otel-custom/http';
 import { expressInstrumentationConfig } from './otel-custom/express';
-import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-proto';
+import { OTLPTraceExporter as ProtoExporter } from '@opentelemetry/exporter-trace-otlp-proto';
+import { OTLPTraceExporter as GRPCExporter } from '@opentelemetry/exporter-trace-otlp-grpc';
+import { containerDetector } from '@opentelemetry/resource-detector-container';
 
-const traceExporter = new OTLPTraceExporter({
-  url: 'http://localhost:4123/v1/traces',
-  timeoutMillis: 100,
-});
-
-let serviceName = 'test-servers';
-if (process.env.ORDERS_SERVICE) {
-  serviceName = 'orders-service';
-}
-if (process.env.EMAILS_SERVICE) {
-  serviceName = 'emails-service';
-}
+const traceExporter = process.env.OTEL_EXPORTER_OTLP_ENDPOINT
+  ? new GRPCExporter({
+      url: process.env.OTEL_EXPORTER_OTLP_ENDPOINT,
+      timeoutMillis: 100,
+    })
+  : new ProtoExporter({
+      url: 'http://localhost:4123/v1/traces',
+      timeoutMillis: 100,
+    });
 
 const sdk = new opentelemetry.NodeSDK({
-  resource: new Resource({
-    [SemanticResourceAttributes.SERVICE_NAME]: serviceName,
-  }),
+  resource: new Resource(
+    process.env.SERVICE_NAME
+      ? {
+          [SemanticResourceAttributes.SERVICE_NAME]: process.env.SERVICE_NAME,
+        }
+      : {},
+  ),
   traceExporter,
   instrumentations: [
     getNodeAutoInstrumentations({
@@ -30,6 +33,7 @@ const sdk = new opentelemetry.NodeSDK({
       '@opentelemetry/instrumentation-express': expressInstrumentationConfig,
     }),
   ],
+  resourceDetectors: [containerDetector],
 });
 
 // initialize the SDK and register with the OpenTelemetry API
