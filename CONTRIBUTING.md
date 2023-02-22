@@ -2,4 +2,4 @@
 
 Thanks for taking the time to contribute! 😃 🚀
 
-Please refer to our [Contributing Guide](https://docs.traceloop.dev/contributing/overview) for instructions on how to contribute.
+Please refer to our [Contributing Guide](https://docs.traceloop.dev/jest-otel/contributing/overview) for instructions on how to contribute.
