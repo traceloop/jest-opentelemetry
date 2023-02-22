@@ -5,6 +5,7 @@ import { SemanticResourceAttributes } from '@opentelemetry/semantic-conventions'
 import { httpInstrumentationConfig } from './otel-custom/http';
 import { expressInstrumentationConfig } from './otel-custom/express';
 import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-proto';
+import { TypeormInstrumentation } from 'opentelemetry-instrumentation-typeorm';
 
 const traceExporter = new OTLPTraceExporter({
   url: 'http://localhost:4123/v1/traces',
@@ -28,6 +29,9 @@ const sdk = new opentelemetry.NodeSDK({
     getNodeAutoInstrumentations({
       '@opentelemetry/instrumentation-http': httpInstrumentationConfig,
       '@opentelemetry/instrumentation-express': expressInstrumentationConfig,
+      '@opentelemetry/instrumentation-pg': {
+        enhancedDatabaseReporting: true,
+      },
     }),
   ],
 });

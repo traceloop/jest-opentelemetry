@@ -59,6 +59,7 @@ export class TraceLoop {
 
     const response = await httpGetBinary(config.url);
     const traces = opentelemetry.proto.trace.v1.TracesData.decode(response);
+    console.log('traces', JSON.stringify(traces.toJSON()));
     this._traceData = traces;
     this._fetchedTrace = true;
   }
