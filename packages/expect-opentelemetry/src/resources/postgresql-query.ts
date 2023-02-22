@@ -1,5 +1,9 @@
 import { SemanticAttributes } from '@opentelemetry/semantic-conventions';
 import { opentelemetry } from '@traceloop/otel-proto';
+import {
+  CompareOptions,
+  filterByAttributeStringValue,
+} from '../matchers/utils';
 
 export class PostgreSQLQuery {
   constructor(
@@ -7,18 +11,34 @@ export class PostgreSQLQuery {
     private readonly serviceName: string,
   ) {}
 
-  withDatabaseName(name: string) {
-    const filteredSpans = this.spans.filter((span) => {
-      return span.attributes?.find(
-        (attribute) =>
-          attribute.key === SemanticAttributes.DB_NAME &&
-          attribute.value?.stringValue === name,
-      );
-    });
+  withDatabaseName(name: string | RegExp, options: CompareOptions) {
+    const filteredSpans = filterByAttributeStringValue(
+      this.spans,
+      SemanticAttributes.DB_NAME,
+      name,
+      options,
+    );
 
     if (filteredSpans.length === 0) {
       throw new Error(
         `No query by ${this.serviceName} to postgresql with database name ${name} was found`,
+      );
+    }
+
+    return new PostgreSQLQuery(filteredSpans, this.serviceName);
+  }
+
+  withStatement(statement: string | RegExp, options: CompareOptions) {
+    const filteredSpans = filterByAttributeStringValue(
+      this.spans,
+      SemanticAttributes.DB_STATEMENT,
+      statement,
+      options,
+    );
+
+    if (filteredSpans.length === 0) {
+      throw new Error(
+        `No query by ${this.serviceName} to postgresql with statement ${statement} was found`,
       );
     }
 

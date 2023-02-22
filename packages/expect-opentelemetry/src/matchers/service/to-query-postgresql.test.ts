@@ -1,21 +1,32 @@
 import { jest, describe, it } from '@jest/globals';
 import { expectTrace } from '../..';
 import { TraceLoop } from '../../trace-loop';
-import { setTimeout } from 'timers/promises';
+import { COMPARE_TYPE } from '../utils';
 
 jest.setTimeout(30000);
 
-describe('query postgres', () => {
-  it('should see orders-service querying postgresql named postgres', async () => {
-    const traceloop = new TraceLoop();
-    const axios = traceloop.axiosInstance; // contains trace-loop-id header set to t.traceLoopId (uuid)
+describe('postgresql query', () => {
+  let traceloop: TraceLoop;
+  beforeAll(async () => {
+    traceloop = new TraceLoop();
 
-    await setTimeout(1000); // to give the orders service (under test) enough time to come up. On running environments this is not needed.
-    await axios.post('http://localhost:3000/orders/create'); // or use t.traceLoopId to set the header manually
+    await traceloop.axiosInstance.post('http://localhost:3000/orders/create');
     await traceloop.fetchTraces();
+  });
 
+  it('should see orders-service querying postgresql named postgres', async () => {
     expectTrace(traceloop.serviceByName('orders-service'))
       .toQueryPostgreSQL()
-      .withDatabaseName('postgres');
+      .withDatabaseName('postgres', { compareType: COMPARE_TYPE.EQUALS });
+  });
+
+  it('should see orders-service querying postgresql named postgres and inserting an order with uuid as id and integer price_in_cents', async () => {
+    expectTrace(traceloop.serviceByName('orders-service'))
+      .toQueryPostgreSQL()
+      .withDatabaseName('postgres', { compareType: COMPARE_TYPE.EQUALS })
+      .withStatement(
+        /INSERT INTO orders \(id, price_in_cents\) VALUES \('[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}', [0-9]+\)/,
+        { compareType: COMPARE_TYPE.REGEX },
+      );
   });
 });
