@@ -14,11 +14,15 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.17",
+    "@types/uuid": "^9.0.0",
     "rollup": "^3.17.2",
     "rollup-plugin-swc3": "^0.8.0"
   },
   "dependencies": {
     "express": "^4.18.2",
+    "pg": "^8.9.0",
+    "typeorm": "^0.3.12",
+    "uuid": "^9.0.0",
     "@traceloop/instrument-opentelemetry": "^0.3.0"
   },
   "version": "0.3.0"

@@ -31,6 +31,9 @@ const sdk = new opentelemetry.NodeSDK({
     getNodeAutoInstrumentations({
       '@opentelemetry/instrumentation-http': httpInstrumentationConfig,
       '@opentelemetry/instrumentation-express': expressInstrumentationConfig,
+      '@opentelemetry/instrumentation-pg': {
+        enhancedDatabaseReporting: true,
+      },
     }),
   ],
   resourceDetectors: [containerDetector],

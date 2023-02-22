@@ -14,12 +14,12 @@ export const stringByRegex = (
   b: RegExp | undefined | null,
 ): boolean => !!a && !!b && b.test(a);
 
-export const bodyEquals = (
+export const objectEquals = (
   a: Record<string, unknown>,
   b: Record<string, unknown>,
 ): boolean => deepEqual(a, b);
 
-export const bodyContains = (
+export const objectContains = (
   a: Record<string, unknown>,
   b: Record<string, unknown>,
 ): boolean => {
@@ -44,15 +44,15 @@ export const stringCompare = (
   }
 };
 
-export const bodyCompare = (
+export const objectCompare = (
   a: Record<string, unknown>,
   b: Record<string, unknown>,
   options?: CompareOptions,
 ): boolean => {
   switch (options?.compareType) {
     case COMPARE_TYPE.CONTAINS:
-      return bodyContains(a, b);
+      return objectContains(a, b);
     default:
-      return bodyEquals(a, b);
+      return objectEquals(a, b);
   }
 };
