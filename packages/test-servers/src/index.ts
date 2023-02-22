@@ -13,24 +13,35 @@ const ordersDataSource = new DataSource({
 });
 
 const postgresSchema = process.env.POSTGRES_SCHEMA || 'public';
+let ordersDataSourceInitialized = false;
 
-ordersDataSource
-  .initialize()
-  .then(async () => {
-    console.log('Orders data Source has been initialized!');
-    await ordersDataSource.query(
-      `CREATE TABLE IF NOT EXISTS ${postgresSchema}.orders (id varchar(50), price_in_cents int)`,
-    );
-    console.log('Orders table has been created!');
-  })
-  .catch((err) => {
-    console.error('Error during orders data source initialization', err);
-  });
+const initializeOrdersDatasource = async () =>
+  ordersDataSource
+    .initialize()
+    .then(async () => {
+      console.log('Orders data Source has been initialized!');
+      await ordersDataSource.query(
+        `CREATE TABLE IF NOT EXISTS ${postgresSchema}.orders (id varchar(50), price_in_cents int)`,
+      );
+      ordersDataSourceInitialized = true;
+      console.log('Orders table has been created!');
+    })
+    .catch((err) => {
+      console.error('Error during orders data source initialization', err);
+    });
+
+if (process.env.ORDERS_SERVICE) {
+  initializeOrdersDatasource();
+}
 
 const ordersService = express();
 const emailsService = express();
 
 ordersService.post('/orders/create', async (req, res) => {
+  if (!ordersDataSourceInitialized) {
+    await initializeOrdersDatasource();
+  }
+
   const orderId = uuidv4();
   console.log('Creating order...');
 
