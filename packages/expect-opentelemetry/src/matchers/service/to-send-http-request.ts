@@ -20,5 +20,5 @@ export function toSendHttpRequest(service: Service): HttpRequest {
     throw new Error(`No HTTP call was sent by ${serviceName}`);
   }
 
-  return new HttpRequest(filteredSpans, serviceName, spanKind);
+  return new HttpRequest(filteredSpans, { serviceName, spanKind });
 }
