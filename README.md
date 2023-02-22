@@ -55,6 +55,8 @@ expectTrace(traceloop.serviceByName('emails-service'))
   .withBody({ emailTemplate: 'orderCreated', itemId: '123' });
 ```
 
+More info can be found in our [docs](https://docs.traceloop.dev/jest-otel/getting-started).
+
 ## What can you test?
 
 Jest OpenTelemetry can be used to test anything that's happening in your system.
