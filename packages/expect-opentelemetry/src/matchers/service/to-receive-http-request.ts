@@ -20,5 +20,5 @@ export function toReceiveHttpRequest(service: Service): HttpRequest {
     throw new Error(`No HTTP call received by ${serviceName}`);
   }
 
-  return new HttpRequest(filteredSpans, serviceName, spanKind);
+  return new HttpRequest(filteredSpans, { serviceName, spanKind });
 }
