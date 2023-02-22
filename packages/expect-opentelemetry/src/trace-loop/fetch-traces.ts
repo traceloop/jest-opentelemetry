@@ -14,7 +14,7 @@ export interface FetchTracesConfig {
 export const fetchTracesConfigBase: FetchTracesConfig = {
   maxPollTime: 10000,
   pollInterval: 500,
-  awaitAllTracesTimeout: 1000,
+  awaitAllTracesTimeout: 2000,
   url: 'http://localhost:4123/v1/traces',
 };
 
