@@ -1,0 +1,79 @@
+---
+title: 'Overview'
+---
+
+Jest OpenTelemetry syntax is simple and easy to use.
+Each test should begin by sending a request to any of your backends in your test environments, like this:
+
+<Note>
+  Note the use of the `axiosInstance` returned from `traceloop` to send the
+  request.
+</Note>
+
+```js
+const traceloop = new TraceLoop();
+
+await traceloop.axiosInstance.post('http://my.awesome.website/orders/create');
+await traceloop.fetchTraces();
+```
+
+Following that, you can run assertions on anything that happened in your system as part of this request.
+
+## Service Assertions
+
+<CardGroup cols={3}>
+  <Card title="REST" icon="server" href="/jest-otel/syntax/services-rest">
+    Available
+  </Card>
+  <Card title="GraphQL" icon="chart-radar">
+    In Development
+  </Card>
+  <Card title="GRPC / Protobuf" icon="ethernet">
+    In Development
+  </Card>
+</CardGroup>
+
+## Database Assertions
+
+<CardGroup cols={3}>
+  <Card title="PostgreSQL" icon="database" href="/jest-otel/syntax/db-pg">
+    Available
+  </Card>
+  <Card title="MongoDB" icon="database">
+    In Development
+  </Card>
+  <Card title="Redis" icon="database">
+    In Development
+  </Card>
+  <Card title="S3" icon="files">
+    In Development
+  </Card>
+</CardGroup>
+
+## Analytics Reporting Assertions
+
+<CardGroup cols={3}>
+  <Card title="Segment" icon="chart-network">
+    In Development
+  </Card>
+  <Card title="Snowflake" icon="snowflake">
+    In Development
+  </Card>
+  <Card title="BigQuery" icon="chart-mixed">
+    In Development
+  </Card>
+  <Card title="Posthog" icon="chart-user">
+    In Development
+  </Card>
+</CardGroup>
+
+## External Systems Assertions
+
+<CardGroup cols={3}>
+  <Card title="SendGrid" icon="envelope">
+    In Development
+  </Card>
+  <Card title="Stripe" icon="stripe-S">
+    In Development
+  </Card>
+</CardGroup>

@@ -5,16 +5,15 @@ title: 'Introduction'
 Jest OpenTelemetry is an engine for writing end to end tests for distributed systems with 10 lines of code.
 
 ```js
-const sequence = await traces(async () => {
-  await axios.post('http://orders-service/orders/create', {
-    productId: 5,
-    quantity: 2,
-  });
-});
+const traceloop = new TraceLoop();
 
-expect(sequence.service('emails-service')).toReceiveHttpRequest({
-  order: { productId: 5, quantity: 2 },
-});
+await traceloop.axiosInstance.post('http://my.awesome.website/orders/create');
+await traceloop.fetchTraces();
+
+expectTrace(traceloop.serviceByName('emails-service'))
+  .toReceiveHttpRequest()
+  .ofMethod('POST')
+  .withBody({ emailTemplate: 'orderCreated', itemId: '123' });
 ```
 
 Everything is running locally on your system and can connect to services running locally on your machine,

@@ -1,0 +1,32 @@
+---
+title: 'PostgreSQL'
+---
+
+Each assrtion should start with defining the service that's sending requests to the Database you want to check. You do this by:
+
+```js
+expectTrace(traceloop.serviceByName('service-name'))...
+```
+
+These are the options you can use for service selection:
+
+- `serviceByName` - the name of the service as reported in the `service.name` attribute
+  (automatically reported by [Traceloop's init container](/jest-otel/no-otel))
+- `serviceByK8sPodName` - the name of the pod as reported by Kubernetes
+- `serviceByCustomAttribute` - any custom attribute reported by your service to OpenTelemetry
+
+Following that, you can use any of the following assertions:
+
+- `toQueryPostgreSQL`
+
+Then, you can specifically assert for each of the properties of the request:
+
+- `withDatabaseName`
+
+So, a complete assertion can look like:
+
+```js
+expectTrace(traceloop.serviceByName('orders-service'))
+  .toQueryPostgreSQL()
+  .withDatabaseName('postgres');
+```

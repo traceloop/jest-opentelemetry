@@ -5,11 +5,11 @@
 </p>
 <h1 align="center">Jest OpenTelemetry</h1>
 <p align="center">
-  <p align="center">End to end tests done right</p>
+  <p align="center">End to end tests with 10 lines of code</p>
 </p>
 <h4 align="center">
   <a href="https://join.slack.com/t/traceloopcommunity/shared_invite/zt-1plpfpm6r-zOHKI028VkpcWdobX65C~g">Slack</a> |
-  <a href="https://docs.traceloop.dev">Docs</a> |
+  <a href="https://docs.traceloop.dev/jest-otel/introduction">Docs</a> |
   <a href="https://www.traceloop.dev">Website</a>
 </h4>
 
@@ -44,8 +44,46 @@ npm i --save-dev @traceloop/jest-opentelemetry
 Then, you can start testing your microservices:
 
 ```js
+const traceloop = new TraceLoop();
 
+await traceloop.axiosInstance.post('http://my.awesome.website/orders/create');
+await traceloop.fetchTraces();
+
+expectTrace(traceloop.serviceByName('emails-service'))
+  .toReceiveHttpRequest()
+  .ofMethod('POST')
+  .withBody({ emailTemplate: 'orderCreated', itemId: '123' });
 ```
+
+## What can you test?
+
+Jest OpenTelemetry can be used to test anything that's happening in your system.
+We're constantly adding more, and you're welcome to [suggest yours](https://github.com/traceloop/jest-opentelemetry/issues).
+
+### Service Assertions
+
+- [x] [REST](http://docs.traceloop.dev/jest-otel/syntax/services-rest)
+- [ ] GraphQL
+- [ ] GRPC
+
+### Database Assertions
+
+- [x] [PostgreSQL](http://docs.traceloop.dev/jest-otel/syntax/db-pg)
+- [ ] MongoDB
+- [ ] Redis
+- [ ] S3
+
+### Analytics Reporting Assertions
+
+- [ ] Segment
+- [ ] Snowflake
+- [ ] BigQuery
+- [ ] Posthog
+
+### External Systems Assertions
+
+- [ ] SendGrid
+- [ ] Stripe
 
 ## 🌱 Contributing
 
@@ -53,7 +91,7 @@ Whether it's big or small, we love contributions ❤️ Check out our guide to s
 
 Not sure where to get started? You can:
 
-- [Book a free, non-pressure pairing sessions with one of our teammates](mailto:nir@traceloop.dev?subject=Pairing%20session&body=I'd%20like%20to%20do%20a%20pairing%20session!)!
+- [Book a free pairing session with one of our teammates](mailto:nir@traceloop.dev?subject=Pairing%20session&body=I'd%20like%20to%20do%20a%20pairing%20session!)!
 - Join our <a href="https://join.slack.com/t/enrollacommunity/shared_invite/zt-1naxh3lia-wIvFcLyCEXTYzAuO1U688Q">Slack</a>, and ask us any questions there.
 
 ## 💚 Community & Support

@@ -54,12 +54,17 @@
       "pages": [
         "jest-otel/introduction",
         "jest-otel/getting-started",
+        "jest-otel/no-otel",
         "jest-otel/architecture"
       ]
     },
     {
       "group": "Syntax",
-      "pages": ["jest-otel/syntax/introduction"]
+      "pages": [
+        "jest-otel/syntax/overview",
+        "jest-otel/syntax/services-rest",
+        "jest-otel/syntax/db-pg"
+      ]
     },
     {
       "group": "Contributing",

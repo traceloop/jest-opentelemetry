@@ -1,0 +1,42 @@
+---
+title: 'REST Assertions'
+---
+
+Each assrtion should start with defining the service you want to check. You do this by:
+
+```js
+expectTrace(traceloop.serviceByName('service-name'))...
+```
+
+These are the options you can use for service selection:
+
+- `serviceByName` - the name of the service as reported in the `service.name` attribute
+  (automatically reported by [Traceloop's init container](/jest-otel/no-otel))
+- `serviceByK8sPodName` - the name of the pod as reported by Kubernetes
+- `serviceByCustomAttribute` - any custom attribute reported by your service to OpenTelemetry
+
+Following that, you can use any of the following assertions:
+
+- `toSendHttpRequest`
+- `toReceiveHttpRequest`
+
+Then, you can specifically assert for each of the properties of the request:
+
+- `withBody`
+- `withHeader`
+- `ofMethod`
+- `withStatusCode`
+
+So, a complete assertion can look like:
+
+```js
+expectTrace(traceloop.serviceByName('users-service'))
+  .toReceiveHttpRequest()
+  .ofMethod('POST')
+  .withHeader('Content-Type', 'application/json')
+  .withBody({
+    id: 1,
+    name: 'John Doe',
+    address: '123 Main St',
+  });
+```
