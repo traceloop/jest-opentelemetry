@@ -2,6 +2,7 @@ import { jest, describe, it } from '@jest/globals';
 import { expectTrace } from '../..';
 import { TraceLoop } from '../../trace-loop';
 import { setTimeout } from 'timers/promises';
+import { opentelemetry } from '@traceloop/otel-proto';
 
 jest.setTimeout(30000);
 
@@ -14,8 +15,14 @@ describe('send-http-request', () => {
     await axios.post('http://localhost:3000/orders/create'); // or use t.traceLoopId to set the header manually
     await traceloop.fetchTraces();
 
-    expectTrace(traceloop.serviceByName('orders-service'))
-      .toSendHttpRequest()
-      .ofMethod('POST');
+    const trace = traceloop.serviceByName('orders-service');
+
+    trace.spans.forEach((span) => {
+      console.log(
+        JSON.stringify((span as opentelemetry.proto.trace.v1.Span).toJSON()),
+      );
+    });
+
+    expectTrace(trace).toSendHttpRequest().ofMethod('POST');
   });
 });

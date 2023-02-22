@@ -24,4 +24,14 @@ export class PostgresQLQuery {
 
     return new PostgresQLQuery(filteredSpans, this.serviceName);
   }
+
+  withStatement(statement: string) {
+    const filteredSpans = this.spans.filter((span) => {
+      return span.attributes?.find(
+        (attribute) =>
+          attribute.key === SemanticAttributes.DB_STATEMENT &&
+          attribute.value?.stringValue === statement,
+      );
+    });
+  }
 }
