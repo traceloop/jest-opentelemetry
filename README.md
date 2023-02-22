@@ -8,8 +8,12 @@
   <p align="center">End to end tests with 10 lines of code</p>
 </p>
 <h4 align="center">
+    <a href="https://docs.traceloop.dev/jest-otel/getting-started"><strong>Get started »</strong></a>
+    <br />
+    <br />
   <a href="https://join.slack.com/t/traceloopcommunity/shared_invite/zt-1plpfpm6r-zOHKI028VkpcWdobX65C~g">Slack</a> |
   <a href="https://docs.traceloop.dev/jest-otel/introduction">Docs</a> |
+  <a href="https://docs.traceloop.dev/jest-otel/syntax/overview">Examples</a> |
   <a href="https://www.traceloop.dev">Website</a>
 </h4>
 
