@@ -22,11 +22,16 @@ Following that, you can use any of the following assertions:
 Then, you can specifically assert for each of the properties of the request:
 
 - `withDatabaseName`
+- `withStatement`
 
 So, a complete assertion can look like:
 
 ```js
 expectTrace(traceloop.serviceByName('orders-service'))
   .toQueryPostgreSQL()
-  .withDatabaseName('postgres');
+  .withDatabaseName('postgres')
+  .withStatement(
+    /INSERT INTO orders \(id, price_in_cents\) VALUES \('[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}', [0-9]+\)/,
+    { compareType: COMPARE_TYPE.REGEX },
+  );
 ```
