@@ -17,6 +17,12 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+      - uses: harmon758/postgresql-action@v1
+        with:
+          postgresql version: '15'
+          postgresql db: 'postgres'
+          postgresql user: 'postgres'
+          postgresql password: 'postgres'
       - run: npm ci
       - run: npm run build
       - run: npm run lint

@@ -9,7 +9,7 @@
     "start:test-servers": "lerna run --scope @traceloop/test-servers start",
     "docker:instrument-opentelemetry": "docker build -f packages/instrument-opentelemetry/Dockerfile . -t instrument-opentelemetry",
     "docker:test-servers": "docker build -f packages/test-servers/Dockerfile . -t test-servers",
-    "test": "jest --runInBand",
+    "test": "jest",
     "test-ci": "concurrently -k --success \"command-1\" --hide 0 \"npm:start:test-servers\" \"npm:test\"",
     "release": "npm run build && lerna publish --conventional-commits"
   },
