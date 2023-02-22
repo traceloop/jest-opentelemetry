@@ -1,5 +1,5 @@
 import { opentelemetry } from '@traceloop/otel-proto';
-import { stringCompare } from './comparators';
+import { objectCompare, stringCompare } from './comparators';
 import { CompareOptions } from './compare-types';
 
 export const filterByAttributeKey = (
@@ -39,6 +39,26 @@ export const filterByAttributeIntValue = (
   spans.filter((span) => {
     return span.attributes?.find(
       (attribute) =>
-        attribute.key === attName && attribute.value?.intValue === attValue,
+        attribute.key === attName &&
+        attribute.value?.intValue.toNumber() === attValue,
     );
+  });
+
+export const filterByAttributeJSON = (
+  spans: opentelemetry.proto.trace.v1.ISpan[],
+  attName: string,
+  attValue: Record<string, unknown>,
+  options?: CompareOptions,
+) =>
+  spans.filter((span) => {
+    try {
+      const json = JSON.parse(
+        span.attributes?.find((attribute) => attribute.key === attName)?.value
+          ?.stringValue || '',
+      );
+
+      return objectCompare(json, attValue, options);
+    } catch (e) {
+      return false;
+    }
   });

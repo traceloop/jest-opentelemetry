@@ -1,10 +1,11 @@
 import { SemanticAttributes } from '@opentelemetry/semantic-conventions';
-import deepEqual from 'deep-equal';
 import { opentelemetry } from '@traceloop/otel-proto';
 import {
   CompareOptions,
   filterByAttributeIntValue,
+  filterByAttributeJSON,
   filterByAttributeStringValue,
+  stringCompare,
 } from '../matchers/utils';
 
 export class HttpRequest {
@@ -16,52 +17,107 @@ export class HttpRequest {
     },
   ) {}
 
-  withBody(body: object) {
-    const filteredSpans = this.spans.filter((span) => {
-      const jsonBody = JSON.parse(
-        span.attributes?.find(
-          (attribute) => attribute.key === 'http.request.body',
-        )?.value?.stringValue || '',
-      );
-
-      return deepEqual(jsonBody, body);
-    });
+  withRequestBody(body: Record<string, unknown>, options?: CompareOptions) {
+    const filteredSpans = filterByAttributeJSON(
+      this.spans,
+      'http.request.body',
+      body,
+      options,
+    );
 
     if (filteredSpans.length === 0) {
       throw new Error(
-        `No HTTP call with body ${body} ${this.serviceErrorBySpanKind()}`,
+        `No HTTP call with request body ${body} ${this.serviceErrorBySpanKind()}`,
       );
     }
 
     return new HttpRequest(filteredSpans, this.extra);
   }
 
-  withHeader(key: string, value: string, options: CompareOptions) {
-    const filteredSpans = filterByAttributeStringValue(
+  withResponseBody(body: Record<string, unknown>, options?: CompareOptions) {
+    const filteredSpans = filterByAttributeJSON(
+      this.spans,
+      'http.response.body',
+      body,
+      options,
+    );
+
+    if (filteredSpans.length === 0) {
+      throw new Error(
+        `No HTTP call with response body ${body} ${this.serviceErrorBySpanKind()}`,
+      );
+    }
+
+    return new HttpRequest(filteredSpans, this.extra);
+  }
+
+  withRequestHeader(key: string, value: string, options?: CompareOptions) {
+    const filteredSpansBySingle = filterByAttributeStringValue(
       this.spans,
       `http.request.header.${key}`,
       value,
       options,
     );
 
+    const headerObjectSpans = this.spans.filter((span) => {
+      const attr = span.attributes?.find(
+        (attribute) => attribute.key === 'http.request.headers',
+      );
+      try {
+        const headerObject = JSON.parse(attr?.value?.stringValue ?? '');
+        return stringCompare(headerObject[key], value);
+      } catch (e) {
+        return false;
+      }
+    });
+
+    const filteredSpans = [...filteredSpansBySingle, ...headerObjectSpans];
+
     if (filteredSpans.length === 0) {
       throw new Error(
-        `No HTTP call with header ${key} assigned with ${value} ${this.serviceErrorBySpanKind()}`,
+        `No HTTP call with request header ${key} assigned with ${value} ${this.serviceErrorBySpanKind()}`,
       );
     }
 
     return new HttpRequest(filteredSpans, this.extra);
   }
 
-  ofMethod(
-    method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH',
-    options?: CompareOptions,
-  ) {
+  withResponseHeader(key: string, value: string, options?: CompareOptions) {
+    const filteredSpansBySingle = filterByAttributeStringValue(
+      this.spans,
+      `http.response.header.${key}`,
+      value,
+      options,
+    );
+
+    const headerObjectSpans = this.spans.filter((span) => {
+      const attr = span.attributes?.find(
+        (attribute) => attribute.key === 'http.response.headers',
+      );
+      try {
+        const headerObject = JSON.parse(attr?.value?.stringValue ?? '');
+        return stringCompare(headerObject[key], value);
+      } catch (e) {
+        return false;
+      }
+    });
+
+    const filteredSpans = [...filteredSpansBySingle, ...headerObjectSpans];
+
+    if (filteredSpans.length === 0) {
+      throw new Error(
+        `No HTTP call with response header ${key} assigned with ${value} ${this.serviceErrorBySpanKind()}`,
+      );
+    }
+
+    return new HttpRequest(filteredSpans, this.extra);
+  }
+
+  withMethod(method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH') {
     const filteredSpans = filterByAttributeStringValue(
       this.spans,
       SemanticAttributes.HTTP_METHOD,
       method,
-      options,
     );
 
     if (filteredSpans.length === 0) {
@@ -83,6 +139,23 @@ export class HttpRequest {
     if (filteredSpans.length === 0) {
       throw new Error(
         `No HTTP call with status code ${code} ${this.serviceErrorBySpanKind()}`,
+      );
+    }
+
+    return new HttpRequest(filteredSpans, this.extra);
+  }
+
+  withUrl(url: string, options?: CompareOptions) {
+    const filteredSpans = filterByAttributeStringValue(
+      this.spans,
+      SemanticAttributes.HTTP_URL,
+      url,
+      options,
+    );
+
+    if (filteredSpans.length === 0) {
+      throw new Error(
+        `No HTTP call with url ${url} ${this.serviceErrorBySpanKind()}`,
       );
     }
 
