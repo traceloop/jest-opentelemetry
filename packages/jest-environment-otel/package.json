@@ -1,7 +1,7 @@
 {
   "name": "@traceloop/jest-environment-otel",
   "description": "OpenTelemetry environment for Jest.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "license": "Apache-2.0",
   "type": "commonjs",
   "main": "./index.js",
@@ -43,7 +43,7 @@
     "rollup-plugin-swc3": "^0.8.0"
   },
   "dependencies": {
-    "@traceloop/otel-receiver": "^0.3.0",
+    "@traceloop/otel-receiver": "^0.4.0",
     "chalk": "^4.1.2",
     "cwd": "^0.10.0",
     "jest-dev-server": "^7.0.1",

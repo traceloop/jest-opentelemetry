@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.4.0 (2023-02-22)
+
+### Bug Fixes
+
+- adaptations for minimal working js project ([57c94a4](https://github.com/traceloop/jest-opentelemetry/commit/57c94a448045ac00a1c01788a8439489a2ca6fe2))
+- adaptations for usage with minimal js project ([7a7771e](https://github.com/traceloop/jest-opentelemetry/commit/7a7771e165b8924778e82758504ee38b1cdd93bc))
+- compilation & tests ([4e8698f](https://github.com/traceloop/jest-opentelemetry/commit/4e8698f254bad209becf2bd260679831fb25c0a6))
+- created a separate package for protobuf code ([b445f6f](https://github.com/traceloop/jest-opentelemetry/commit/b445f6fb7a32989b44253d813c4f92ad5dfffd2f))
+- imports from dist ([#16](https://github.com/traceloop/jest-opentelemetry/issues/16)) ([230849d](https://github.com/traceloop/jest-opentelemetry/commit/230849d617887d53b85a012cd1878dbdfca19e7b))
+- **integration:** integration test dsl with test servers ([#4](https://github.com/traceloop/jest-opentelemetry/issues/4)) ([6b4b7f7](https://github.com/traceloop/jest-opentelemetry/commit/6b4b7f7c43f7f450b615bf46635a817df708517e))
+- **lint:** linting issues ([#11](https://github.com/traceloop/jest-opentelemetry/issues/11)) ([c74ca77](https://github.com/traceloop/jest-opentelemetry/commit/c74ca77896c35a8ff72500451d41cc0c53d1c8b1))
+- npm publish files ([02afb0b](https://github.com/traceloop/jest-opentelemetry/commit/02afb0b6f6054d3570d2160d667f05033243401d))
+- otel receiver timeouts ([#17](https://github.com/traceloop/jest-opentelemetry/issues/17)) ([8c99815](https://github.com/traceloop/jest-opentelemetry/commit/8c998151a7a30c1a401aa1403587f35026d4814b))
+- separate expect() function ([e704f43](https://github.com/traceloop/jest-opentelemetry/commit/e704f43b5c5877c254c901825c446eeaea2f1258))
+- timeout on test setup ([2b3fc15](https://github.com/traceloop/jest-opentelemetry/commit/2b3fc15b2cfae8e46471c3d11531bff40bf7c834))
+- typescript adaptations ([ec0ad8e](https://github.com/traceloop/jest-opentelemetry/commit/ec0ad8e40c799f70881ae7ac3b441c7f6eb6c9cd))
+- wrong export for setup/teardown of jest ([3979c3f](https://github.com/traceloop/jest-opentelemetry/commit/3979c3f01a0286175c2f1a52bd117b1fee9b6d76))
+
+### Features
+
+- basic integration with otel-receiver ([10f4a4e](https://github.com/traceloop/jest-opentelemetry/commit/10f4a4e274079620f8461eb64b09c73e9a609077))
+- TraceLoop ([#19](https://github.com/traceloop/jest-opentelemetry/issues/19)) ([ab17a91](https://github.com/traceloop/jest-opentelemetry/commit/ab17a91601ff8643ed99a6e2adaced491ab0743d))
+
 # [0.3.0](https://github.com/traceloop/jest-opentelemetry/compare/v0.2.7...v0.3.0) (2023-02-21)
 
 **Note:** Version bump only for package @traceloop/jest-environment-otel
