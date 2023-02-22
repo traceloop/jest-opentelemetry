@@ -14,7 +14,7 @@ describe('send-http-request', () => {
     await axios.post('http://localhost:3000/orders/create'); // or use t.traceLoopId to set the header manually
     await traceloop.fetchTraces();
 
-    expectTrace(traceloop.service('orders-service'))
+    expectTrace(traceloop.serviceByName('orders-service'))
       .toSendHttpRequest()
       .ofMethod('POST');
   });
