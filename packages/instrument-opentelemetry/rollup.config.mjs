@@ -16,9 +16,9 @@ const swcPlugin = swc(
 
 export default [
   bundle({
-    input: ['src/index.ts'],
+    input: ['src/tracing.ts'],
     output: {
-      file: 'dist/index.js',
+      file: 'dist/tracing.js',
       format: 'cjs',
     },
     plugins: [swcPlugin, typescript({ tsconfig: '../../tsconfig.json' })],
