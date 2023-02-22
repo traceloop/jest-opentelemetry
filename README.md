@@ -19,7 +19,7 @@
 
 <h4 align="center">
    <a href="https://github.com/traceloop/jest-opentelemetry/blob/main/LICENSE">
-    <img src="https://img.shields.io/badge/license-Apache 2.0-blue.svg" alt="Enrolla is released under the MIT License">
+    <img src="https://img.shields.io/badge/license-Apache 2.0-blue.svg" alt="Jest OpenTelemetry is released under the Apache-2.0 License">
   </a>
   <a href="https://www.ycombinator.com/companies/traceloop"><img src="https://img.shields.io/website?color=%23f26522&down_message=Y%20Combinator&label=Backed&logo=ycombinator&style=flat-square&up_message=Y%20Combinator&url=https%3A%2F%2Fwww.ycombinator.com"></a>
   <a href="https://github.com/traceloop/jest-opentelemetry/blob/main/CONTRIBUTING.md">
@@ -98,11 +98,11 @@ Whether it's big or small, we love contributions ❤️ Check out our guide to s
 Not sure where to get started? You can:
 
 - [Book a free pairing session with one of our teammates](mailto:nir@traceloop.dev?subject=Pairing%20session&body=I'd%20like%20to%20do%20a%20pairing%20session!)!
-- Join our <a href="https://join.slack.com/t/enrollacommunity/shared_invite/zt-1naxh3lia-wIvFcLyCEXTYzAuO1U688Q">Slack</a>, and ask us any questions there.
+- Join our <a href="https://join.slack.com/t/traceloopcommunity/shared_invite/zt-1plpfpm6r-zOHKI028VkpcWdobX65C~g">Slack</a>, and ask us any questions there.
 
 ## 💚 Community & Support
 
-- [Slack](https://join.slack.com/t/enrollacommunity/shared_invite/zt-1naxh3lia-wIvFcLyCEXTYzAuO1U688Q) (For live discussion with the community and the Enrolla team)
+- [Slack](https://join.slack.com/t/traceloopcommunity/shared_invite/zt-1plpfpm6r-zOHKI028VkpcWdobX65C~g) (For live discussion with the community and the Traceloop team)
 - [GitHub Discussions](https://github.com/traceloop/jest-opentelemetry/discussions) (For help with building and deeper conversations about features)
 - [GitHub Issues](https://github.com/traceloop/jest-opentelemetry/issues) (For any bugs and errors you encounter using Jest OpenTelemetry)
 - [Twitter](https://twitter.com/traceloop) (Get news fast)
