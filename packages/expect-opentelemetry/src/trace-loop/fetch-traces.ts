@@ -54,7 +54,7 @@ export const findTraceLoopIdMatch = (
 export const pollForTraceLoopIdMatch = async (
   config: FetchTracesConfig,
   traceLoopId: string,
-) => {
+): Promise<string | undefined> => {
   let foundMatch = false;
   while (!foundMatch) {
     await setTimeout(config.pollInterval);
@@ -69,10 +69,10 @@ export const pollForTraceLoopIdMatch = async (
   }
 };
 
-export const rejectAfterTimeout = async (config: FetchTracesConfig) => {
-  return new Promise((resolve, reject) => {
+export const resolveAfterTimeout = async (config: FetchTracesConfig) => {
+  return new Promise((resolve, _) => {
     setTimeout(config.maxPollTime).then(() => {
-      reject(new Error('Timeout'));
+      resolve(undefined);
     });
   });
 };
