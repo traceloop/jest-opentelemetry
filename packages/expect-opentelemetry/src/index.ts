@@ -1,8 +1,8 @@
 import { toReceiveHttpRequest } from './matchers/service/to-receive-http-request';
 import { toSendHttpRequest } from './matchers/service/to-send-http-request';
-import { toQueryPostgresQL } from './matchers/service/to-query-postgresql';
+import { toQueryPostgreSQL } from './matchers/service/to-query-postgresql';
 import { expect } from '@jest/globals';
-import { HttpRequest, PostgresQLQuery, Service } from './resources';
+import { HttpRequest, PostgreSQLQuery, Service } from './resources';
 export { setDefaultOptions, getDefaultOptions } from './options';
 
 export * from './matchers';
@@ -12,7 +12,7 @@ export * from './trace-loop';
 const serviceMatchers = {
   toReceiveHttpRequest,
   toSendHttpRequest,
-  toQueryPostgresQL,
+  toQueryPostgreSQL,
 };
 
 interface TraceMatchers {
