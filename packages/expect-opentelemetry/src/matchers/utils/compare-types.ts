@@ -1,6 +1,6 @@
 export const COMPARE_TYPE = {
-  EQUALS: 'equal',
-  CONTAINS: 'contain',
+  EQUALS: 'equals',
+  CONTAINS: 'contains',
   REGEX: 'regex',
 } as const;
 

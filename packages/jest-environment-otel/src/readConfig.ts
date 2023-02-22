@@ -3,6 +3,7 @@ import path from 'path';
 import { promisify } from 'util';
 import cwd from 'cwd';
 import merge from 'merge-deep';
+import { setTimeout } from 'timers/promises';
 
 const exists = promisify(fs.exists);
 
@@ -36,6 +37,10 @@ export async function readConfig() {
   }
 
   const localConfig = await require(absConfigPath);
+
+  if (localConfig.timeout) {
+    await setTimeout(localConfig.timeout);
+  }
 
   return merge({}, defaultConfig, localConfig);
 }
