@@ -1,4 +1,4 @@
-import { opentelemetry } from '../../../otel-proto/src';
+import { opentelemetry } from '@traceloop/otel-proto';
 
 export class Service {
   constructor(

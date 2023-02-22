@@ -1,4 +1,4 @@
-import { opentelemetry } from '../../otel-proto/src';
+import { opentelemetry } from '@traceloop/otel-proto';
 
 const _resourceSpans: opentelemetry.proto.trace.v1.IResourceSpans[] = [];
 

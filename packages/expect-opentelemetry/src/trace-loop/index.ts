@@ -1,20 +1,26 @@
 import { randomUUID } from 'crypto';
 import axios from 'axios';
-import { opentelemetry } from '../../../otel-proto/src';
+import { opentelemetry } from '@traceloop/otel-proto';
 import { httpGetBinary } from '../utils';
 import { setTimeout } from 'timers/promises';
 import {
   fetchTracesConfigBase,
   FetchTracesConfig,
   pollForTraceLoopIdMatch,
-  rejectAfterTimeout,
+  resolveAfterTimeout,
 } from './fetch-traces';
 import { Service } from '../resources/service';
+import { CompareOptions } from '../matchers/utils/compare-types';
+import {
+  byK8sPodName,
+  byServiceName,
+  byCustomAttribute,
+} from './filter-service-spans';
 
 const TRACE_LOOP_ID_HEADER = 'trace-loop-id';
 
 export class TraceLoop {
-  private _traceLoopId: string;
+  private readonly _traceLoopId: string;
   private _fetchedTrace = false;
   private _traceId;
   private _traceData: opentelemetry.proto.trace.v1.TracesData | undefined;
@@ -51,41 +57,39 @@ export class TraceLoop {
 
     this._traceId = await Promise.race([
       pollForTraceLoopIdMatch(config, this._traceLoopId),
-      rejectAfterTimeout(config),
+      resolveAfterTimeout(config),
     ]);
 
     // allow time for all spans for the current trace to be received
     await setTimeout(config.awaitAllTracesTimeout);
 
     const response = await httpGetBinary(config.url);
-    const traces = opentelemetry.proto.trace.v1.TracesData.decode(response);
-    console.log('traces', JSON.stringify(traces.toJSON()));
-    this._traceData = traces;
+    this._traceData = opentelemetry.proto.trace.v1.TracesData.decode(response);
     this._fetchedTrace = true;
   }
 
-  /**
-   * Returns a Service object for the given service name and relevant trace id
-   * @param name service name (must match the service.name attribute)
-   * @returns
-   */
-  service(name: string): Service {
-    const serviceResourceSpans = this._traceData?.resourceSpans?.find((rs) =>
-      rs.resource?.attributes?.find(
-        (a) => a.key === 'service.name' && a.value?.stringValue === name,
-      ),
+  serviceByName(name: string, options?: CompareOptions) {
+    return new Service(
+      name,
+      byServiceName(name, this._traceData, this._traceId, options),
     );
+  }
 
-    // return only spans for the requested service + relevant trace id
-    const serviceSpans =
-      serviceResourceSpans?.scopeSpans
-        ?.flatMap((ss) => ss.spans || [])
-        .filter(
-          (span) =>
-            span.traceId &&
-            Buffer.from(span.traceId).toString('hex') === this._traceId,
-        ) || [];
+  serviceByK8sPodName(name: string, options?: CompareOptions) {
+    return new Service(
+      name,
+      byK8sPodName(name, this._traceData, this._traceId, options),
+    );
+  }
 
-    return new Service(name, serviceSpans || []);
+  serviceByCustomAttribute(
+    key: string,
+    value: string | RegExp,
+    options?: CompareOptions,
+  ) {
+    return new Service(
+      value as string,
+      byCustomAttribute(key, value, this._traceData, this._traceId, options),
+    );
   }
 }

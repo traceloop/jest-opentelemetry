@@ -1,7 +1,7 @@
 {
   "name": "@traceloop/otel-proto",
   "description": "A set of functions for parsing OpenTelemetry protos.",
-  "version": "0.2.7",
+  "version": "0.3.0",
   "license": "Apache-2.0",
   "type": "commonjs",
   "main": "./dist/index.js",
