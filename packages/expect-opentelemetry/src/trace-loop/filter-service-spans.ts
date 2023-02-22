@@ -3,8 +3,15 @@ import { opentelemetry } from '@traceloop/otel-proto';
 import { stringCompare, CompareOptions } from '../matchers/utils';
 
 const flatten = (
-  serviceResourceSpans: opentelemetry.proto.trace.v1.IResourceSpans | undefined,
-) => serviceResourceSpans?.scopeSpans?.flatMap((ss) => ss.spans || []);
+  serviceResourceSpans:
+    | opentelemetry.proto.trace.v1.IResourceSpans[]
+    | undefined,
+) =>
+  (
+    serviceResourceSpans?.flatMap((srs) => {
+      return srs.scopeSpans?.flatMap((ss) => ss.spans || []);
+    }) || []
+  ).filter((s) => !!s) as opentelemetry.proto.trace.v1.ISpan[];
 
 const filterByTraceId = (
   spans: opentelemetry.proto.trace.v1.ISpan[] | undefined = [],
@@ -29,7 +36,7 @@ export const byCustomAttribute = (
   traceId: string | undefined,
   options?: CompareOptions,
 ) => {
-  const serviceResourceSpans = traceData?.resourceSpans?.find((rs) =>
+  const serviceResourceSpans = traceData?.resourceSpans?.filter((rs) =>
     rs.resource?.attributes?.find(
       (a) =>
         a.key === attName &&
