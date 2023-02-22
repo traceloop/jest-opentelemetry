@@ -1,5 +1,6 @@
 {
   "name": "@traceloop/test-servers",
+  "version": "0.4.0",
   "private": true,
   "main": "./dist/index.js",
   "engines": {
@@ -24,6 +25,5 @@
     "pg": "^8.9.0",
     "typeorm": "^0.3.12",
     "uuid": "^9.0.0"
-  },
-  "version": "0.4.0"
+  }
 }
