@@ -34,7 +34,7 @@ expectTrace(traceloop.serviceByName('users-service'))
   .toReceiveHttpRequest()
   .ofMethod('POST')
   .withHeader('Content-Type', 'application/json')
-  .withBody({
+  .withRequestBody({
     id: 1,
     name: 'John Doe',
     address: '123 Main St',

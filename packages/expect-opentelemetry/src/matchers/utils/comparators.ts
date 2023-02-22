@@ -1,4 +1,5 @@
 import deepEqual from 'deep-equal';
+import { expect } from '@jest/globals';
 import { CompareOptions, COMPARE_TYPE } from './compare-types';
 
 type MaybeString = string | undefined | null;
@@ -23,10 +24,12 @@ export const objectContains = (
   a: Record<string, unknown>,
   b: Record<string, unknown>,
 ): boolean => {
-  const aKeys = Object.keys(a);
-  const bKeys = Object.keys(b);
-
-  return bKeys.every((key) => aKeys.includes(key) && deepEqual(a[key], b[key]));
+  try {
+    expect(a).toMatchObject(b);
+    return true;
+  } catch (e) {
+    return false;
+  }
 };
 
 export const stringCompare = (

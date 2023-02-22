@@ -59,7 +59,10 @@ ordersService.post('/orders/create', async (req, res) => {
   console.log('Order created! Sending email...');
   const EMAILS_SERVICE_URL =
     process.env.EMAILS_SERVICE_URL || 'http://localhost:3001';
-  await axios.post(`${EMAILS_SERVICE_URL}/emails/send`);
+  await axios.post(`${EMAILS_SERVICE_URL}/emails/send`, {
+    email: 'test',
+    nestedObject: { test: 'test' },
+  });
 
   res.send('Order created!');
 });
