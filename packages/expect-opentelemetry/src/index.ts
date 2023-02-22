@@ -18,7 +18,7 @@ const serviceMatchers = {
 interface TraceMatchers {
   toReceiveHttpRequest(): HttpRequest;
   toSendHttpRequest(): HttpRequest;
-  toQueryPostgresQL(): PostgresQLQuery;
+  toQueryPostgreSQL(): PostgreSQLQuery;
 }
 
 function createMatcher(matcher, type) {
