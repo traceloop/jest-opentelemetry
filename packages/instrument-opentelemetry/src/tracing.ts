@@ -8,46 +8,49 @@ import { OTLPTraceExporter as ProtoExporter } from '@opentelemetry/exporter-trac
 import { OTLPTraceExporter as GRPCExporter } from '@opentelemetry/exporter-trace-otlp-grpc';
 import { containerDetector } from '@opentelemetry/resource-detector-container';
 
-const traceExporter = process.env.OTEL_EXPORTER_OTLP_ENDPOINT
-  ? new GRPCExporter({
-      url: process.env.OTEL_EXPORTER_OTLP_ENDPOINT,
-      timeoutMillis: 100,
-    })
-  : new ProtoExporter({
-      url: 'http://localhost:4123/v1/traces',
-      timeoutMillis: 100,
-    });
+if (process.env.OTEL_EXPORTER_OTLP_ENDPOINT) {
+  const traceExporter =
+    process.env.OTEL_EXPORTER_TYPE === 'PROTO'
+      ? new ProtoExporter({
+          url: process.env.OTEL_EXPORTER_OTLP_ENDPOINT,
+          timeoutMillis: 100,
+        })
+      : new GRPCExporter({
+          url: process.env.OTEL_EXPORTER_OTLP_ENDPOINT,
+          timeoutMillis: 100,
+        });
 
-const sdk = new opentelemetry.NodeSDK({
-  resource: new Resource(
-    process.env.SERVICE_NAME
-      ? {
-          [SemanticResourceAttributes.SERVICE_NAME]: process.env.SERVICE_NAME,
-        }
-      : {},
-  ),
-  traceExporter,
-  instrumentations: [
-    getNodeAutoInstrumentations({
-      '@opentelemetry/instrumentation-http': httpInstrumentationConfig,
-      '@opentelemetry/instrumentation-express': expressInstrumentationConfig,
-      '@opentelemetry/instrumentation-pg': {
-        enhancedDatabaseReporting: true,
-      },
-    }),
-  ],
-  resourceDetectors: [containerDetector],
-});
+  const sdk = new opentelemetry.NodeSDK({
+    resource: new Resource(
+      process.env.SERVICE_NAME
+        ? {
+            [SemanticResourceAttributes.SERVICE_NAME]: process.env.SERVICE_NAME,
+          }
+        : {},
+    ),
+    traceExporter,
+    instrumentations: [
+      getNodeAutoInstrumentations({
+        '@opentelemetry/instrumentation-http': httpInstrumentationConfig,
+        '@opentelemetry/instrumentation-express': expressInstrumentationConfig,
+        '@opentelemetry/instrumentation-pg': {
+          enhancedDatabaseReporting: true,
+        },
+      }),
+    ],
+    resourceDetectors: [containerDetector],
+  });
 
-// initialize the SDK and register with the OpenTelemetry API
-// this enables the API to record telemetry
-sdk.start();
+  // initialize the SDK and register with the OpenTelemetry API
+  // this enables the API to record telemetry
+  sdk.start();
 
-// gracefully shut down the SDK on process exit
-process.on('SIGTERM', () => {
-  sdk
-    .shutdown()
-    .then(() => console.log('Tracing terminated'))
-    .catch((error) => console.log('Error terminating tracing', error))
-    .finally(() => process.exit(0));
-});
+  // gracefully shut down the SDK on process exit
+  process.on('SIGTERM', () => {
+    sdk
+      .shutdown()
+      .then(() => console.log('Tracing terminated'))
+      .catch((error) => console.log('Error terminating tracing', error))
+      .finally(() => process.exit(0));
+  });
+}

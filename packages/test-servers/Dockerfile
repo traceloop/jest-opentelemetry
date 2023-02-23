@@ -13,4 +13,4 @@ COPY packages/test-servers/. ./packages/test-servers/
 
 RUN npm run build
 
-CMD node -r ./packages/test-servers/dist/index.js
+CMD node ./packages/test-servers/dist/index.js
