@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1](https://github.com/traceloop/jest-opentelemetry/compare/v0.4.0...v0.4.1) (2023-02-23)
+
+### Bug Fixes
+
+- publish on public packages ([7ecb00a](https://github.com/traceloop/jest-opentelemetry/commit/7ecb00aff9b376195c3b04a2f65dcd26321ba186))
+- tracing enabled only if OTEL_EXPORTER_OTLP_ENDPOINT is specified ([80f74ce](https://github.com/traceloop/jest-opentelemetry/commit/80f74ce6c06ea1b6740faa5cf8499ea70d284cdf))
+
 # 0.4.0 (2023-02-22)
 
 ### Bug Fixes
