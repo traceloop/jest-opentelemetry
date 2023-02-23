@@ -36,8 +36,14 @@
   </a>
 </h4>
 
-<br>
-<br>
+Jest OpenTelemetry allows you to write, build and run end to end tests based on OpenTelemetry traces with [Jest-like](https://jestjs.io/) syntax. You can:
+
+- 🕵️ Test any side-effect in your system: an email was sent, a database was updated, a BI event was reported, etc.
+- 👩‍💻 Run your tests and connect to a local or remote test environment.
+
+All with just a few lines of code.
+
+It's built and maintained by Traceloop under the Apache 2.0 license.
 
 ## 🚀 Getting Started
 
