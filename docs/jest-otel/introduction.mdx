@@ -12,7 +12,7 @@ await traceloop.fetchTraces();
 
 expectTrace(traceloop.serviceByName('emails-service'))
   .toReceiveHttpRequest()
-  .ofMethod('POST')
+  .withMethod('POST')
   .withBody({ emailTemplate: 'orderCreated', itemId: '123' });
 ```
 
