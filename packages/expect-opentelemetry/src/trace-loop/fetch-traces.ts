@@ -2,7 +2,8 @@ import { opentelemetry } from '@traceloop/otel-proto';
 import { setTimeout } from 'timers/promises';
 import { httpGetBinary } from '../utils';
 
-const TRACE_LOOP_ID_HEADER_OTEL_ATTRIBUTE = 'http.request.header.traceloop_id';
+const TRACELOOP_ID_REQUEST_HEADER = 'http.request.header.traceloop_id';
+const TRACELOOP_ID_RESPONSE_HEADER = 'http.response.header.traceloop_id';
 
 export interface FetchTracesConfig {
   maxPollTime: number;
@@ -51,7 +52,10 @@ export const findTraceLoopIdMatch = (
             }
 
             // check in specific header key
-            if (attribute.key === TRACE_LOOP_ID_HEADER_OTEL_ATTRIBUTE) {
+            if (
+              attribute.key === TRACELOOP_ID_REQUEST_HEADER ||
+              attribute.key === TRACELOOP_ID_RESPONSE_HEADER
+            ) {
               if (
                 attribute.value?.arrayValue?.values?.[0]?.stringValue ===
                 traceLoopId
