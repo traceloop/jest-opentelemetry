@@ -2,20 +2,22 @@ import { opentelemetry } from '@traceloop/otel-proto';
 import { setTimeout } from 'timers/promises';
 import { httpGetBinary } from '../utils';
 
-const TRACE_LOOP_ID_HEADER_OTEL_ATTRIBUTE = 'http.request.header.trace_loop_id';
+const TRACE_LOOP_ID_HEADER_OTEL_ATTRIBUTE = 'http.request.header.traceloop_id';
 
 export interface FetchTracesConfig {
   maxPollTime: number;
   pollInterval: number;
   awaitAllTracesTimeout: number;
   url: string;
+  customerId: string;
 }
 
 export const fetchTracesConfigBase: FetchTracesConfig = {
-  maxPollTime: 10000,
-  pollInterval: 500,
-  awaitAllTracesTimeout: 4000,
-  url: 'http://localhost:4123/v1/traces',
+  maxPollTime: 120000,
+  pollInterval: 1000,
+  awaitAllTracesTimeout: 1000,
+  url: 'http://localhost:3005/v1/traces',
+  customerId: 'local',
 };
 
 /**
@@ -34,6 +36,21 @@ export const findTraceLoopIdMatch = (
       for (const span of scopeSpan.spans || []) {
         if (span.attributes) {
           for (const attribute of span.attributes) {
+            // http: check in headers stringified json
+            if (attribute.key === 'http.request.headers') {
+              const matches = attribute.value?.stringValue?.match(
+                /"traceloop_id":"(.*)"/,
+              );
+              if (matches?.length > 1) {
+                if (matches[1] === traceLoopId) {
+                  return span.traceId
+                    ? Buffer.from(span.traceId).toString('hex')
+                    : undefined;
+                }
+              }
+            }
+
+            // check in specific header key
             if (attribute.key === TRACE_LOOP_ID_HEADER_OTEL_ATTRIBUTE) {
               if (
                 attribute.value?.arrayValue?.values?.[0]?.stringValue ===
@@ -58,13 +75,20 @@ export const pollForTraceLoopIdMatch = async (
   let foundMatch = false;
   while (!foundMatch) {
     await setTimeout(config.pollInterval);
-    const response = await httpGetBinary(config.url);
-    const traces = opentelemetry.proto.trace.v1.TracesData.decode(response);
+    try {
+      const response = await httpGetBinary(config, traceLoopId);
+      const traces = opentelemetry.proto.trace.v1.TracesData.decode(response);
 
-    const traceId = findTraceLoopIdMatch(traces, traceLoopId);
-    if (traceId) {
-      foundMatch = true;
-      return traceId;
+      const traceId = findTraceLoopIdMatch(traces, traceLoopId);
+      if (traceId) {
+        foundMatch = true;
+        return traceId;
+      }
+    } catch (e) {
+      // retry on 400, else throw
+      if ((e as Error)?.message !== '400') {
+        throw e;
+      }
     }
   }
 };

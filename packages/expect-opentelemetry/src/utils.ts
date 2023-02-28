@@ -1,5 +1,6 @@
 import http from 'http';
 import { opentelemetry } from '@traceloop/otel-proto';
+import { FetchTracesConfig } from './trace-loop/fetch-traces';
 
 export const getInstanceType = (instance: any) => {
   if (
@@ -81,13 +82,17 @@ export const generateStubData = () => {
  * @param url - url to make get request to (server that responds with Buffer)
  * @returns Buffer result
  */
-export function httpGetBinary(url: string): Promise<Buffer> {
+export function httpGetBinary(
+  config: FetchTracesConfig,
+  traceloopId: string,
+): Promise<Buffer> {
+  const url = `${config.url}/${traceloopId}`;
   return new Promise((resolve, reject) => {
-    http.get(url, (res) => {
+    http.get(url, { headers: { Authorization: config.customerId } }, (res) => {
       const { statusCode } = res;
 
       if (!statusCode || statusCode < 200 || statusCode >= 300) {
-        return reject(new Error('statusCode=' + res.statusCode));
+        return reject(new Error(`${res.statusCode}`));
       }
 
       const data: Uint8Array[] = [];

@@ -21,7 +21,7 @@ const startServer = async () => {
     },
   );
 
-  app.get('/v1/traces', (_: Request, res: Response) => {
+  app.get('/v1/traces/:traceloopId', (_: Request, res: Response) => {
     res.send(getAll());
   });
 

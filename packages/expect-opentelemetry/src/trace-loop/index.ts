@@ -17,7 +17,7 @@ import {
   byCustomAttribute,
 } from './filter-service-spans';
 
-const TRACE_LOOP_ID_HEADER = 'trace-loop-id';
+const TRACE_LOOP_ID_HEADER = 'traceloop_id';
 
 export class TraceLoop {
   private readonly _traceLoopId: string;
@@ -63,7 +63,7 @@ export class TraceLoop {
     // allow time for all spans for the current trace to be received
     await setTimeout(config.awaitAllTracesTimeout);
 
-    const response = await httpGetBinary(config.url);
+    const response = await httpGetBinary(config, this._traceLoopId);
     this._traceData = opentelemetry.proto.trace.v1.TracesData.decode(response);
     this._fetchedTrace = true;
   }
