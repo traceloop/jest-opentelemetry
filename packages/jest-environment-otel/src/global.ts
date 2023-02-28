@@ -18,6 +18,10 @@ export async function setup(jestConfig: JestConfig = {}) {
     didAlreadyRunInWatchMode = true;
   }
 
+  if (config.useRemoteOtelReceiver) {
+    return;
+  }
+
   try {
     await setupServer({
       command: 'node ./node_modules/@traceloop/otel-receiver/dist/index.js',

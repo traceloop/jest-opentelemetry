@@ -90,12 +90,12 @@ export const httpInstrumentationConfig = {
   responseHook: httpCustomAttributesOnResponse,
   headersToSpanAttributes: {
     client: {
-      requestHeaders: ['trace-loop-id'],
-      responseHeaders: ['trace-loop-id'],
+      requestHeaders: ['traceloop_id'],
+      responseHeaders: ['traceloop_id'],
     },
     server: {
-      requestHeaders: ['trace-loop-id'],
-      responseHeaders: ['trace-loop-id'],
+      requestHeaders: ['traceloop_id'],
+      responseHeaders: ['traceloop_id'],
     },
   },
 };
