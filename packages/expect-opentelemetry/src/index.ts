@@ -1,8 +1,6 @@
-import { toReceiveHttpRequest } from './matchers/service/to-receive-http-request';
-import { toSendHttpRequest } from './matchers/service/to-send-http-request';
-import { toQueryPostgreSQL } from './matchers/service/to-query-postgresql';
+import { toReceiveHttpRequest, toSendHttpRequest, toQueryPostgreSQL, toReceiveGrpcRequest, toSendGrpcRequest } from './matchers/service';
 import { expect } from '@jest/globals';
-import { HttpRequest, PostgreSQLQuery, Service } from './resources';
+import { GrpcRequest, HttpRequest, PostgreSQLQuery, Service } from './resources';
 export { setDefaultOptions, getDefaultOptions } from './options';
 
 export * from './matchers';
@@ -13,12 +11,16 @@ const serviceMatchers = {
   toReceiveHttpRequest,
   toSendHttpRequest,
   toQueryPostgreSQL,
+  toReceiveGrpcRequest,
+  toSendGrpcRequest
 };
 
 interface TraceMatchers {
   toReceiveHttpRequest(): HttpRequest;
   toSendHttpRequest(): HttpRequest;
   toQueryPostgreSQL(): PostgreSQLQuery;
+  toReceiveGrpcRequest(): GrpcRequest;
+  toSendGrpcRequest(): GrpcRequest;
 }
 
 function createMatcher(matcher, type) {
