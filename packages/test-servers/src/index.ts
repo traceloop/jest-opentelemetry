@@ -2,7 +2,22 @@ import axios from 'axios';
 import express from 'express';
 import { DataSource } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
+import grpc from '@grpc/grpc-js';
+import protoLoader from '@grpc/proto-loader';
 
+// --- Protos ---
+const PROTO_PATH = __dirname + '/helloworld.proto';
+
+var packageDefinition = protoLoader.loadSync(PROTO_PATH, {
+  keepCase: true,
+  longs: String,
+  enums: String,
+  defaults: true,
+  oneofs: true,
+});
+var hello_proto = grpc.loadPackageDefinition(packageDefinition).helloworld;
+
+// --- Postgres ---
 const ordersDataSource = new DataSource({
   type: 'postgres',
   host: process.env.POSTGRES_HOST || 'localhost',
@@ -34,8 +49,8 @@ if (process.env.ORDERS_SERVICE) {
   initializeOrdersDatasource();
 }
 
+// --- Orders Service ---
 const ordersService = express();
-const emailsService = express();
 
 ordersService.post('/orders/create', async (req, res) => {
   if (!ordersDataSourceInitialized) {
@@ -56,6 +71,7 @@ ordersService.post('/orders/create', async (req, res) => {
     );
   }
 
+  // make http call
   console.log('Order created! Sending email...');
   const EMAILS_SERVICE_URL =
     process.env.EMAILS_SERVICE_URL || 'http://localhost:3001';
@@ -64,14 +80,40 @@ ordersService.post('/orders/create', async (req, res) => {
     nestedObject: { test: 'test' },
   });
 
+  // make grpc call
+  console.log('Making gRPC call');
+  const GRPC_SERVICE_URL = process.env.GRPC_SERVICE_URL || 'localhost:50051';
+  const client = new (hello_proto as any).Greeter(
+    GRPC_SERVICE_URL,
+    grpc.credentials.createInsecure(),
+  );
+
+  client.sayHello({ name: 'name' }, function (_: any, response: any) {
+    console.log('Greeting:', response.message);
+  });
+
   res.send('Order created!');
 });
+
+// --- Emails Service ---
+const emailsService = express();
 
 emailsService.post('/emails/send', (req, res) => {
   console.log('Email sent!');
   res.send('Email sent!');
 });
 
+// --- gRPC Service ---
+const grpcServer = new grpc.Server();
+
+function sayHello(call: any, callback: any) {
+  callback(null, { message: 'Hello ' + call.request.name });
+}
+grpcServer.addService((hello_proto as any).Greeter.service, {
+  sayHello: sayHello,
+});
+
+// --- Initialize Service ---
 const PORT = process.env.PORT || 3000;
 
 if (process.env.ORDERS_SERVICE) {
@@ -84,4 +126,15 @@ if (process.env.EMAILS_SERVICE) {
   emailsService.listen(PORT, () => {
     console.log(`Emails service listening at http://localhost:${PORT}`);
   });
+}
+
+if (process.env.GRPC_SERVICE) {
+  grpcServer.bindAsync(
+    `0.0.0.0:${PORT}`,
+    grpc.ServerCredentials.createInsecure(),
+    () => {
+      console.log(`gRPC service listening on port ${PORT}`);
+      grpcServer.start();
+    },
+  );
 }
