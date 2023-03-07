@@ -76,6 +76,37 @@ spec:
           imagePullPolicy: Never
 
 ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grpc-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grpc-service
+  template:
+    metadata:
+      labels:
+        app: grpc-service
+      annotations:
+        instrumentation.opentelemetry.io/inject-nodejs: 'true'
+    spec:
+      containers:
+        - name: grpc-service
+          image: test-servers
+          ports:
+            - containerPort: 50051
+          env:
+            - name: SERVICE_NAME
+              value: 'grpc-service'
+            - name: GRPC_SERVICE
+              value: 'TRUE'
+            - name: PORT
+              value: '50051'
+          imagePullPolicy: Never
+
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -88,6 +119,19 @@ spec:
       port: 3000
       targetPort: 3000
   type: LoadBalancer
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grpc-service
+spec:
+  selector:
+    app: grpc-service
+  ports:
+    - protocol: TCP
+      port: 50051
+      targetPort: 50051
 
 ---
 apiVersion: v1
