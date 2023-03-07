@@ -8,14 +8,14 @@ import protoLoader from '@grpc/proto-loader';
 // --- Protos ---
 const PROTO_PATH = __dirname + '/helloworld.proto';
 
-var packageDefinition = protoLoader.loadSync(PROTO_PATH, {
+const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
   keepCase: true,
   longs: String,
   enums: String,
   defaults: true,
   oneofs: true,
 });
-var hello_proto = grpc.loadPackageDefinition(packageDefinition).helloworld;
+const hello_proto = grpc.loadPackageDefinition(packageDefinition).helloworld;
 
 // --- Postgres ---
 const ordersDataSource = new DataSource({
