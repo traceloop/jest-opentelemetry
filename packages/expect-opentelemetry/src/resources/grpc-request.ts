@@ -44,7 +44,7 @@ export class GrpcRequest {
       this.spans,
       SemanticAttributes.RPC_METHOD,
       method,
-      options
+      options,
     );
 
     if (filteredSpans.length === 0) {
@@ -61,7 +61,7 @@ export class GrpcRequest {
       this.spans,
       SemanticAttributes.RPC_SERVICE,
       service,
-        options,
+      options,
     );
 
     if (filteredSpans.length === 0) {
@@ -81,11 +81,11 @@ export class GrpcRequest {
     );
 
     // spec says it should be an int, but in practice we get strings
-    const filteredSpansString = filterByAttributeStringValue( 
-        this.spans,
-        SemanticAttributes.RPC_GRPC_STATUS_CODE,
-        code.toString(),
-      );
+    const filteredSpansString = filterByAttributeStringValue(
+      this.spans,
+      SemanticAttributes.RPC_GRPC_STATUS_CODE,
+      code.toString(),
+    );
 
     if (filteredSpans.length === 0 && filteredSpansString.length === 0) {
       throw new Error(
@@ -93,7 +93,10 @@ export class GrpcRequest {
       );
     }
 
-    return new GrpcRequest(filteredSpans.length !== 0 ? filteredSpans : filteredSpansString, this.extra);
+    return new GrpcRequest(
+      filteredSpans.length !== 0 ? filteredSpans : filteredSpansString,
+      this.extra,
+    );
   }
 
   withNetPeerName(netPeerName: string, options?: CompareOptions) {
@@ -118,7 +121,8 @@ export class GrpcRequest {
   }
 
   private serviceErrorBySpanKind() {
-    const { SPAN_KIND_CLIENT, SPAN_KIND_SERVER } = opentelemetry.proto.trace.v1.Span.SpanKind
+    const { SPAN_KIND_CLIENT, SPAN_KIND_SERVER } =
+      opentelemetry.proto.trace.v1.Span.SpanKind;
     const { spanKind, serviceName } = this.extra;
 
     switch (spanKind) {
