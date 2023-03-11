@@ -21,7 +21,7 @@
     "@commitlint/config-conventional": "^17.4.4",
     "@rollup/plugin-typescript": "^11.0.0",
     "@tsconfig/recommended": "^1.0.2",
-    "@typescript-eslint/eslint-plugin": "^5.52.0",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
     "@typescript-eslint/parser": "^5.52.0",
     "concurrently": "^7.6.0",
     "eslint": "^8.35.0",
