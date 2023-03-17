@@ -28,3 +28,4 @@ message TraceloopSpan {
 
   string traceloop_id = 8;
 }
+
