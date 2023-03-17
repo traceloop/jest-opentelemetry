@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package traceloop.proto.traceloop.v1;
+
+import "opentelemetry/proto/common/v1/common.proto";
+import "opentelemetry/proto/resource/v1/resource.proto";
+import "opentelemetry/proto/trace/v1/trace.proto";
+
+option go_package = "./";
+
+message TraceloopSpan {
+  // The resource for the span.
+  opentelemetry.proto.resource.v1.Resource resource = 1;
+
+  // The instrumentation scope for the span.
+  opentelemetry.proto.common.v1.InstrumentationScope scope = 2;
+
+  // The span.
+  opentelemetry.proto.trace.v1.Span span = 3;
+
+  string trace_id = 4;
+
+  string span_id = 5;
+
+  string parent_span_id = 6;
+
+  string customer_id = 7;
+
+  string traceloop_id = 8;
+}
