@@ -3,14 +3,6 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [0.5.0](https://github.com/traceloop/jest-opentelemetry/compare/v0.4.1...v0.5.0) (2023-03-17)
-
-### Features
-
-- go server backend ([#42](https://github.com/traceloop/jest-opentelemetry/issues/42)) ([a543845](https://github.com/traceloop/jest-opentelemetry/commit/a543845445617bd321c7cee793e23caf2c651844))
-- gRPC matchers ([#48](https://github.com/traceloop/jest-opentelemetry/issues/48)) ([fe893e2](https://github.com/traceloop/jest-opentelemetry/commit/fe893e2068286b014d20fe9f25335c5e02f341c8))
-- traceloop proto ([#52](https://github.com/traceloop/jest-opentelemetry/issues/52)) ([53e9e68](https://github.com/traceloop/jest-opentelemetry/commit/53e9e68ab34bf79ab52adb82be219d48fef64acb))
-
 ## [0.4.1](https://github.com/traceloop/jest-opentelemetry/compare/v0.4.0...v0.4.1) (2023-02-23)
 
 ### Bug Fixes
