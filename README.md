@@ -76,7 +76,7 @@ We're constantly adding more, and you're welcome to [suggest yours](https://gith
 
 - [x] [REST](http://docs.traceloop.dev/jest-otel/syntax/services-rest)
 - [ ] GraphQL
-- [ ] GRPC
+- [x] GRPC
 
 ### Database Assertions
 
