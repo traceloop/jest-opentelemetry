@@ -7,7 +7,6 @@ import {
   fetchTracesConfigBase,
   FetchTracesConfig,
   pollForTraceLoopIdMatch,
-  resolveAfterTimeout,
 } from './fetch-traces';
 import { Service } from '../resources/service';
 import { CompareOptions } from '../matchers/utils/compare-types';
@@ -55,13 +54,9 @@ export class TraceLoop {
       return;
     }
 
-    this._traceId = await Promise.race([
-      pollForTraceLoopIdMatch(config, this._traceLoopId),
-      resolveAfterTimeout(config),
-    ]);
-
-    // allow time for all spans for the current trace to be received
-    await setTimeout(config.awaitAllSpansInTraceTimeout);
+    (this._traceId = await pollForTraceLoopIdMatch(config, this._traceLoopId)),
+      // allow time for all spans for the current trace to be received
+      await setTimeout(config.awaitAllSpansInTraceTimeout);
 
     const response = await httpGetBinary(config, this._traceLoopId);
     this._traceData = opentelemetry.proto.trace.v1.TracesData.decode(response);

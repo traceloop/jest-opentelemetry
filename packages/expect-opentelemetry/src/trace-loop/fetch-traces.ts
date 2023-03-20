@@ -76,8 +76,10 @@ export const pollForTraceLoopIdMatch = async (
   config: FetchTracesConfig,
   traceLoopId: string,
 ): Promise<string | undefined> => {
+  let numOfPolls = Math.floor(config.maxPollTime / config.pollInterval);
   let foundMatch = false;
-  while (!foundMatch) {
+
+  while (!foundMatch && numOfPolls-- > 0) {
     await setTimeout(config.pollInterval);
     try {
       const response = await httpGetBinary(config, traceLoopId);
@@ -95,12 +97,6 @@ export const pollForTraceLoopIdMatch = async (
       }
     }
   }
-};
 
-export const resolveAfterTimeout = async (config: FetchTracesConfig) => {
-  return new Promise((resolve, _) => {
-    setTimeout(config.maxPollTime).then(() => {
-      resolve(undefined);
-    });
-  });
+  return undefined;
 };
