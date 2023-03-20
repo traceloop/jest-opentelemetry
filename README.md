@@ -1,11 +1,11 @@
 <p align="center">
-<a href="https://www.traceloop.dev/">
+<a href="https://www.traceloop.com/">
 <img width="300" src="https://raw.githubusercontent.com/traceloop/jest-opentelemetry/main/img/logo.png">
 </a>
 </p>
 <h1 align="center">Jest OpenTelemetry</h1>
 <p align="center">
-  <p align="center">End to end tests with 10 lines of code</p>
+  <p align="center">Integeration tests with 10 lines of code</p>
 </p>
 <h4 align="center">
     <a href="https://docs.traceloop.dev/jest-otel/getting-started"><strong>Get started »</strong></a>
@@ -14,7 +14,7 @@
   <a href="https://join.slack.com/t/traceloopcommunity/shared_invite/zt-1plpfpm6r-zOHKI028VkpcWdobX65C~g">Slack</a> |
   <a href="https://docs.traceloop.dev/jest-otel/introduction">Docs</a> |
   <a href="https://docs.traceloop.dev/jest-otel/syntax/overview">Examples</a> |
-  <a href="https://www.traceloop.dev">Website</a>
+  <a href="https://www.traceloop.com">Website</a>
 </h4>
 
 <h4 align="center">
@@ -36,7 +36,7 @@
   </a>
 </h4>
 
-Jest OpenTelemetry allows you to write, build and run end to end tests based on OpenTelemetry traces with [Jest-like](https://jestjs.io/) syntax. You can:
+Jest OpenTelemetry allows you to write, build and run integration tests based on OpenTelemetry traces with [Jest-like](https://jestjs.io/) syntax. You can:
 
 - 🕵️ Test any side-effect in your system: an email was sent, a database was updated, a BI event was reported, etc.
 - 👩‍💻 Run your tests and connect to a local or remote test environment.
@@ -76,7 +76,7 @@ We're constantly adding more, and you're welcome to [suggest yours](https://gith
 
 - [x] [REST](http://docs.traceloop.dev/jest-otel/syntax/services-rest)
 - [ ] GraphQL
-- [x] GRPC
+- [x] [GRPC](http://docs.traceloop.dev/jest-otel/syntax/services-grpc)
 
 ### Database Assertions
 
@@ -103,7 +103,7 @@ Whether it's big or small, we love contributions ❤️ Check out our guide to s
 
 Not sure where to get started? You can:
 
-- [Book a free pairing session with one of our teammates](mailto:nir@traceloop.dev?subject=Pairing%20session&body=I'd%20like%20to%20do%20a%20pairing%20session!)!
+- [Book a free pairing session with one of our teammates](mailto:nir@traceloop.com?subject=Pairing%20session&body=I'd%20like%20to%20do%20a%20pairing%20session!)!
 - Join our <a href="https://join.slack.com/t/traceloopcommunity/shared_invite/zt-1plpfpm6r-zOHKI028VkpcWdobX65C~g">Slack</a>, and ask us any questions there.
 
 ## 💚 Community & Support
@@ -111,4 +111,4 @@ Not sure where to get started? You can:
 - [Slack](https://join.slack.com/t/traceloopcommunity/shared_invite/zt-1plpfpm6r-zOHKI028VkpcWdobX65C~g) (For live discussion with the community and the Traceloop team)
 - [GitHub Discussions](https://github.com/traceloop/jest-opentelemetry/discussions) (For help with building and deeper conversations about features)
 - [GitHub Issues](https://github.com/traceloop/jest-opentelemetry/issues) (For any bugs and errors you encounter using Jest OpenTelemetry)
-- [Twitter](https://twitter.com/traceloop) (Get news fast)
+- [Twitter](https://twitter.com/traceloopdev) (Get news fast)

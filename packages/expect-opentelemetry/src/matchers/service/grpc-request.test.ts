@@ -1,4 +1,4 @@
-import { jest, describe, it } from '@jest/globals';
+import { jest, describe, it, beforeAll } from '@jest/globals';
 import { expectTrace } from '../..';
 import { TraceLoop } from '../../trace-loop';
 
