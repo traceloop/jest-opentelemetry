@@ -8,15 +8,15 @@ const TRACELOOP_ID_RESPONSE_HEADER = 'http.response.header.traceloop_id';
 export interface FetchTracesConfig {
   maxPollTime: number;
   pollInterval: number;
-  awaitAllTracesTimeout: number;
+  awaitAllSpansInTraceTimeout: number;
   url: string;
   customerId: string;
 }
 
 export const fetchTracesConfigBase: FetchTracesConfig = {
-  maxPollTime: 120000,
+  maxPollTime: 9000,
   pollInterval: 1000,
-  awaitAllTracesTimeout: 1000,
+  awaitAllSpansInTraceTimeout: 2000,
   url: 'http://localhost:4123/v1/traces',
   customerId: 'local',
 };
@@ -76,8 +76,10 @@ export const pollForTraceLoopIdMatch = async (
   config: FetchTracesConfig,
   traceLoopId: string,
 ): Promise<string | undefined> => {
+  let numOfPolls = Math.floor(config.maxPollTime / config.pollInterval);
   let foundMatch = false;
-  while (!foundMatch) {
+
+  while (!foundMatch && numOfPolls-- > 0) {
     await setTimeout(config.pollInterval);
     try {
       const response = await httpGetBinary(config, traceLoopId);
@@ -95,12 +97,6 @@ export const pollForTraceLoopIdMatch = async (
       }
     }
   }
-};
 
-export const resolveAfterTimeout = async (config: FetchTracesConfig) => {
-  return new Promise((resolve, _) => {
-    setTimeout(config.maxPollTime).then(() => {
-      resolve(undefined);
-    });
-  });
+  return undefined;
 };

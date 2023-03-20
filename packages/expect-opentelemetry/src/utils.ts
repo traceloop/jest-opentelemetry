@@ -103,6 +103,9 @@ export function httpGetBinary(
         const result = Buffer.concat(data);
         resolve(result);
       });
+      res.on('error', function () {
+        reject('Error while fetching data');
+      });
     });
   });
 }
