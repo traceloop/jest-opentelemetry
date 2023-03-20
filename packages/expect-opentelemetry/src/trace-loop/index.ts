@@ -54,9 +54,10 @@ export class TraceLoop {
       return;
     }
 
-    (this._traceId = await pollForTraceLoopIdMatch(config, this._traceLoopId)),
-      // allow time for all spans for the current trace to be received
-      await setTimeout(config.awaitAllSpansInTraceTimeout);
+    this._traceId = await pollForTraceLoopIdMatch(config, this._traceLoopId);
+
+    // allow time for all spans for the current trace to be received
+    await setTimeout(config.awaitAllSpansInTraceTimeout);
 
     const response = await httpGetBinary(config, this._traceLoopId);
     this._traceData = opentelemetry.proto.trace.v1.TracesData.decode(response);
