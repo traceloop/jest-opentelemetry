@@ -8,15 +8,15 @@ const TRACELOOP_ID_RESPONSE_HEADER = 'http.response.header.traceloop_id';
 export interface FetchTracesConfig {
   maxPollTime: number;
   pollInterval: number;
-  awaitAllTracesTimeout: number;
+  awaitAllSpansInTraceTimeout: number;
   url: string;
   customerId: string;
 }
 
 export const fetchTracesConfigBase: FetchTracesConfig = {
-  maxPollTime: 120000,
+  maxPollTime: 9000,
   pollInterval: 1000,
-  awaitAllTracesTimeout: 1000,
+  awaitAllSpansInTraceTimeout: 2000,
   url: 'http://localhost:4123/v1/traces',
   customerId: 'local',
 };
