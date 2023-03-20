@@ -87,7 +87,7 @@ export function httpGetBinary(
   traceloopId: string,
 ): Promise<Buffer> {
   const url = `${config.url}/${traceloopId}`;
-  console.log('httpGetBinary call to otel server', url)
+  console.log('httpGetBinary call to otel server', url);
   return new Promise((resolve, reject) => {
     http.get(url, { headers: { Authorization: config.customerId } }, (res) => {
       const { statusCode } = res;
