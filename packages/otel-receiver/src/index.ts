@@ -34,4 +34,17 @@ const startServer = async () => {
   });
 };
 
+const gracefulShutdownHandler = function gracefulShutdownHandler(signal) {
+  console.log(`otel-receiver caught ${signal}, gracefully shutting down`);
+
+  setTimeout(() => {
+    _server.close(function () {
+      process.exit();
+    });
+  }, 0);
+};
+
+process.on('SIGINT', gracefulShutdownHandler);
+process.on('SIGTERM', gracefulShutdownHandler);
+
 startServer();
