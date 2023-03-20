@@ -25,7 +25,7 @@
     "@opentelemetry/instrumentation-http": "^0.35.1",
     "@opentelemetry/resource-detector-container": "^0.2.2",
     "@opentelemetry/sdk-node": "^0.35.1",
-    "@opentelemetry/semantic-conventions": "^1.9.1",
+    "@opentelemetry/semantic-conventions": "^1.10.0",
     "@opentelemetry/tracing": "^0.24.0",
     "opentelemetry-instrumentation-express": "^0.34.0"
   }
