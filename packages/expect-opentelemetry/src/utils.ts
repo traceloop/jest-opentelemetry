@@ -104,7 +104,7 @@ export function httpGetBinary(
         resolve(result);
       });
       res.on('error', function () {
-        console.log('error http get err listener');
+        reject('Error while fetching data');
       });
     });
   });
