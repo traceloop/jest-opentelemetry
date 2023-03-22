@@ -39,7 +39,7 @@
     "@types/cwd": "^0.10.0",
     "@types/jest-dev-server": "^5.0.0",
     "@types/merge-deep": "^3.0.0",
-    "rollup": "^3.17.3",
+    "rollup": "^3.20.0",
     "rollup-plugin-swc3": "^0.8.0"
   },
   "dependencies": {
