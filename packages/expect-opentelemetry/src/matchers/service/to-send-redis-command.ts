@@ -9,12 +9,14 @@ export function toSendRedisCommand(service: Service): RedisCommand {
     return (
       span.kind ===
         opentelemetry.proto.trace.v1.Span.SpanKind.SPAN_KIND_CLIENT &&
-      span.attributes?.find((attribute: opentelemetry.proto.common.v1.IKeyValue) => {
-        return (
-          attribute.key === SemanticAttributes.DB_SYSTEM &&
-          attribute.value?.stringValue === 'redis'
-        );
-      })
+      span.attributes?.find(
+        (attribute: opentelemetry.proto.common.v1.IKeyValue) => {
+          return (
+            attribute.key === SemanticAttributes.DB_SYSTEM &&
+            attribute.value?.stringValue === 'redis'
+          );
+        },
+      )
     );
   });
 

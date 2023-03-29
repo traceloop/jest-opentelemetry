@@ -4,7 +4,7 @@ import {
   toQueryPostgreSQL,
   toReceiveGrpcRequest,
   toSendGrpcRequest,
-  toSendRedisCommand
+  toSendRedisCommand,
 } from './matchers/service';
 import { expect } from '@jest/globals';
 import {
@@ -26,7 +26,7 @@ const serviceMatchers = {
   toQueryPostgreSQL,
   toReceiveGrpcRequest,
   toSendGrpcRequest,
-  toSendRedisCommand
+  toSendRedisCommand,
 };
 
 interface TraceMatchers {
@@ -35,7 +35,7 @@ interface TraceMatchers {
   toQueryPostgreSQL(): PostgreSQLQuery;
   toReceiveGrpcRequest(): GrpcRequest;
   toSendGrpcRequest(): GrpcRequest;
-  toSendRedisCommand(): RedisCommand
+  toSendRedisCommand(): RedisCommand;
 }
 
 function createMatcher(matcher, type) {
