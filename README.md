@@ -82,7 +82,7 @@ We're constantly adding more, and you're welcome to [suggest yours](https://gith
 
 - [x] [PostgreSQL](http://docs.traceloop.dev/jest-otel/syntax/db-pg)
 - [ ] MongoDB
-- [ ] Redis
+- [x] [Redis](http://docs.traceloop.dev/jest-otel/syntax/db-redis)
 - [ ] S3
 
 ### Analytics Reporting Assertions

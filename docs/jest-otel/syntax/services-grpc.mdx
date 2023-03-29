@@ -2,7 +2,7 @@
 title: 'GRPC Assertions'
 ---
 
-Each assrtion should start with defining the service you want to check. You do this by:
+Each assertion should start with defining the service you want to check. You do this by:
 
 ```js
 expectTrace(traceloop.serviceByName('service-name'))...
@@ -33,5 +33,6 @@ So, a complete assertion can look like:
 ```js
 expectTrace(traceloop.serviceByName('users-service'))
   .toReceiveGrpcRequest()
-  .withRpcMethod('CreateUser');
+  .withRpcMethod('CreateUser')
+  .withRpcGrpcStatusCode(0);
 ```
