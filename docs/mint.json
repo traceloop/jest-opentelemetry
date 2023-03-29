@@ -64,7 +64,8 @@
         "jest-otel/syntax/overview",
         "jest-otel/syntax/services-rest",
         "jest-otel/syntax/services-grpc",
-        "jest-otel/syntax/db-pg"
+        "jest-otel/syntax/db-pg",
+        "jest-otel/syntax/db-redis"
       ]
     },
     {

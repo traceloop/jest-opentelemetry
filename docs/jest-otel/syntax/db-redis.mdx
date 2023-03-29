@@ -1,8 +1,8 @@
 ---
-title: 'PostgreSQL'
+title: 'Redis'
 ---
 
-Each assertion should start with defining the service that's sending requests to the Database you want to check. You do this by:
+Each assertion should start with defining the service that's sending requests to the Redis Database you want to check. You do this by:
 
 ```js
 expectTrace(traceloop.serviceByName('service-name'))...
@@ -17,7 +17,7 @@ These are the options you can use for service selection:
 
 Following that, you can use any of the following assertions:
 
-- `toQueryPostgreSQL`
+- `toSendRedisCommand`
 
 Then, you can specifically assert for each of the properties of the request:
 
@@ -27,11 +27,11 @@ Then, you can specifically assert for each of the properties of the request:
 So, a complete assertion can look like:
 
 ```js
-expectTrace(traceloop.serviceByName('orders-service'))
-  .toQueryPostgreSQL()
-  .withDatabaseName('postgres')
+expectTrace(traceloop.serviceByName('redis-service'))
+  .toSendRedisCommend()
+  .withDatabaseName('redis-db')
   .withStatement(
-    /INSERT INTO orders \(id, price_in_cents\) VALUES \('[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}', [0-9]+\)/,
+    /^HGET/
     { compareType: COMPARE_TYPE.REGEX },
   );
 ```
