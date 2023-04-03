@@ -40,7 +40,7 @@
     "@types/jest-dev-server": "^5.0.0",
     "@types/merge-deep": "^3.0.0",
     "rollup": "^3.20.0",
-    "rollup-plugin-swc3": "^0.8.0"
+    "rollup-plugin-swc3": "^0.8.1"
   },
   "dependencies": {
     "@traceloop/otel-receiver": "^0.5.0",
