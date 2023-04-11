@@ -99,7 +99,7 @@ We're constantly adding more, and you're welcome to [suggest yours](https://gith
 
 ## 🌱 Contributing
 
-Whether it's big or small, we love contributions ❤️ Check out our guide to see how to [get started](https://docs.traceloop.dev/contributing/overview).
+Whether it's big or small, we love contributions ❤️ Check out our guide to see how to [get started](https://traceloop.com/docs/contributing/overview).
 
 Not sure where to get started? You can:
 
