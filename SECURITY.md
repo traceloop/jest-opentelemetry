@@ -1,6 +1,6 @@
 # Security
 
-Contact: security@traceloop.dev
+Contact: security@traceloop.com
 
 Based on [https://supabase.com/.well-known/security.txt](https://supabase.com/.well-known/security.txt)
 

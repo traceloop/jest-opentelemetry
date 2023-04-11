@@ -8,12 +8,12 @@
   <p align="center">Integeration tests with 10 lines of code</p>
 </p>
 <h4 align="center">
-    <a href="https://docs.traceloop.dev/jest-otel/getting-started"><strong>Get started »</strong></a>
+    <a href="https://traceloop.com/docs/jest-otel/getting-started"><strong>Get started »</strong></a>
     <br />
     <br />
   <a href="https://join.slack.com/t/traceloopcommunity/shared_invite/zt-1plpfpm6r-zOHKI028VkpcWdobX65C~g">Slack</a> |
-  <a href="https://docs.traceloop.dev/jest-otel/introduction">Docs</a> |
-  <a href="https://docs.traceloop.dev/jest-otel/syntax/overview">Examples</a> |
+  <a href="https://traceloop.com/docs/jest-otel/introduction">Docs</a> |
+  <a href="https://traceloop.com/docs/jest-otel/syntax/overview">Examples</a> |
   <a href="https://www.traceloop.com">Website</a>
 </h4>
 
@@ -65,7 +65,7 @@ expectTrace(traceloop.serviceByName('emails-service'))
   .withBody({ emailTemplate: 'orderCreated', itemId: '123' });
 ```
 
-More info can be found in our [docs](https://docs.traceloop.dev/jest-otel/getting-started).
+More info can be found in our [docs](https://traceloop.com/docs/jest-otel/getting-started).
 
 ## What can you test?
 
@@ -74,15 +74,15 @@ We're constantly adding more, and you're welcome to [suggest yours](https://gith
 
 ### Service Assertions
 
-- [x] [REST](http://docs.traceloop.dev/jest-otel/syntax/services-rest)
+- [x] [REST](http://traceloop.com/docs/jest-otel/syntax/services-rest)
 - [ ] GraphQL
-- [x] [GRPC](http://docs.traceloop.dev/jest-otel/syntax/services-grpc)
+- [x] [GRPC](http://traceloop.com/docs/jest-otel/syntax/services-grpc)
 
 ### Database Assertions
 
-- [x] [PostgreSQL](http://docs.traceloop.dev/jest-otel/syntax/db-pg)
+- [x] [PostgreSQL](http://traceloop.com/docs/jest-otel/syntax/db-pg)
 - [ ] MongoDB
-- [x] [Redis](http://docs.traceloop.dev/jest-otel/syntax/db-redis)
+- [x] [Redis](http://traceloop.com/docs/jest-otel/syntax/db-redis)
 - [ ] S3
 
 ### Analytics Reporting Assertions
