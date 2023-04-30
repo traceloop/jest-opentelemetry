@@ -17,7 +17,7 @@ export const fetchTracesConfigBase: FetchTracesConfig = {
   maxPollTime: 9000,
   pollInterval: 1000,
   awaitAllSpansInTraceTimeout: 2000,
-  url: process.env.TRACELOOP_URL || 'http://traceloop.com/v1/traces',
+  url: process.env.TRACELOOP_URL || 'https://traceloop.com/v1/traces',
   apiKey: process.env.TRACELOOP_API_KEY || 'none',
 };
 
