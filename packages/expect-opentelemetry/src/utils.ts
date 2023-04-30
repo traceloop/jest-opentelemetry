@@ -88,7 +88,7 @@ export function httpGetBinary(
 ): Promise<Buffer> {
   const url = `${config.url}/${traceloopId}`;
   return new Promise((resolve, reject) => {
-    http.get(url, { headers: { Authorization: config.customerId } }, (res) => {
+    http.get(url, { headers: { Authorization: config.apiKey } }, (res) => {
       const { statusCode } = res;
 
       if (!statusCode || statusCode < 200 || statusCode >= 300) {

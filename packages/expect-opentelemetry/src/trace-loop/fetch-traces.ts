@@ -10,15 +10,15 @@ export interface FetchTracesConfig {
   pollInterval: number;
   awaitAllSpansInTraceTimeout: number;
   url: string;
-  customerId: string;
+  apiKey: string;
 }
 
 export const fetchTracesConfigBase: FetchTracesConfig = {
   maxPollTime: 9000,
   pollInterval: 1000,
   awaitAllSpansInTraceTimeout: 2000,
-  url: 'http://localhost:4123/v1/traces',
-  customerId: 'local',
+  url: process.env.TRACELOOP_URL || 'http://traceloop.com/v1/traces',
+  apiKey: process.env.TRACELOOP_API_KEY || 'none',
 };
 
 /**
