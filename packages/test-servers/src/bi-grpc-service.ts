@@ -28,5 +28,5 @@ const client = new (bi_proto as any).Bi(
 
 // should be called from other services (makes an rpc call to the bi grpc service)
 export const sendBiEvent = (name: string, id: string) => {
-  client.reportBi({ name: name, id: id }, function (_: any, response: any) {});
+  client.reportBi({ name: name, id: id }, function (_: any, response: any) {}); // eslint-disable-line
 };
