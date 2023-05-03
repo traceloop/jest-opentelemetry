@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_outer_classname = "ReportBiProto";
+option objc_class_prefix = "HLW";
+
+package bi;
+
+service Bi {
+  rpc ReportBi (ReportBiEvent) returns (ReportBiReply) {}
+}
+
+// The request message containing the BI data.
+message ReportBiEvent {
+  string name = 1;
+  string id = 2;
+}
+
+// The response message.
+message ReportBiReply {
+  string message = 1;
+}
