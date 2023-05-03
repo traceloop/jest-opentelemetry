@@ -8,26 +8,28 @@ import {
 
 export const gatewayService = express();
 
-gatewayService.use(
-  '/users',
-  createProxyMiddleware({
-    target: `http://localhost:${USERS_SERVICE_PORT}`,
-    changeOrigin: true,
-  }),
-);
+if (process.env.GATEWAY_SERVICE) {
+  gatewayService.use(
+    '/users',
+    createProxyMiddleware({
+      target: `http://localhost:${USERS_SERVICE_PORT}`,
+      changeOrigin: true,
+    }),
+  );
 
-gatewayService.use(
-  '/gigs',
-  createProxyMiddleware({
-    target: `http://localhost:${GIGS_SERVICE_PORT}`,
-    changeOrigin: true,
-  }),
-);
+  gatewayService.use(
+    '/gigs',
+    createProxyMiddleware({
+      target: `http://localhost:${GIGS_SERVICE_PORT}`,
+      changeOrigin: true,
+    }),
+  );
 
-gatewayService.use(
-  '/orders',
-  createProxyMiddleware({
-    target: `http://localhost:${ORDERS_SERVICE_PORT}`,
-    changeOrigin: true,
-  }),
-);
+  gatewayService.use(
+    '/orders',
+    createProxyMiddleware({
+      target: `http://localhost:${ORDERS_SERVICE_PORT}`,
+      changeOrigin: true,
+    }),
+  );
+}
