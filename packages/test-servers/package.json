@@ -9,12 +9,12 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "rollup -c && cp ./src/bi.proto ./dist/bi.proto",
-    "start:emails": "EMAILS_SERVICE=TRUE SERVICE_NAME=test-servers-emails OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4123/v1/traces OTEL_EXPORTER_TYPE=PROTO node -r @traceloop/instrument-opentelemetry dist/index.js",
-    "start:grpc": "GRPC_SERVICE=TRUE SERVICE_NAME=test-servers-grpc OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4123/v1/traces OTEL_EXPORTER_TYPE=PROTO node -r @traceloop/instrument-opentelemetry dist/index.js",
-    "start:users": "USERS_SERVICE=TRUE SERVICE_NAME=test-servers-users OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4123/v1/traces OTEL_EXPORTER_TYPE=PROTO node -r @traceloop/instrument-opentelemetry dist/index.js",
-    "start:gigs": "GIGS_SERVICE=TRUE SERVICE_NAME=test-servers-gigs OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4123/v1/traces OTEL_EXPORTER_TYPE=PROTO node -r @traceloop/instrument-opentelemetry dist/index.js",
-    "start:orders": "ORDERS_SERVICE=TRUE SERVICE_NAME=test-servers-orders OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4123/v1/traces OTEL_EXPORTER_TYPE=PROTO node -r @traceloop/instrument-opentelemetry dist/index.js",
-    "start:gateway": "GATEWAY_SERVICE=TRUE SERVICE_NAME=test-servers-gateway PORT=3000 OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4123/v1/traces OTEL_EXPORTER_TYPE=PROTO node -r @traceloop/instrument-opentelemetry dist/index.js",
+    "start:emails": "EMAILS_SERVICE=TRUE SERVICE_NAME=test-servers-emails OTEL_EXPORTER_OTLP_ENDPOINT=https://api-staging.traceloop.dev/v1/traces OTEL_EXPORTER_TYPE=PROTO node -r @traceloop/instrument-opentelemetry dist/index.js",
+    "start:grpc": "GRPC_SERVICE=TRUE SERVICE_NAME=test-servers-grpc OTEL_EXPORTER_OTLP_ENDPOINT=https://api-staging.traceloop.dev/v1/traces OTEL_EXPORTER_TYPE=PROTO node -r @traceloop/instrument-opentelemetry dist/index.js",
+    "start:users": "USERS_SERVICE=TRUE SERVICE_NAME=test-servers-users OTEL_EXPORTER_OTLP_ENDPOINT=https://api-staging.traceloop.dev/v1/traces OTEL_EXPORTER_TYPE=PROTO node -r @traceloop/instrument-opentelemetry dist/index.js",
+    "start:gigs": "GIGS_SERVICE=TRUE SERVICE_NAME=test-servers-gigs OTEL_EXPORTER_OTLP_ENDPOINT=https://api-staging.traceloop.dev/v1/traces OTEL_EXPORTER_TYPE=PROTO node -r @traceloop/instrument-opentelemetry dist/index.js",
+    "start:orders": "ORDERS_SERVICE=TRUE SERVICE_NAME=test-servers-orders OTEL_EXPORTER_OTLP_ENDPOINT=https://api-staging.traceloop.dev/v1/traces OTEL_EXPORTER_TYPE=PROTO node -r @traceloop/instrument-opentelemetry dist/index.js",
+    "start:gateway": "GATEWAY_SERVICE=TRUE SERVICE_NAME=test-servers-gateway PORT=3000 OTEL_EXPORTER_OTLP_ENDPOINT=https://api-staging.traceloop.dev/v1/traces OTEL_EXPORTER_TYPE=PROTO node -r @traceloop/instrument-opentelemetry dist/index.js",
     "start": "concurrently \"npm:start:users\" \"npm:start:gigs\" \"npm:start:orders\" \"npm:start:gateway\" \"npm:start:emails\" \"npm:start:grpc\""
   },
   "devDependencies": {
