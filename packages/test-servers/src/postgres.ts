@@ -3,14 +3,14 @@ import { DataSource } from 'typeorm';
 // --- Postgres ---
 export const postgresDb = new DataSource({
   type: 'postgres',
-  host: process.env.POSTGRES_HOST || 'localhost',
-  port: process.env.POSTGRES_PORT ? parseInt(process.env.POSTGRES_PORT) : 5432,
-  username: process.env.POSTGRES_USERNAME || 'postgres',
-  password: process.env.POSTGRES_PASSWORD || 'postgres',
-  database: process.env.POSTGRES_DATABASE || 'postgres',
+  host: process.env.TEST_SERVERS_POSTGRES_HOST || 'localhost',
+  port: process.env.TEST_SERVERS_POSTGRES_PORT ? parseInt(process.env.TEST_SERVERS_POSTGRES_PORT) : 5432,
+  username: process.env.TEST_SERVERS_POSTGRES_USERNAME || 'postgres',
+  password: process.env.TEST_SERVERS_POSTGRES_PASSWORD || 'postgres',
+  database: process.env.TEST_SERVERS_POSTGRES_DATABASE || 'postgres',
 });
 
-const postgresSchema = process.env.POSTGRES_SCHEMA || 'public';
+const postgresSchema = process.env.TEST_SERVER_POSTGRES_SCHEMA || 'public';
 let dbInitialized = false;
 
 const initializeDb = async () =>
