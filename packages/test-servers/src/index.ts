@@ -5,20 +5,24 @@ import { ordersService } from './orders-service';
 import { emailsService } from './email-service';
 import { biGrpcService } from './bi-grpc-service';
 import { gatewayService } from './gateway';
+import { initializeSyntheticTraffic } from './synthetic-traffic';
 import {
   USERS_SERVICE_PORT,
   GIGS_SERVICE_PORT,
   ORDERS_SERVICE_PORT,
   EMAILS_SERVICE_PORT,
   GRPC_SERVICE_PORT,
+  GATEWAY_SERVICE_PORT,
 } from './constants';
 
 // --- Initialize Services ---
-const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
 process.env.GATEWAY_SERVICE &&
-  gatewayService.listen(PORT, () => {
-    console.log(`Gateway service listening at http://localhost:${PORT}`);
-  });
+  gatewayService.listen(GATEWAY_SERVICE_PORT, () => {
+    console.log(
+      `Gateway service listening at http://localhost:${GATEWAY_SERVICE_PORT}`,
+    );
+  }) &&
+  initializeSyntheticTraffic();
 
 process.env.USERS_SERVICE &&
   usersService.listen(USERS_SERVICE_PORT, () => {

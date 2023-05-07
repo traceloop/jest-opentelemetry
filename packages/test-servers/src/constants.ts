@@ -3,3 +3,7 @@ export const USERS_SERVICE_PORT = 3001,
   ORDERS_SERVICE_PORT = 3003,
   EMAILS_SERVICE_PORT = 3004,
   GRPC_SERVICE_PORT = 50051;
+
+export const GATEWAY_SERVICE_PORT = process.env.PORT
+  ? Number(process.env.PORT)
+  : 3000;

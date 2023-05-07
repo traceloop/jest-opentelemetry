@@ -4,13 +4,15 @@ import { DataSource } from 'typeorm';
 export const postgresDb = new DataSource({
   type: 'postgres',
   host: process.env.TEST_SERVERS_POSTGRES_HOST || 'localhost',
-  port: process.env.TEST_SERVERS_POSTGRES_PORT ? parseInt(process.env.TEST_SERVERS_POSTGRES_PORT) : 5432,
+  port: process.env.TEST_SERVERS_POSTGRES_PORT
+    ? parseInt(process.env.TEST_SERVERS_POSTGRES_PORT)
+    : 5432,
   username: process.env.TEST_SERVERS_POSTGRES_USERNAME || 'postgres',
   password: process.env.TEST_SERVERS_POSTGRES_PASSWORD || 'postgres',
   database: process.env.TEST_SERVERS_POSTGRES_DATABASE || 'postgres',
   ssl: {
-    rejectUnauthorized: false
-  }
+    rejectUnauthorized: false,
+  },
 });
 
 const postgresSchema = process.env.TEST_SERVER_POSTGRES_SCHEMA || 'public';

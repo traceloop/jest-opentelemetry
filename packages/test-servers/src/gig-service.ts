@@ -6,24 +6,72 @@ import { sendEmail } from './email-service';
 export const gigsService = express();
 gigsService.use(express.json());
 
+gigsService.get('/gigs:gigId', async (req, res) => {
+  await initializeDbIfNeeded();
+
+  const gigId = req.params.gigId;
+  console.log(`Getting gig ${gigId}`);
+
+  try {
+    const gigRes = await postgresDb.query(
+      `SELECT * FROM gigs WHERE id = '${gigId}'`,
+    );
+    if (!gigRes?.length) {
+      throw new Error(`Gig ${gigId} not found`);
+    }
+
+    res.status(200);
+    res.send(gigRes[0]);
+  } catch (err) {
+    console.error('Error getting gig', err);
+    res.status(500);
+    res.send({ error: 'Error getting gig', message: err.message });
+  }
+});
+
+gigsService.delete('/gigs/:gigId', async (req, res) => {
+  await initializeDbIfNeeded();
+
+  const gigId = req.params.gigId;
+  console.log(`Deleting gig ${gigId}`);
+
+  try {
+    const gigRes = await postgresDb.query(
+      `SELECT * FROM gigs WHERE id = '${gigId}'`,
+    );
+    if (!gigRes?.length) {
+      throw new Error(`Gig ${gigId} not found`);
+    }
+
+    await postgresDb.query(`DELETE FROM gigs WHERE id = '${gigId}'`);
+
+    res.status(200);
+    res.send({ message: `Gig ${gigId} deleted` });
+  } catch (err) {
+    console.error('Error deleting gig', err);
+    res.status(500);
+    res.send({ error: 'Error deleting gig', message: err.message });
+  }
+});
+
 // required body params:
-// - user_name
+// - user_id
 // - title
 gigsService.post('/gigs/create', async (req, res) => {
   await initializeDbIfNeeded();
 
   const gigId = uuidv4();
   console.log(
-    `Creating gig ${gigId} with title ${req.body.title} for user ${req.body.user_name}`,
+    `Creating gig ${gigId} with title ${req.body.title} for user ${req.body.user_id}`,
   );
 
   try {
     // check user exists
     const userRes = await postgresDb.query(
-      `SELECT * FROM users WHERE name = '${req.body.user_name}'`,
+      `SELECT * FROM users WHERE id = '${req.body.user_id}'`,
     );
     if (!userRes?.length) {
-      throw new Error(`User ${req.body.user_name} not found`);
+      throw new Error(`User ${req.body.user_id} not found`);
     }
     const userId = userRes[0].id;
 
@@ -33,7 +81,7 @@ gigsService.post('/gigs/create', async (req, res) => {
     );
     if (existingGigs?.length) {
       throw new Error(
-        `A gig with the title "${req.body.title}" already exists for user ${req.body.user_name}`,
+        `A gig with the title "${req.body.title}" already exists for user ${req.body.user_id}`,
       );
     }
 
@@ -46,7 +94,7 @@ gigsService.post('/gigs/create', async (req, res) => {
     sendEmail({
       message: 'Gig created!',
       title: req.body.title,
-      user: req.body.user_name,
+      user: req.body.user_id,
       id: gigId,
     });
 

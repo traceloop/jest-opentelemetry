@@ -7,6 +7,54 @@ import { sendBiEvent } from './bi-grpc-service';
 export const usersService = express();
 usersService.use(express.json());
 
+usersService.get('/users/:userId', async (req, res) => {
+  await initializeDbIfNeeded();
+
+  const userId = req.params.userId;
+  console.log(`Getting user ${userId}`);
+
+  try {
+    const userRes = await postgresDb.query(
+      `SELECT * FROM users WHERE id = '${userId}'`,
+    );
+    if (!userRes?.length) {
+      throw new Error(`User ${userId} not found`);
+    }
+
+    res.status(200);
+    res.send(userRes[0]);
+  } catch (err) {
+    console.error('Error getting user', err);
+    res.status(500);
+    res.send({ error: 'Error getting user', message: err.message });
+  }
+});
+
+usersService.delete('/users/:userId', async (req, res) => {
+  await initializeDbIfNeeded();
+
+  const userId = req.params.userId;
+  console.log(`Deleting user ${userId}`);
+
+  try {
+    const userRes = await postgresDb.query(
+      `SELECT * FROM users WHERE id = '${userId}'`,
+    );
+    if (!userRes?.length) {
+      throw new Error(`User ${userId} not found`);
+    }
+
+    await postgresDb.query(`DELETE FROM users WHERE id = '${userId}'`);
+
+    res.status(200);
+    res.send({ message: `User ${userId} deleted` });
+  } catch (err) {
+    console.error('Error deleting user', err);
+    res.status(500);
+    res.send({ error: 'Error deleting user', message: err.message });
+  }
+});
+
 // required body params:
 // - name
 usersService.post('/users/create', async (req, res) => {
