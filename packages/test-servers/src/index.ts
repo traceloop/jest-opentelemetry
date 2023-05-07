@@ -21,8 +21,7 @@ process.env.GATEWAY_SERVICE &&
     console.log(
       `Gateway service listening at http://localhost:${GATEWAY_SERVICE_PORT}`,
     );
-  }) &&
-  initializeSyntheticTraffic();
+  });
 
 process.env.USERS_SERVICE &&
   usersService.listen(USERS_SERVICE_PORT, () => {
@@ -61,3 +60,5 @@ process.env.GRPC_SERVICE &&
       biGrpcService.start();
     },
   );
+
+process.env.NOT_INSTRUMENTED && initializeSyntheticTraffic();

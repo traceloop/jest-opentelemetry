@@ -14,6 +14,9 @@ if (process.env.OTEL_EXPORTER_OTLP_ENDPOINT) {
       ? new ProtoExporter({
           url: process.env.OTEL_EXPORTER_OTLP_ENDPOINT,
           timeoutMillis: 100,
+          // headers: {
+          //   authorization: 'testtttt',
+          // },
         })
       : new GRPCExporter({
           url: process.env.OTEL_EXPORTER_OTLP_ENDPOINT,
