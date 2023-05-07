@@ -14,6 +14,8 @@ const OPERATION_INTERVAL_MS = 5000;
 let sellerId, buyerId, gigId, orderId: string;
 
 export const initializeSyntheticTraffic = async () => {
+  await wait(OPERATION_INTERVAL_MS);
+
   console.log('Synthetic traffic started');
   syntheticTrafficFlow();
   setInterval(syntheticTrafficFlow, INTERVAL_MINUTES * 60 * 1000);

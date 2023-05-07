@@ -27,17 +27,14 @@ const initializeDb = async () =>
         await postgresDb.query(
           `CREATE TABLE IF NOT EXISTS ${postgresSchema}.users (id varchar(50), name varchar(50))`,
         );
-        console.log('Users table has been created!');
 
         await postgresDb.query(
           `CREATE TABLE IF NOT EXISTS ${postgresSchema}.gigs (id varchar(50), user_id varchar(50), title varchar(50))`,
         );
-        console.log('Gigs table has been created!');
 
         await postgresDb.query(
           `CREATE TABLE IF NOT EXISTS ${postgresSchema}.orders (id varchar(50), gig_id varchar(50), seller_id varchar(50), buyer_id varchar(50))`,
         );
-        console.log('Orders table has been created!');
 
         dbInitialized = true;
       } catch (err) {
@@ -45,7 +42,7 @@ const initializeDb = async () =>
       }
     })
     .catch((err) => {
-      console.error('Error during orders data source initialization', err);
+      console.error('Error during data source initialization', err);
     });
 
 export const initializeDbIfNeeded = async () => {
