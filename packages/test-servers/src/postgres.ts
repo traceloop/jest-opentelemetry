@@ -8,6 +8,9 @@ export const postgresDb = new DataSource({
   username: process.env.TEST_SERVERS_POSTGRES_USERNAME || 'postgres',
   password: process.env.TEST_SERVERS_POSTGRES_PASSWORD || 'postgres',
   database: process.env.TEST_SERVERS_POSTGRES_DATABASE || 'postgres',
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 const postgresSchema = process.env.TEST_SERVER_POSTGRES_SCHEMA || 'public';
