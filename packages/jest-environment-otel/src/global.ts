@@ -18,7 +18,7 @@ export async function setup(jestConfig: JestConfig = {}) {
     didAlreadyRunInWatchMode = true;
   }
 
-  if (config.useRemoteOtelReceiver) {
+  if (!config?.useLocalOtelReceiver) {
     return;
   }
 
