@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@traceloop/otel-receiver": "^0.5.0",
-    "chalk": "^4.1.2",
+    "chalk": "^5.2.0",
     "cwd": "^0.10.0",
     "jest-dev-server": "^7.0.1",
     "jest-environment-node": "^29.5.0",
