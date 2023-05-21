@@ -28,7 +28,7 @@
   <a href="https://github.com/traceloop/jest-opentelemetry/issues">
     <img src="https://img.shields.io/github/commit-activity/m/traceloop/jest-opentelemetry" alt="git commit activity" />
   </a>
-  <a href="/">
+  <a href="https://join.slack.com/t/traceloopcommunity/shared_invite/zt-1plpfpm6r-zOHKI028VkpcWdobX65C~g">
     <img src="https://img.shields.io/badge/chat-on%20Slack-blueviolet" alt="Slack community channel" />
   </a>
   <a href="https://twitter.com/traceloopdev">
