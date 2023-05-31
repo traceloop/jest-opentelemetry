@@ -16,12 +16,10 @@ import {
   byCustomAttribute,
 } from './filter-service-spans';
 
-const TRACE_LOOP_ID_HEADER = 'traceloop_id';
-
 export class TraceLoop {
   private readonly _traceLoopId: string;
   private _fetchedTrace = false;
-  private _traceId;
+  private _traceId: string | undefined;
   private _traceData: opentelemetry.proto.trace.v1.TracesData | undefined;
 
   constructor() {
@@ -32,13 +30,9 @@ export class TraceLoop {
     return this._traceLoopId;
   }
 
-  get traceLoopHeaderName() {
-    return TRACE_LOOP_ID_HEADER;
-  }
-
   get axiosInstance() {
     return axios.create({
-      headers: { [TRACE_LOOP_ID_HEADER]: this._traceLoopId },
+      headers: { 'User-Agent': `traceloop_id=${this._traceLoopId}` },
     });
   }
 
