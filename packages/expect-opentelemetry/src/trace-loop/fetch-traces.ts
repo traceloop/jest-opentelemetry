@@ -1,9 +1,7 @@
 import { opentelemetry } from '@traceloop/otel-proto';
+import { SemanticAttributes } from '@opentelemetry/semantic-conventions';
 import { setTimeout } from 'timers/promises';
 import { httpGetBinary } from '../utils';
-
-const TRACELOOP_ID_REQUEST_HEADER = 'http.request.header.traceloop_id';
-const TRACELOOP_ID_RESPONSE_HEADER = 'http.response.header.traceloop_id';
 
 export interface FetchTracesConfig {
   maxPollTime: number;
@@ -22,7 +20,7 @@ export const fetchTracesConfigBase: FetchTracesConfig = {
 };
 
 /**
- * Searches in the traces for a trace with the given traceLoopId contained in the attribute http.request.header.trace_loop_id
+ * Searches in the traces for a trace with the given traceLoopId contained in the attribute http.user_agent
  *
  * @param traces all traces from the otel receiver
  * @param traceLoopId traceLoopId to search for
@@ -37,32 +35,15 @@ export const findTraceLoopIdMatch = (
       for (const span of scopeSpan.spans || []) {
         if (span.attributes) {
           for (const attribute of span.attributes) {
-            // http: check in headers stringified json
-            if (attribute.key === 'http.request.headers') {
-              const matches = attribute.value?.stringValue?.match(
-                /"traceloop_id":"(.*)"/,
-              );
+            if (attribute.key === SemanticAttributes.HTTP_USER_AGENT) {
+              const matches =
+                attribute.value?.stringValue?.match(/traceloop_id=(.*)/);
               if (matches?.length > 1) {
                 if (matches[1] === traceLoopId) {
                   return span.traceId
                     ? Buffer.from(span.traceId).toString('hex')
                     : undefined;
                 }
-              }
-            }
-
-            // check in specific header key
-            if (
-              attribute.key === TRACELOOP_ID_REQUEST_HEADER ||
-              attribute.key === TRACELOOP_ID_RESPONSE_HEADER
-            ) {
-              if (
-                attribute.value?.arrayValue?.values?.[0]?.stringValue ===
-                traceLoopId
-              ) {
-                return span.traceId
-                  ? Buffer.from(span.traceId).toString('hex')
-                  : undefined;
               }
             }
           }
