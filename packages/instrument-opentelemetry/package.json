@@ -20,7 +20,7 @@
   "dependencies": {
     "@opentelemetry/api": "^1.4.1",
     "@opentelemetry/auto-instrumentations-node": "^0.36.4",
-    "@opentelemetry/exporter-trace-otlp-grpc": "0.35.1",
+    "@opentelemetry/exporter-trace-otlp-grpc": "0.39.1",
     "@opentelemetry/exporter-trace-otlp-proto": "^0.36.1",
     "@opentelemetry/instrumentation-http": "^0.35.1",
     "@opentelemetry/resource-detector-container": "^0.2.2",
