@@ -1,7 +1,7 @@
 {
   "name": "@traceloop/otel-receiver",
   "description": "A node server to receive and cache incoming opentelemetry spans.",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "license": "Apache-2.0",
   "type": "commonjs",
   "main": "./dist/index.js",
@@ -45,7 +45,7 @@
     "rollup-plugin-swc3": "^0.8.0"
   },
   "dependencies": {
-    "@traceloop/otel-proto": "^0.5.0",
+    "@traceloop/otel-proto": "^0.6.0",
     "express": "^4.18.2"
   }
 }

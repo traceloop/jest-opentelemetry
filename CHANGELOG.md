@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/traceloop/jest-opentelemetry/compare/v0.5.0...v0.6.0) (2023-06-04)
+
+### Bug Fixes
+
+- instrumentation version bump ([#55](https://github.com/traceloop/jest-opentelemetry/issues/55)) ([0a5a352](https://github.com/traceloop/jest-opentelemetry/commit/0a5a352d6ef45e3bce114a53182f7958a1e3b7a9))
+- work with remote server ([#69](https://github.com/traceloop/jest-opentelemetry/issues/69)) ([d219a40](https://github.com/traceloop/jest-opentelemetry/commit/d219a402ea52b7cc7aa4c8f31a4e9071e016a9cf))
+
+### Features
+
+- redis tests ([#61](https://github.com/traceloop/jest-opentelemetry/issues/61)) ([7e0c156](https://github.com/traceloop/jest-opentelemetry/commit/7e0c156aabf06b5e79667ebc7574a58fab2e7bd3))
+- user agent header for traceloopId ([#73](https://github.com/traceloop/jest-opentelemetry/issues/73)) ([96b9e26](https://github.com/traceloop/jest-opentelemetry/commit/96b9e26d29636c9095b731ca96c87a23f2b8db8b))
+
 # [0.5.0](https://github.com/traceloop/jest-opentelemetry/compare/v0.4.1...v0.5.0) (2023-03-17)
 
 ### Features
