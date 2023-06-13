@@ -30,6 +30,7 @@ So, a complete assertion can look like:
 expectTrace(traceloop.serviceByName('orders-service'))
   .toQueryPostgreSQL()
   .withDatabaseName('postgres')
+  .withOperationAndTable('INSERT', 'orders')
   .withStatement(
     /INSERT INTO orders \(id, price_in_cents\) VALUES \('[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}', [0-9]+\)/,
     { compareType: COMPARE_TYPE.REGEX },
