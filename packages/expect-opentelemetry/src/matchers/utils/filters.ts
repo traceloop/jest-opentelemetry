@@ -7,7 +7,7 @@ export const filterByAttributeKey = (
   attName: string,
 ) =>
   spans.filter((span) => {
-    span.attributes?.find((attribute) => {
+    return span.attributes?.find((attribute) => {
       return attribute.key === attName;
     });
   });
