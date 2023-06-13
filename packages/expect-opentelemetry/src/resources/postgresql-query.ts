@@ -46,9 +46,7 @@ export class PostgreSQLQuery {
   }
 
   withOperationAndTable(operation: string, table: string) {
-    const regex = new RegExp( // naive initial implementation
-      `${operation.toLocaleLowerCase()}.*${table.toLocaleLowerCase()}`,
-    );
+    const regex = new RegExp(`${operation}.*${table}`, 'i'); // case insensitive
 
     const filteredSpans = this.spans.filter((span) => {
       const statement = span.attributes?.find(
@@ -59,7 +57,7 @@ export class PostgreSQLQuery {
         return false;
       }
 
-      return regex.test(statement.toLocaleLowerCase());
+      return regex.test(statement);
     });
 
     if (filteredSpans.length === 0) {
