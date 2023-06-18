@@ -83,12 +83,10 @@ export class PostgreSQLQuery {
         return false;
       }
 
-      const allTablesInStatement = this.parser
-        .tableList(prepareQuery(statement), { database: 'PostgresQL' })
-        .map((table) => table.split('::')[2].trim());
+      const lowerCaseStatement = statement.toLowerCase();
 
       return tables.every((table) =>
-        allTablesInStatement.includes(table.toLowerCase()),
+        lowerCaseStatement.includes(table.toLocaleLowerCase()),
       );
     });
 
@@ -101,7 +99,3 @@ export class PostgreSQLQuery {
     return new PostgreSQLQuery(filteredSpans, this.serviceName);
   }
 }
-
-const prepareQuery = (
-  query: string, // remove double quotes and replace %s with 111
-) => query.replace(/"/g, '').replace(/%s/g, '111').toLocaleLowerCase();
