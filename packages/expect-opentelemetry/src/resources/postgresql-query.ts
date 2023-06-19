@@ -1,16 +1,16 @@
 import { SemanticAttributes } from '@opentelemetry/semantic-conventions';
 import { opentelemetry } from '@traceloop/otel-proto';
-import { Parser } from 'node-sql-parser';
 import {
   CompareOptions,
   filterByAttributeStringValue,
 } from '../matchers/utils';
 
 export class PostgreSQLQuery {
+  private tablesRegex = /(from|join)\s+(?<table>\S+)/gi;
+
   constructor(
     readonly spans: opentelemetry.proto.trace.v1.ISpan[],
     private readonly serviceName: string,
-    private parser = new Parser(),
   ) {}
 
   withDatabaseName(name: string | RegExp, options?: CompareOptions) {
@@ -83,10 +83,19 @@ export class PostgreSQLQuery {
         return false;
       }
 
-      const lowerCaseStatement = statement.toLowerCase();
+      const matches = statement.match(this.tablesRegex);
+      const cleaned = matches?.map((elem: string) => {
+        const [_, second] = elem.split(' ');
+        return second
+          .replace('"', '')
+          .replace('(', '')
+          .replace(')', '')
+          .replace('\n', '')
+          .toLocaleLowerCase();
+      });
 
       return tables.every((table) =>
-        lowerCaseStatement.includes(table.toLocaleLowerCase()),
+        cleaned.includes(table.toLocaleLowerCase()),
       );
     });
 
