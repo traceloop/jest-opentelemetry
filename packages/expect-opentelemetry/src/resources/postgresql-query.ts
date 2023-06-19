@@ -1,16 +1,17 @@
 import { SemanticAttributes } from '@opentelemetry/semantic-conventions';
 import { opentelemetry } from '@traceloop/otel-proto';
-import { Parser } from 'node-sql-parser';
 import {
   CompareOptions,
+  extractAttributeStringValues,
   filterByAttributeStringValue,
 } from '../matchers/utils';
+
+const tablesRegex = /(from|join|into|update|alter)\s+(?<table>\S+)/gi;
 
 export class PostgreSQLQuery {
   constructor(
     readonly spans: opentelemetry.proto.trace.v1.ISpan[],
     private readonly serviceName: string,
-    private parser = new Parser(),
   ) {}
 
   withDatabaseName(name: string | RegExp, options?: CompareOptions) {
@@ -40,7 +41,12 @@ export class PostgreSQLQuery {
 
     if (filteredSpans.length === 0) {
       throw new Error(
-        `No query by ${this.serviceName} to postgresql with statement ${statement} was found`,
+        `No query by ${
+          this.serviceName
+        } to postgresql with statement ${statement} was found. Found statements: ${extractAttributeStringValues(
+          this.spans,
+          SemanticAttributes.DB_STATEMENT,
+        )}`,
       );
     }
 
@@ -50,7 +56,8 @@ export class PostgreSQLQuery {
   withOperations(...operations: string[]) {
     const filteredSpans = this.spans.filter((span) => {
       const statement = span.attributes?.find(
-        (attribute) => attribute.key === SemanticAttributes.DB_STATEMENT,
+        (attribute: opentelemetry.proto.common.v1.IKeyValue) =>
+          attribute.key === SemanticAttributes.DB_STATEMENT,
       )?.value?.stringValue;
 
       if (!statement) {
@@ -66,7 +73,12 @@ export class PostgreSQLQuery {
 
     if (filteredSpans.length === 0) {
       throw new Error(
-        `No query by ${this.serviceName} to postgresql with operations ${operations} was found`,
+        `No query by ${
+          this.serviceName
+        } to postgresql with operations ${operations} was found. Found statements: ${extractAttributeStringValues(
+          this.spans,
+          SemanticAttributes.DB_STATEMENT,
+        )}`,
       );
     }
 
@@ -76,32 +88,41 @@ export class PostgreSQLQuery {
   withTables(...tables: string[]) {
     const filteredSpans = this.spans.filter((span) => {
       const statement = span.attributes?.find(
-        (attribute) => attribute.key === SemanticAttributes.DB_STATEMENT,
+        (attribute: opentelemetry.proto.common.v1.IKeyValue) =>
+          attribute.key === SemanticAttributes.DB_STATEMENT,
       )?.value?.stringValue;
 
       if (!statement) {
         return false;
       }
 
-      const allTablesInStatement = this.parser
-        .tableList(prepareQuery(statement), { database: 'PostgresQL' })
-        .map((table) => table.split('::')[2].trim());
+      const matches = statement.match(tablesRegex);
+      const cleaned = matches?.map((elem: string) => {
+        const [_, second] = elem.split(' ');
+        return second
+          .replace('"', '')
+          .replace('(', '')
+          .replace(')', '')
+          .replace('\n', '')
+          .toLocaleLowerCase();
+      });
 
       return tables.every((table) =>
-        allTablesInStatement.includes(table.toLowerCase()),
+        cleaned?.includes(table.toLocaleLowerCase()),
       );
     });
 
     if (filteredSpans.length === 0) {
       throw new Error(
-        `No query by ${this.serviceName} to postgresql with tables ${tables} was found`,
+        `No query by ${
+          this.serviceName
+        } to postgresql with tables ${tables} was found. Found statements: ${extractAttributeStringValues(
+          this.spans,
+          SemanticAttributes.DB_STATEMENT,
+        )}`,
       );
     }
 
     return new PostgreSQLQuery(filteredSpans, this.serviceName);
   }
 }
-
-const prepareQuery = (
-  query: string, // remove double quotes and replace %s with 111
-) => query.replace(/"/g, '').replace(/%s/g, '111').toLocaleLowerCase();
