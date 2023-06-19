@@ -4,13 +4,13 @@ import { CompareOptions } from './compare-types';
 
 export const extractAttributeStringValues = (
   spans: opentelemetry.proto.trace.v1.ISpan[],
-  attribute: string,
-) => {
+  expected: string,
+): string[] => {
   return spans
     .map((span) => {
       return span.attributes?.find(
         (attribute: opentelemetry.proto.common.v1.IKeyValue) =>
-          attribute.key === attribute,
+          attribute.key === expected,
       )?.value?.stringValue;
     })
     .filter((statement) => !!statement) as string[];
