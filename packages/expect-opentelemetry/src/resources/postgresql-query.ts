@@ -5,9 +5,9 @@ import {
   filterByAttributeStringValue,
 } from '../matchers/utils';
 
-export class PostgreSQLQuery {
-  private tablesRegex = /(from|join)\s+(?<table>\S+)/gi;
+const tablesRegex = /(from|join|into|update|alter)\s+(?<table>\S+)/gi;
 
+export class PostgreSQLQuery {
   constructor(
     readonly spans: opentelemetry.proto.trace.v1.ISpan[],
     private readonly serviceName: string,
@@ -83,7 +83,7 @@ export class PostgreSQLQuery {
         return false;
       }
 
-      const matches = statement.match(this.tablesRegex);
+      const matches = statement.match(tablesRegex);
       const cleaned = matches?.map((elem: string) => {
         const [_, second] = elem.split(' ');
         return second
@@ -94,15 +94,12 @@ export class PostgreSQLQuery {
           .toLocaleLowerCase();
       });
 
-      console.log(`statement: ${statement}, cleaned: ${cleaned}`);
-
       return tables.every((table) =>
         cleaned?.includes(table.toLocaleLowerCase()),
       );
     });
 
     if (filteredSpans.length === 0) {
-      console.log(this.spans);
       throw new Error(
         `No query by ${this.serviceName} to postgresql with tables ${tables} was found`,
       );
