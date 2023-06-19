@@ -100,6 +100,7 @@ export class PostgreSQLQuery {
     });
 
     if (filteredSpans.length === 0) {
+      console.log(this.spans);
       throw new Error(
         `No query by ${this.serviceName} to postgresql with tables ${tables} was found`,
       );
