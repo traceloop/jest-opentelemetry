@@ -94,6 +94,8 @@ export class PostgreSQLQuery {
           .toLocaleLowerCase();
       });
 
+      console.log(`statement: ${statement}, cleaned: ${cleaned}`);
+
       return tables.every((table) =>
         cleaned?.includes(table.toLocaleLowerCase()),
       );
