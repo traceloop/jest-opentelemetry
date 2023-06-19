@@ -24,7 +24,12 @@ export class PostgreSQLQuery {
 
     if (filteredSpans.length === 0) {
       throw new Error(
-        `No query by ${this.serviceName} to postgresql with database name ${name} was found`,
+        `No query by ${
+          this.serviceName
+        } to postgresql with database name ${name} was found. Found db names: ${extractAttributeStringValues(
+          this.spans,
+          SemanticAttributes.DB_NAME,
+        )}`,
       );
     }
 
@@ -43,10 +48,10 @@ export class PostgreSQLQuery {
       throw new Error(
         `No query by ${
           this.serviceName
-        } to postgresql with statement ${statement} was found. Found statements: ${extractAttributeStringValues(
+        } to postgresql with statement ${statement} was found. Found statements:\n ${extractAttributeStringValues(
           this.spans,
           SemanticAttributes.DB_STATEMENT,
-        )}`,
+        ).join('\n\n')}`,
       );
     }
 
@@ -78,7 +83,7 @@ export class PostgreSQLQuery {
         } to postgresql with operations ${operations} was found. Found statements: ${extractAttributeStringValues(
           this.spans,
           SemanticAttributes.DB_STATEMENT,
-        )}`,
+        ).join('\n\n')}`,
       );
     }
 
@@ -100,10 +105,10 @@ export class PostgreSQLQuery {
       const cleaned = matches?.map((elem: string) => {
         const [_, second] = elem.split(' ');
         return second
-          .replace('"', '')
-          .replace('(', '')
-          .replace(')', '')
-          .replace('\n', '')
+          .replaceAll('"', '')
+          .replaceAll('(', '')
+          .replaceAll(')', '')
+          .replaceAll('\n', '')
           .toLocaleLowerCase();
       });
 
@@ -119,7 +124,7 @@ export class PostgreSQLQuery {
         } to postgresql with tables ${tables} was found. Found statements: ${extractAttributeStringValues(
           this.spans,
           SemanticAttributes.DB_STATEMENT,
-        )}`,
+        ).join('\n\n')}`,
       );
     }
 
