@@ -2,14 +2,30 @@ import { opentelemetry } from '@traceloop/otel-proto';
 import { objectCompare, stringCompare } from './comparators';
 import { CompareOptions } from './compare-types';
 
+export const extractAttributeStringValues = (
+  spans: opentelemetry.proto.trace.v1.ISpan[],
+  attribute: string,
+) => {
+  return spans
+    .map((span) => {
+      return span.attributes?.find(
+        (attribute: opentelemetry.proto.common.v1.IKeyValue) =>
+          attribute.key === attribute,
+      )?.value?.stringValue;
+    })
+    .filter((statement) => !!statement) as string[];
+};
+
 export const filterByAttributeKey = (
   spans: opentelemetry.proto.trace.v1.ISpan[],
   attName: string,
 ) =>
   spans.filter((span) => {
-    return span.attributes?.find((attribute) => {
-      return attribute.key === attName;
-    });
+    return span.attributes?.find(
+      (attribute: opentelemetry.proto.common.v1.IKeyValue) => {
+        return attribute.key === attName;
+      },
+    );
   });
 
 export const filterBySpanKind = (
@@ -38,7 +54,7 @@ export const filterByAttributeIntValue = (
 ) =>
   spans.filter((span) => {
     return span.attributes?.find(
-      (attribute) =>
+      (attribute: opentelemetry.proto.common.v1.IKeyValue) =>
         attribute.key === attName &&
         attribute.value?.intValue.toNumber() === attValue,
     );

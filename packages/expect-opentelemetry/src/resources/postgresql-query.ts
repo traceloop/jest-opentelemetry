@@ -2,6 +2,7 @@ import { SemanticAttributes } from '@opentelemetry/semantic-conventions';
 import { opentelemetry } from '@traceloop/otel-proto';
 import {
   CompareOptions,
+  extractAttributeStringValues,
   filterByAttributeStringValue,
 } from '../matchers/utils';
 
@@ -40,7 +41,12 @@ export class PostgreSQLQuery {
 
     if (filteredSpans.length === 0) {
       throw new Error(
-        `No query by ${this.serviceName} to postgresql with statement ${statement} was found`,
+        `No query by ${
+          this.serviceName
+        } to postgresql with statement ${statement} was found. Found statements: ${extractAttributeStringValues(
+          this.spans,
+          SemanticAttributes.DB_STATEMENT,
+        )}`,
       );
     }
 
@@ -50,7 +56,8 @@ export class PostgreSQLQuery {
   withOperations(...operations: string[]) {
     const filteredSpans = this.spans.filter((span) => {
       const statement = span.attributes?.find(
-        (attribute) => attribute.key === SemanticAttributes.DB_STATEMENT,
+        (attribute: opentelemetry.proto.common.v1.IKeyValue) =>
+          attribute.key === SemanticAttributes.DB_STATEMENT,
       )?.value?.stringValue;
 
       if (!statement) {
@@ -66,7 +73,12 @@ export class PostgreSQLQuery {
 
     if (filteredSpans.length === 0) {
       throw new Error(
-        `No query by ${this.serviceName} to postgresql with operations ${operations} was found`,
+        `No query by ${
+          this.serviceName
+        } to postgresql with operations ${operations} was found. Found statements: ${extractAttributeStringValues(
+          this.spans,
+          SemanticAttributes.DB_STATEMENT,
+        )}`,
       );
     }
 
@@ -76,7 +88,8 @@ export class PostgreSQLQuery {
   withTables(...tables: string[]) {
     const filteredSpans = this.spans.filter((span) => {
       const statement = span.attributes?.find(
-        (attribute) => attribute.key === SemanticAttributes.DB_STATEMENT,
+        (attribute: opentelemetry.proto.common.v1.IKeyValue) =>
+          attribute.key === SemanticAttributes.DB_STATEMENT,
       )?.value?.stringValue;
 
       if (!statement) {
@@ -101,7 +114,12 @@ export class PostgreSQLQuery {
 
     if (filteredSpans.length === 0) {
       throw new Error(
-        `No query by ${this.serviceName} to postgresql with tables ${tables} was found`,
+        `No query by ${
+          this.serviceName
+        } to postgresql with tables ${tables} was found. Found statements: ${extractAttributeStringValues(
+          this.spans,
+          SemanticAttributes.DB_STATEMENT,
+        )}`,
       );
     }
 
