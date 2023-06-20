@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/traceloop/jest-opentelemetry/compare/v0.7.0...v0.8.0) (2023-06-20)
+
+### Bug Fixes
+
+- tables compare ([#79](https://github.com/traceloop/jest-opentelemetry/issues/79)) ([81e4ee5](https://github.com/traceloop/jest-opentelemetry/commit/81e4ee56783666162f7ac8a57316aabf0e9999c3))
+
+### Features
+
+- simplify tables compare ([#78](https://github.com/traceloop/jest-opentelemetry/issues/78)) ([b765cc9](https://github.com/traceloop/jest-opentelemetry/commit/b765cc96dcf16a8a19e027468149dd8347540673))
+- times ([#80](https://github.com/traceloop/jest-opentelemetry/issues/80)) ([4fc74e4](https://github.com/traceloop/jest-opentelemetry/commit/4fc74e48bb3fde5450b731dcfb905165d618fb2e))
+
 # [0.7.0](https://github.com/traceloop/jest-opentelemetry/compare/v0.6.0...v0.7.0) (2023-06-13)
 
 ### Features
