@@ -28,7 +28,7 @@ So, a complete assertion can look like:
 
 ```js
 expectTrace(traceloop.serviceByName('redis-service'))
-  .toSendRedisCommend()
+  .toSendRedisCommend({ times: 2 }) // optional times parameter (defaults to one)
   .withDatabaseName('redis-db')
   .withStatement(
     /^HGET/

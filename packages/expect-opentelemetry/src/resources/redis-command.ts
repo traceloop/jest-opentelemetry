@@ -9,6 +9,7 @@ export class RedisCommand {
   constructor(
     readonly spans: opentelemetry.proto.trace.v1.ISpan[],
     private readonly serviceName: string,
+    private readonly times = 1,
   ) {}
 
   withDatabaseName(name: string | RegExp, options: CompareOptions) {
@@ -19,9 +20,9 @@ export class RedisCommand {
       options,
     );
 
-    if (filteredSpans.length === 0) {
+    if (filteredSpans.length < this.times) {
       throw new Error(
-        `No redis command from service ${this.serviceName} to database ${name} found`,
+        `Expected ${this.times} queries by ${this.serviceName} to redis with database name ${name}, but found ${filteredSpans.length}.`,
       );
     }
 
@@ -36,9 +37,9 @@ export class RedisCommand {
       options,
     );
 
-    if (filteredSpans.length === 0) {
+    if (filteredSpans.length < this.times) {
       throw new Error(
-        `No redis command with statement ${statement} from service ${this.serviceName} found`,
+        `Expected ${this.times} queries by ${this.serviceName} to redis with statement ${statement}, but found ${filteredSpans.length}.`,
       );
     }
 
