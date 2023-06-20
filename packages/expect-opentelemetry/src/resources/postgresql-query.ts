@@ -12,6 +12,7 @@ export class PostgreSQLQuery {
   constructor(
     readonly spans: opentelemetry.proto.trace.v1.ISpan[],
     private readonly serviceName: string,
+    private readonly times = 1,
   ) {}
 
   withDatabaseName(name: string | RegExp, options?: CompareOptions) {
@@ -22,18 +23,19 @@ export class PostgreSQLQuery {
       options,
     );
 
-    if (filteredSpans.length === 0) {
-      throw new Error(
-        `No query by ${
-          this.serviceName
-        } to postgresql with database name ${name} was found. Found db names: ${extractAttributeStringValues(
-          this.spans,
-          SemanticAttributes.DB_NAME,
-        )}`,
-      );
+    if (filteredSpans.length < this.times) {
+      throw new Error(`Expected ${this.times} queries by ${
+        this.serviceName
+      } to postgresql with database name ${name}, but found ${
+        filteredSpans.length
+      }.\n
+      Found db names:\n ${extractAttributeStringValues(
+        this.spans,
+        SemanticAttributes.DB_NAME,
+      )}`);
     }
 
-    return new PostgreSQLQuery(filteredSpans, this.serviceName);
+    return new PostgreSQLQuery(filteredSpans, this.serviceName, this.times);
   }
 
   withStatement(statement: string | RegExp, options?: CompareOptions) {
@@ -44,18 +46,16 @@ export class PostgreSQLQuery {
       options,
     );
 
-    if (filteredSpans.length === 0) {
-      throw new Error(
-        `No query by ${
-          this.serviceName
-        } to postgresql with statement ${statement} was found. Found statements:\n ${extractAttributeStringValues(
-          this.spans,
-          SemanticAttributes.DB_STATEMENT,
-        ).join('\n\n')}`,
-      );
+    if (filteredSpans.length < this.times) {
+      throw new Error(`Expected ${this.times} queries by ${
+        this.serviceName
+      } to postgresql with statement ${statement}, but found ${
+        filteredSpans.length
+      }.\n
+      Found statements:\n${printStatements(this.spans)}`);
     }
 
-    return new PostgreSQLQuery(filteredSpans, this.serviceName);
+    return new PostgreSQLQuery(filteredSpans, this.serviceName, this.times);
   }
 
   withOperations(...operations: string[]) {
@@ -76,18 +76,14 @@ export class PostgreSQLQuery {
       );
     });
 
-    if (filteredSpans.length === 0) {
+    if (filteredSpans.length < this.times) {
       throw new Error(
-        `No query by ${
-          this.serviceName
-        } to postgresql with operations ${operations} was found. Found statements: ${extractAttributeStringValues(
-          this.spans,
-          SemanticAttributes.DB_STATEMENT,
-        ).join('\n\n')}`,
+        `Expected ${this.times} queries by ${this.serviceName} to postgresql with operations ${operations}, but found ${filteredSpans.length}.\n` +
+          `Found statements:\n${printStatements(this.spans)}`,
       );
     }
 
-    return new PostgreSQLQuery(filteredSpans, this.serviceName);
+    return new PostgreSQLQuery(filteredSpans, this.serviceName, this.times);
   }
 
   withTables(...tables: string[]) {
@@ -117,17 +113,25 @@ export class PostgreSQLQuery {
       );
     });
 
-    if (filteredSpans.length === 0) {
+    if (filteredSpans.length < this.times) {
       throw new Error(
-        `No query by ${
-          this.serviceName
-        } to postgresql with tables ${tables} was found. Found statements: ${extractAttributeStringValues(
-          this.spans,
-          SemanticAttributes.DB_STATEMENT,
-        ).join('\n\n')}`,
+        `Expected ${this.times} queries by ${this.serviceName} to postgresql with tables ${tables}, but found ${filteredSpans.length}.\n` +
+          `Found statements:\n${printStatements(this.spans)}`,
       );
     }
 
-    return new PostgreSQLQuery(filteredSpans, this.serviceName);
+    return new PostgreSQLQuery(filteredSpans, this.serviceName, this.times);
   }
 }
+
+const printStatements = (spans: opentelemetry.proto.trace.v1.ISpan[]) => {
+  const MAX_LEN = 100;
+  return extractAttributeStringValues(spans, SemanticAttributes.DB_STATEMENT)
+    .map((statement) => {
+      if (statement.length > MAX_LEN) {
+        return `${statement.slice(0, MAX_LEN)}...`;
+      }
+      return statement;
+    })
+    .join('\n');
+};

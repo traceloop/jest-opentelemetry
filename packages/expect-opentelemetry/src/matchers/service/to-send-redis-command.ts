@@ -2,7 +2,10 @@ import { SemanticAttributes } from '@opentelemetry/semantic-conventions';
 import { opentelemetry } from '@traceloop/otel-proto';
 import { RedisCommand, Service } from '../../resources';
 
-export function toSendRedisCommand(service: Service): RedisCommand {
+export function toSendRedisCommand(
+  service: Service,
+  options = { times: 1 },
+): RedisCommand {
   const { name: serviceName, spans } = service;
 
   const filteredSpans = spans.filter((span) => {
@@ -20,9 +23,11 @@ export function toSendRedisCommand(service: Service): RedisCommand {
     );
   });
 
-  if (filteredSpans.length === 0) {
-    throw new Error(`No redis command from ${serviceName} found`);
+  if (filteredSpans.length < options.times) {
+    throw new Error(
+      `Expected ${options.times} queries by ${serviceName} to redis, but found ${filteredSpans.length}.`,
+    );
   }
 
-  return new RedisCommand(filteredSpans, serviceName);
+  return new RedisCommand(filteredSpans, serviceName, options.times);
 }

@@ -29,13 +29,17 @@ const serviceMatchers = {
   toSendRedisCommand,
 };
 
+interface MatcherOptions {
+  times: number;
+}
+
 interface TraceMatchers {
   toReceiveHttpRequest(): HttpRequest;
   toSendHttpRequest(): HttpRequest;
-  toQueryPostgreSQL(): PostgreSQLQuery;
+  toQueryPostgreSQL(options?: MatcherOptions): PostgreSQLQuery;
   toReceiveGrpcRequest(): GrpcRequest;
   toSendGrpcRequest(): GrpcRequest;
-  toSendRedisCommand(): RedisCommand;
+  toSendRedisCommand(options?: MatcherOptions): RedisCommand;
 }
 
 function createMatcher(matcher, type) {
