@@ -4,9 +4,14 @@
   "version": "0.8.0",
   "license": "Apache-2.0",
   "type": "commonjs",
-  "main": "./index.js",
+  "main": "./dist/index.js",
+  "module": "./src/index.ts",
+  "types": "dist/index.d.ts",
   "exports": {
-    ".": "./index.js",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
     "./setup": "./setup.js",
     "./teardown": "./teardown.js",
     "./package.json": "./package.json"

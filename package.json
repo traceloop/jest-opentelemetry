@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "build": "lerna run build",
+    "clean": "rm -fR packages/*/dist",
     "format": "prettier --write .",
     "lint": "prettier --check . && eslint .",
     "start:otel-receiver": "lerna run --scope @traceloop/otel-receiver start",

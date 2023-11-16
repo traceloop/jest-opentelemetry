@@ -19,10 +19,12 @@ export async function setup(jestConfig: JestConfig = {}) {
   }
 
   if (!config?.useLocalOtelReceiver) {
+    console.log('NOT USING LOCAL OTEL RECEIVER', config);
     return;
   }
 
   try {
+    console.log('OTEL setting up local test server');
     await setupServer({
       command: 'node ./node_modules/@traceloop/otel-receiver/dist/index.js',
       // debug: true,
