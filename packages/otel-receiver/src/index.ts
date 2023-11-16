@@ -30,7 +30,7 @@ const startServer = async () => {
   });
 
   _server = app.listen(port, () => {
-    console.log(`otel-receiver listening at port ${port}`);
+      console.log(`otel-receiver listening at port ${port}`);
   });
 };
 

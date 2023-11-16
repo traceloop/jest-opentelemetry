@@ -1,7 +1,7 @@
 import NodeEnvironment from 'jest-environment-node';
 import { readConfig } from './readConfig';
 
-const handleError = (error) => {
+const handleError = (error: Error) => {
   process.emit('uncaughtException', error);
 };
 
@@ -18,7 +18,7 @@ const getWorkerIndex = () => process.env.JEST_WORKER_ID - 1;
 class OpenTelemetryEnvironment extends NodeEnvironment {
   // Jest is not available here, so we have to reverse engineer
   // the setTimeout function, see https://github.com/facebook/jest/blob/v23.1.0/packages/jest-runtime/src/index.js#L823
-  setTimeout(timeout) {
+  setTimeout(timeout: number) {
     if (this.global.jasmine) {
       // eslint-disable-next-line no-underscore-dangle
       this.global.jasmine.DEFAULT_TIMEOUT_INTERVAL = timeout;
